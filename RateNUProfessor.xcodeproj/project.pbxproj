@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E12B099D6100AD34AA /* AppColors.swift */; };
 		CE09F9142B043A1E0010DBAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9132B043A1E0010DBAC /* AppDelegate.swift */; };
 		CE09F9162B043A1E0010DBAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9152B043A1E0010DBAC /* SceneDelegate.swift */; };
 		CE09F9182B043A1E0010DBAC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9172B043A1E0010DBAC /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18D6A6E12B099D6100AD34AA /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		CE09F9102B043A1E0010DBAC /* RateNUProfessor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RateNUProfessor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE09F9132B043A1E0010DBAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE09F9152B043A1E0010DBAC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		CE09F9122B043A1E0010DBAC /* RateNUProfessor */ = {
 			isa = PBXGroup;
 			children = (
+				18D6A6E12B099D6100AD34AA /* AppColors.swift */,
 				CE09F9132B043A1E0010DBAC /* AppDelegate.swift */,
 				CE09F9152B043A1E0010DBAC /* SceneDelegate.swift */,
 				CE09F9482B0443120010DBAC /* Landing Screen */,
@@ -332,6 +335,7 @@
 				CE09F9592B0444A90010DBAC /* CommentScreenViewController.swift in Sources */,
 				CE09F9392B04425C0010DBAC /* AddCommentScreenView.swift in Sources */,
 				CE09F93D2B04428F0010DBAC /* CommentScreenView.swift in Sources */,
+				18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */,
 				CE09F9352B04422D0010DBAC /* LoginScreenView.swift in Sources */,
 				CE09F9552B0444570010DBAC /* PostCommentTableViewCell.swift in Sources */,
 				CE09F9182B043A1E0010DBAC /* ViewController.swift in Sources */,

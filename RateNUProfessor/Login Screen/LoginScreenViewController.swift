@@ -8,22 +8,18 @@
 import UIKit
 
 class LoginScreenViewController: UIViewController {
+    
+    let loginScreen = LoginScreenView()
+    
+    override func loadView() {
+        view = loginScreen
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Login"
 
-        // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

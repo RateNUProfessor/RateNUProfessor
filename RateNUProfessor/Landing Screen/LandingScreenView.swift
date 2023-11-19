@@ -12,7 +12,7 @@ class LandingScreenView: UIView {
     var buttonSignIn: UIButton!
     var buttonSignUp: UIButton!
     
-    let buttonColor = UIColor(red: 1, green: 110.0/255.0, blue: 108.0/255.0, alpha: 1.0)
+    // let buttonColor = UIColor(red: 1, green: 110.0/255.0, blue: 108.0/255.0, alpha: 1.0)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,7 +40,7 @@ class LandingScreenView: UIView {
         buttonSignIn.setTitle("Sign In", for: .normal)
         // set the font color as white
         buttonSignIn.setTitleColor(UIColor.white, for: .normal)
-        buttonSignIn.backgroundColor = buttonColor
+        buttonSignIn.backgroundColor = AppColors.buttonColor
         // have rounded corners
         buttonSignIn.layer.cornerRadius = 8
         buttonSignIn.clipsToBounds = true
@@ -54,7 +54,7 @@ class LandingScreenView: UIView {
         buttonSignUp.setTitle("Sign Up", for: .normal)
         // set the font color as white
         buttonSignUp.setTitleColor(UIColor.white, for: .normal)
-        buttonSignUp.backgroundColor = buttonColor
+        buttonSignUp.backgroundColor = AppColors.buttonColor
         // have rounded corners
         buttonSignUp.layer.cornerRadius = 8
         buttonSignUp.clipsToBounds = true
@@ -66,15 +66,15 @@ class LandingScreenView: UIView {
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             logoImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            logoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor), // 左边距贴着父视图
-            logoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor), // 右边距贴着父视图
-            logoImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor), // 顶部距离 labelTitle 的底部
-            logoImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5), // 图像高度占屏幕一半
+            logoImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            logoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            logoImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            logoImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
             
-            buttonSignIn.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 50), // Adjust top constraint as needed
-            buttonSignIn.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20), // Adjust leading constraint as needed
-            buttonSignIn.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20), // Adjust trailing constraint as needed
-            buttonSignIn.heightAnchor.constraint(equalToConstant: 50), // Adjust height as needed
+            buttonSignIn.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 50),
+            buttonSignIn.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            buttonSignIn.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            buttonSignIn.heightAnchor.constraint(equalToConstant: 50),
             
             buttonSignUp.topAnchor.constraint(equalTo: buttonSignIn.bottomAnchor, constant: 20), // Adjust top constraint as needed
             buttonSignUp.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20), // Adjust leading constraint as needed
