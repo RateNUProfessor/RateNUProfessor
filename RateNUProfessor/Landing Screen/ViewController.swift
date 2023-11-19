@@ -23,12 +23,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         landingScreen.buttonSignIn.addTarget(self, action: #selector(onButtonSignInTapped), for: .touchUpInside)
+        landingScreen.buttonSignUp.addTarget(self, action: #selector(onButtonSignUpTapped), for: .touchUpInside)
         
     }
     
     @objc func onButtonSignInTapped() {
         let loginController = LoginScreenViewController()
         self.navigationController?.pushViewController(loginController, animated: true)
+    }
+    
+    
+    @objc func onButtonSignUpTapped() {
+        let signUpController = SignUpScreenViewController()
+        self.navigationController?.pushViewController(signUpController, animated: true)
     }
 
 

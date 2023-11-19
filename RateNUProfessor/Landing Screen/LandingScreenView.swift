@@ -76,10 +76,9 @@ class LandingScreenView: UIView {
             buttonSignIn.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             buttonSignIn.heightAnchor.constraint(equalToConstant: 50),
             
-            buttonSignUp.topAnchor.constraint(equalTo: buttonSignIn.bottomAnchor, constant: 20), // Adjust top constraint as needed
-            buttonSignUp.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20), // Adjust leading constraint as needed
-            buttonSignUp.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20), // Adjust trailing constraint as needed
-            buttonSignUp.heightAnchor.constraint(equalToConstant: 50) // Adjust height as needed
+            buttonSignUp.topAnchor.constraint(equalTo: buttonSignIn.bottomAnchor, constant: 20),
+            buttonSignUp.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),             buttonSignUp.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            buttonSignUp.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
