@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E12B099D6100AD34AA /* AppColors.swift */; };
+		18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E42B09A22D00AD34AA /* Professor.swift */; };
+		18D6A6E72B09A2E000AD34AA /* SingleRateUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E62B09A2E000AD34AA /* SingleRateUnit.swift */; };
 		CE09F9142B043A1E0010DBAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9132B043A1E0010DBAC /* AppDelegate.swift */; };
 		CE09F9162B043A1E0010DBAC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9152B043A1E0010DBAC /* SceneDelegate.swift */; };
 		CE09F9182B043A1E0010DBAC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9172B043A1E0010DBAC /* ViewController.swift */; };
@@ -45,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		18D6A6E12B099D6100AD34AA /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		18D6A6E42B09A22D00AD34AA /* Professor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professor.swift; sourceTree = "<group>"; };
+		18D6A6E62B09A2E000AD34AA /* SingleRateUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRateUnit.swift; sourceTree = "<group>"; };
 		CE09F9102B043A1E0010DBAC /* RateNUProfessor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RateNUProfessor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE09F9132B043A1E0010DBAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE09F9152B043A1E0010DBAC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,9 +97,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18D6A6E32B09A21A00AD34AA /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				18D6A6E42B09A22D00AD34AA /* Professor.swift */,
+				18D6A6E62B09A2E000AD34AA /* SingleRateUnit.swift */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
 		CE09F9072B043A1E0010DBAC = {
 			isa = PBXGroup;
 			children = (
+				18D6A6E32B09A21A00AD34AA /* Data Model */,
 				CE09F9122B043A1E0010DBAC /* RateNUProfessor */,
 				CE09F9112B043A1E0010DBAC /* Products */,
 			);
@@ -337,6 +351,7 @@
 				CE09F93D2B04428F0010DBAC /* CommentScreenView.swift in Sources */,
 				18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */,
 				CE09F9352B04422D0010DBAC /* LoginScreenView.swift in Sources */,
+				18D6A6E72B09A2E000AD34AA /* SingleRateUnit.swift in Sources */,
 				CE09F9552B0444570010DBAC /* PostCommentTableViewCell.swift in Sources */,
 				CE09F9182B043A1E0010DBAC /* ViewController.swift in Sources */,
 				CE09F9682B0445780010DBAC /* SearchResultTableViewCell.swift in Sources */,
@@ -348,6 +363,7 @@
 				CE09F9412B0442CC0010DBAC /* SettingScreenView.swift in Sources */,
 				CE09F9532B0444200010DBAC /* ProfileScreenViewController.swift in Sources */,
 				CE09F9142B043A1E0010DBAC /* AppDelegate.swift in Sources */,
+				18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */,
 				CE09F94A2B0443330010DBAC /* LoginScreenViewController.swift in Sources */,
 				CE09F9622B0445390010DBAC /* ChatScreenViewController.swift in Sources */,
 				CE09F9502B0443E70010DBAC /* AddCommentScreenViewController.swift in Sources */,
