@@ -109,7 +109,6 @@
 		CE09F9072B043A1E0010DBAC = {
 			isa = PBXGroup;
 			children = (
-				18D6A6E32B09A21A00AD34AA /* Data Model */,
 				CE09F9122B043A1E0010DBAC /* RateNUProfessor */,
 				CE09F9112B043A1E0010DBAC /* Products */,
 			);
@@ -126,6 +125,7 @@
 		CE09F9122B043A1E0010DBAC /* RateNUProfessor */ = {
 			isa = PBXGroup;
 			children = (
+				18D6A6E32B09A21A00AD34AA /* Data Model */,
 				18D6A6E12B099D6100AD34AA /* AppColors.swift */,
 				CE09F9132B043A1E0010DBAC /* AppDelegate.swift */,
 				CE09F9152B043A1E0010DBAC /* SceneDelegate.swift */,
