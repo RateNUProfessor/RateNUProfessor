@@ -19,7 +19,14 @@ class SignUpScreenViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Sign Up"
+        
+        signUpScreen.buttonRegister.addTarget(self, action: #selector(onButtonRegisterTapped), for: .touchUpInside)
 
+    }
+    
+    @objc func onButtonRegisterTapped() {
+        let tabBarController = TabBarScreenViewController()
+        self.navigationController?.pushViewController(tabBarController, animated: true)
     }
 
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18CFE5FE2B0A8ABB00529968 /* TabBarScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */; };
 		18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E12B099D6100AD34AA /* AppColors.swift */; };
 		18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E42B09A22D00AD34AA /* Professor.swift */; };
 		18D6A6E72B09A2E000AD34AA /* SingleRateUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E62B09A2E000AD34AA /* SingleRateUnit.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenViewController.swift; sourceTree = "<group>"; };
 		18D6A6E12B099D6100AD34AA /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		18D6A6E42B09A22D00AD34AA /* Professor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professor.swift; sourceTree = "<group>"; };
 		18D6A6E62B09A2E000AD34AA /* SingleRateUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRateUnit.swift; sourceTree = "<group>"; };
@@ -97,6 +99,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18CFE5FB2B0A88A500529968 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				18D6A6E12B099D6100AD34AA /* AppColors.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		18CFE5FC2B0A8A5800529968 /* Tab Bar Screen */ = {
+			isa = PBXGroup;
+			children = (
+				18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */,
+			);
+			path = "Tab Bar Screen";
+			sourceTree = "<group>";
+		};
 		18D6A6E32B09A21A00AD34AA /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,8 +143,9 @@
 		CE09F9122B043A1E0010DBAC /* RateNUProfessor */ = {
 			isa = PBXGroup;
 			children = (
+				18CFE5FC2B0A8A5800529968 /* Tab Bar Screen */,
+				18CFE5FB2B0A88A500529968 /* Shared */,
 				18D6A6E32B09A21A00AD34AA /* Data Model */,
-				18D6A6E12B099D6100AD34AA /* AppColors.swift */,
 				CE09F9132B043A1E0010DBAC /* AppDelegate.swift */,
 				CE09F9152B043A1E0010DBAC /* SceneDelegate.swift */,
 				CE09F9482B0443120010DBAC /* Landing Screen */,
@@ -371,6 +390,7 @@
 				CE09F9662B04455F0010DBAC /* ResultScreenViewController.swift in Sources */,
 				CE09F93B2B04426D0010DBAC /* ProfileScreenView.swift in Sources */,
 				CE09F9472B0443010010DBAC /* ResultScreenView.swift in Sources */,
+				18CFE5FE2B0A8ABB00529968 /* TabBarScreenViewController.swift in Sources */,
 				CE09F9452B0442EB0010DBAC /* SearchScreenView.swift in Sources */,
 				CE09F9162B043A1E0010DBAC /* SceneDelegate.swift in Sources */,
 				CE09F95F2B04450D0010DBAC /* SettingScreenViewController.swift in Sources */,

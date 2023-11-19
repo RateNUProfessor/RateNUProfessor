@@ -19,7 +19,14 @@ class LoginScreenViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Login"
+        
+        loginScreen.buttonLogin.addTarget(self, action: #selector(onButtonLoginTapped), for: .touchUpInside)
 
+    }
+    
+    @objc func onButtonLoginTapped() {
+        let tabBarController = TabBarScreenViewController()
+        self.navigationController?.pushViewController(tabBarController, animated: true)
     }
 
 }

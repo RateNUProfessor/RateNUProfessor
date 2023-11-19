@@ -9,12 +9,37 @@ import UIKit
 
 class SearchScreenView: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    var labelSearch: UILabel!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = .white
+        
+        setupLabelSearch()
+        
+        initConstraints()
+        
     }
-    */
-
+    
+    func setupLabelSearch() {
+        labelSearch = UILabel()
+        labelSearch.text = "This is Search Page"
+        labelSearch.font = UIFont.boldSystemFont(ofSize: 32)
+        labelSearch.textAlignment = .center
+        labelSearch.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(labelSearch)
+    }
+    
+    func initConstraints() {
+        // Constraints for labelProfile (centered both horizontally and vertically)
+        NSLayoutConstraint.activate([
+            labelSearch.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            labelSearch.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16)
+        ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
