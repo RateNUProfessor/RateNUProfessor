@@ -20,6 +20,16 @@ class ProfileScreenViewController: UIViewController {
         view.backgroundColor = .white
         title = "Profile"
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "gearshape"),
+            style: .plain,
+            target: self,
+            action: #selector(onSettingsBarButtonTapped))
+    }
+    
+    @objc func onSettingsBarButtonTapped() {
+        let settingsController = SettingScreenViewController()
+        navigationController?.pushViewController(settingsController, animated: true)
     }
     
 }

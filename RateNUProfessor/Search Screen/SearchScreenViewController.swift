@@ -12,14 +12,13 @@ class SearchScreenViewController: UIViewController {
     let searchScreen = SearchScreenView()
     
     override func loadView() {
-            view = searchScreen
+        view = searchScreen
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = "Search"
-        
     }
     
 
