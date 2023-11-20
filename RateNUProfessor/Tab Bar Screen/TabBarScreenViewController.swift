@@ -12,7 +12,6 @@ class TabBarScreenViewController: UITabBarController, UITabBarControllerDelegate
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //MARK: setting up seach bar...
         let tabSearch = UINavigationController(rootViewController: SearchScreenViewController())
         let tabSearchBarItem = UITabBarItem(
             title: "Search",
@@ -22,7 +21,6 @@ class TabBarScreenViewController: UITabBarController, UITabBarControllerDelegate
         tabSearch.tabBarItem = tabSearchBarItem
         tabSearch.title = "Search"
         
-        //MARK: setting up profile bar...
         let tabProfile = UINavigationController(rootViewController: ProfileScreenViewController())
         let tabProfileBarItem = UITabBarItem(
             title: "Profile",
@@ -32,13 +30,12 @@ class TabBarScreenViewController: UITabBarController, UITabBarControllerDelegate
         tabProfile.tabBarItem = tabProfileBarItem
         tabProfile.title = "Profile"
         
-        //MARK: setting up this view controller as the Tab Bar Controller...
         self.viewControllers = [tabSearch, tabProfile]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.hidesBackButton = true
     }
 
 }
