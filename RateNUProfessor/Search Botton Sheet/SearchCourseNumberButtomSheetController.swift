@@ -9,6 +9,7 @@ import UIKit
 class SearchCourseNumberBottomSheetController: UIViewController {
 
     let searchSheet = SearchBottomSheetView()
+    let notificationCenter = NotificationCenter.default
     
     //MARK: the list of names...
     var namesDatabase = [Course]()
@@ -63,17 +64,17 @@ extension SearchCourseNumberBottomSheetController: UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //MARK: course selected....
-        // TODO: 尚未完成，现在假设searchButtonSheet里存的是string，可以根据需要调整
-        showSearchResultScreen(CourseNumber: namesForTableView[indexPath.row])
+        // course selected....
+        notificationCenter.post(name: .courseNumberSelected, object: namesForTableView[indexPath.row])
+        // showSearchResultScreen(CourseNumber: namesForTableView[indexPath.row])
         //dismiss the bottom search sheet...
         self.dismiss(animated: true)
     }
     
     // TODO: 尚未完成，如果根据课号搜索，进入Search Result Screen, 列出所有教这个课的老师，再点击对应老师，进入Comment Screen
-    func showSearchResultScreen(CourseNumber : Course) {
-        
-    }
+//    func showSearchResultScreen(CourseNumber : Course) {
+//
+//    }
 }
 
 //MARK: adopting the search bar protocol...

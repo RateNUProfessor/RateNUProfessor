@@ -12,6 +12,7 @@
 		186BAAE22B16CCBA000030A1 /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE12B16CCBA000030A1 /* SearchTableCell.swift */; };
 		186BAAE42B16DC3C000030A1 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE32B16DC3C000030A1 /* Course.swift */; };
 		186BAAE62B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE52B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift */; };
+		186BAAE82B16E7B9000030A1 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE72B16E7B9000030A1 /* NotificationNames.swift */; };
 		18CFE5FE2B0A8ABB00529968 /* TabBarScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */; };
 		18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E12B099D6100AD34AA /* AppColors.swift */; };
 		18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E42B09A22D00AD34AA /* Professor.swift */; };
@@ -64,6 +65,7 @@
 		186BAAE12B16CCBA000030A1 /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
 		186BAAE32B16DC3C000030A1 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		186BAAE52B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCourseNumberButtomSheetController.swift; sourceTree = "<group>"; };
+		186BAAE72B16E7B9000030A1 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenViewController.swift; sourceTree = "<group>"; };
 		18D6A6E12B099D6100AD34AA /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		18D6A6E42B09A22D00AD34AA /* Professor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professor.swift; sourceTree = "<group>"; };
@@ -137,7 +139,9 @@
 		18CFE5FB2B0A88A500529968 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				CE09FA572B0B3E430010DBAC /* Configs.swift */,
 				18D6A6E12B099D6100AD34AA /* AppColors.swift */,
+				186BAAE72B16E7B9000030A1 /* NotificationNames.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -203,7 +207,6 @@
 				CE09F91E2B043A210010DBAC /* LaunchScreen.storyboard */,
 				CE09F9212B043A210010DBAC /* Info.plist */,
 				CE09F9272B043E7D0010DBAC /* GoogleService-Info.plist */,
-				CE09FA572B0B3E430010DBAC /* Configs.swift */,
 			);
 			path = RateNUProfessor;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				CE09F9142B043A1E0010DBAC /* AppDelegate.swift in Sources */,
 				18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */,
 				CE09FA582B0B3E430010DBAC /* Configs.swift in Sources */,
+				186BAAE82B16E7B9000030A1 /* NotificationNames.swift in Sources */,
 				CE09F94A2B0443330010DBAC /* LoginScreenViewController.swift in Sources */,
 				CE09F9622B0445390010DBAC /* ChatScreenViewController.swift in Sources */,
 				CE09F9502B0443E70010DBAC /* AddCommentScreenViewController.swift in Sources */,

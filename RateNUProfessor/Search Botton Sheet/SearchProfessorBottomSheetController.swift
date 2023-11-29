@@ -10,6 +10,7 @@ import UIKit
 class SearchProfessorBottomSheetController: UIViewController {
 
     let searchSheet = SearchBottomSheetView()
+    let notificationCenter = NotificationCenter.default
     
     //MARK: the list of names...
     var namesDatabase = [Professor]()
@@ -65,15 +66,18 @@ extension SearchProfessorBottomSheetController: UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //MARK: name selected....
-        showProfessorCommentScreen(ProfessorSelected: namesForTableView[indexPath.row])
+        notificationCenter.post(name: .professorSelected, object: namesForTableView[indexPath.row])
+        //showProfessorCommentScreen(ProfessorSelected: namesForTableView[indexPath.row])
         //dismiss the bottom search sheet...
         self.dismiss(animated: true)
     }
     
-    // show corresponding Comment Page
-    func showProfessorCommentScreen(ProfessorSelected : Professor) {
-        
-    }
+//    func showProfessorCommentScreen(ProfessorSelected : Professor) {
+//        // show corresponding Comment Page
+//        let commentScreen = CommentScreenViewController()
+//        navigationController?.pushViewController(commentScreen, animated: true)
+//
+//    }
 }
 
 //MARK: adopting the search bar protocol...

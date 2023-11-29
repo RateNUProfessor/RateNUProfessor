@@ -10,6 +10,7 @@ import UIKit
 class SearchScreenViewController: UIViewController {
     
     let searchScreen = SearchScreenView()
+    let notificationCenter = NotificationCenter.default
     
     let searchProfessorSheetController = SearchProfessorBottomSheetController()
     let searchCourseNumberSheetController = SearchCourseNumberBottomSheetController()
@@ -17,6 +18,7 @@ class SearchScreenViewController: UIViewController {
     
     override func loadView() {
         view = searchScreen
+        
     }
 
     override func viewDidLoad() {
@@ -26,7 +28,33 @@ class SearchScreenViewController: UIViewController {
         
         searchScreen.searchByProfessorButton.addTarget(self, action: #selector(onSearchByProfessorButtonTapped), for: .touchUpInside)
         searchScreen.searchByCourseNumberButton.addTarget(self, action: #selector(onSearchByCourseNumberButtonTapped), for: .touchUpInside)
+        
+        notificationCenter.addObserver(
+                    self,
+                    selector: #selector(onProfessorSelected(notification:)),
+                    name: .professorSelected, object: nil)
+        
+        notificationCenter.addObserver(
+                    self,
+                    selector: #selector(onCourseNumberSelected(notification:)),
+                    name: .courseNumberSelected, object: nil)
     }
+    
+    @objc func onProfessorSelected(notification: Notification){
+        if let selectedItem = notification.object{
+            let commentScreen = CommentScreenViewController()
+            navigationController?.pushViewController(commentScreen, animated: true)
+        }
+    }
+    
+    @objc func onCourseNumberSelected(notification: Notification){
+        if let selectedItem = notification.object{
+            let searchResultScreen = ResultScreenViewController()
+            navigationController?.pushViewController(searchResultScreen, animated: true)
+        }
+    }
+    
+    
     
     func setupSearchBottomSheet(type: String){
         //MARK: setting up bottom search sheet...
@@ -35,8 +63,6 @@ class SearchScreenViewController: UIViewController {
         } else {
             searchSheetNavController = UINavigationController(rootViewController: searchCourseNumberSheetController)
         }
-            
-        // searchSheetNavController = UINavigationController(rootViewController: searchProfessorSheetController)
         
         // setting up modal style...
         searchSheetNavController.modalPresentationStyle = .pageSheet

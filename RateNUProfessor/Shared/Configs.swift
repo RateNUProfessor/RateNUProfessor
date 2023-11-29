@@ -9,4 +9,5 @@ import Foundation
 class Configs{
     static let tableViewCommentID = "tableViewCommentID"
     static let searchTableViewID = "searchTableViewID"
+    static let tableViewCommentsID = "tableViewCommentsID"
 }
