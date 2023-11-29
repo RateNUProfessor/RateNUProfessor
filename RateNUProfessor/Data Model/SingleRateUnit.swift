@@ -16,11 +16,11 @@ struct SingleRateUnit: Codable {
     var rateScore: Double
     var rateComment: String
     
-    init(rateStudent: User, rateProfessor: Professor, rateClass: String, rateScore: Double) {
+    init(rateStudent: User, rateProfessor: Professor, rateClass: String, rateScore: Double, rateComment: String) {
         self.rateStudent = rateStudent
         self.rateProfessor = rateProfessor
         self.rateClass = rateClass
         self.rateScore = rateScore
-        self.rateComment = ""
+        self.rateComment = rateComment
     }
 }

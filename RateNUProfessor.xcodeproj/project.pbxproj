@@ -14,6 +14,7 @@
 		186BAAE62B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE52B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift */; };
 		186BAAE82B16E7B9000030A1 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE72B16E7B9000030A1 /* NotificationNames.swift */; };
 		186BAAEA2B16EC74000030A1 /* CommentTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE92B16EC74000030A1 /* CommentTableViewManager.swift */; };
+		186BAAEC2B17E4A4000030A1 /* commonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAEB2B17E4A4000030A1 /* commonFunction.swift */; };
 		18CFE5FE2B0A8ABB00529968 /* TabBarScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */; };
 		18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E12B099D6100AD34AA /* AppColors.swift */; };
 		18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E42B09A22D00AD34AA /* Professor.swift */; };
@@ -68,6 +69,7 @@
 		186BAAE52B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCourseNumberButtomSheetController.swift; sourceTree = "<group>"; };
 		186BAAE72B16E7B9000030A1 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		186BAAE92B16EC74000030A1 /* CommentTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewManager.swift; sourceTree = "<group>"; };
+		186BAAEB2B17E4A4000030A1 /* commonFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commonFunction.swift; sourceTree = "<group>"; };
 		18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenViewController.swift; sourceTree = "<group>"; };
 		18D6A6E12B099D6100AD34AA /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		18D6A6E42B09A22D00AD34AA /* Professor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professor.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				CE09FA572B0B3E430010DBAC /* Configs.swift */,
 				18D6A6E12B099D6100AD34AA /* AppColors.swift */,
 				186BAAE72B16E7B9000030A1 /* NotificationNames.swift */,
+				186BAAEB2B17E4A4000030A1 /* commonFunction.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				CE09F93D2B04428F0010DBAC /* CommentScreenView.swift in Sources */,
 				18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */,
 				CE09F9352B04422D0010DBAC /* LoginScreenView.swift in Sources */,
+				186BAAEC2B17E4A4000030A1 /* commonFunction.swift in Sources */,
 				18D6A6E72B09A2E000AD34AA /* SingleRateUnit.swift in Sources */,
 				CE09F9552B0444570010DBAC /* PostCommentTableViewCell.swift in Sources */,
 				186BAADE2B16CC81000030A1 /* SearchProfessorBottomSheetController.swift in Sources */,

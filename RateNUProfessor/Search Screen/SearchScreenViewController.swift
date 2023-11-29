@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SearchScreenViewController: UIViewController {
     
@@ -15,6 +16,8 @@ class SearchScreenViewController: UIViewController {
     let searchProfessorSheetController = SearchProfessorBottomSheetController()
     let searchCourseNumberSheetController = SearchCourseNumberBottomSheetController()
     var searchSheetNavController: UINavigationController!
+    
+    var currentUser:FirebaseAuth.User?
     
     override func loadView() {
         view = searchScreen
@@ -76,9 +79,9 @@ class SearchScreenViewController: UIViewController {
     @objc func onSearchByProfessorButtonTapped(){
         // mock data for professor Database
         // TODO: 现在为MockData, 需要implem从firebase中获得所有ProfessorName, 注意firebase是async，需要用completion
-        let Amy = Professor(name: "Amy")
+        let MockProf = Professor(name: "MockProf")
         let Jake = Professor(name: "Jake")
-        var ProfessorDatabase = [Amy, Jake]
+        var ProfessorDatabase = [MockProf, Jake]
         
         searchProfessorSheetController.namesForTableView.removeAll()
         searchProfessorSheetController.namesDatabase = ProfessorDatabase
