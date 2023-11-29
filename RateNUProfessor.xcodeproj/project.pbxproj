@@ -13,6 +13,7 @@
 		186BAAE42B16DC3C000030A1 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE32B16DC3C000030A1 /* Course.swift */; };
 		186BAAE62B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE52B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift */; };
 		186BAAE82B16E7B9000030A1 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE72B16E7B9000030A1 /* NotificationNames.swift */; };
+		186BAAEA2B16EC74000030A1 /* CommentTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE92B16EC74000030A1 /* CommentTableViewManager.swift */; };
 		18CFE5FE2B0A8ABB00529968 /* TabBarScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */; };
 		18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E12B099D6100AD34AA /* AppColors.swift */; };
 		18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E42B09A22D00AD34AA /* Professor.swift */; };
@@ -66,6 +67,7 @@
 		186BAAE32B16DC3C000030A1 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		186BAAE52B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCourseNumberButtomSheetController.swift; sourceTree = "<group>"; };
 		186BAAE72B16E7B9000030A1 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
+		186BAAE92B16EC74000030A1 /* CommentTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewManager.swift; sourceTree = "<group>"; };
 		18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenViewController.swift; sourceTree = "<group>"; };
 		18D6A6E12B099D6100AD34AA /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		18D6A6E42B09A22D00AD34AA /* Professor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professor.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			children = (
 				CE09F9582B0444A90010DBAC /* CommentScreenViewController.swift */,
 				CE09F95D2B0444CC0010DBAC /* Views */,
+				186BAAE92B16EC74000030A1 /* CommentTableViewManager.swift */,
 			);
 			path = "Comment Screen";
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE09F9592B0444A90010DBAC /* CommentScreenViewController.swift in Sources */,
+				186BAAEA2B16EC74000030A1 /* CommentTableViewManager.swift in Sources */,
 				CE09F9392B04425C0010DBAC /* AddCommentScreenView.swift in Sources */,
 				CE09F93D2B04428F0010DBAC /* CommentScreenView.swift in Sources */,
 				18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */,
