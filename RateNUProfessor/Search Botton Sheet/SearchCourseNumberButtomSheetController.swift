@@ -1,5 +1,4 @@
 //
-//  SearchBottomSheetController.swift
 //  RateNUProfessor
 //
 //  Created by 陈可轩 on 2023/11/28.
@@ -7,18 +6,15 @@
 
 import UIKit
 
-class SearchBottomSheetController: UIViewController {
+class SearchCourseNumberBottomSheetController: UIViewController {
 
     let searchSheet = SearchBottomSheetView()
     
-    // identify search by professor or courseNumber
-    var category = String()
-    
     //MARK: the list of names...
-    var namesDatabase = [String]()
+    var namesDatabase = [Course]()
     
     //MARK: the array to display the table view...
-    var namesForTableView = [String]()
+    var namesForTableView = [Course]()
     
     override func loadView() {
         view = searchSheet
@@ -37,23 +33,23 @@ class SearchBottomSheetController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //MARK: sorting the names list...
-        namesDatabase.sort()
+        //sorting the names list...
+        //namesDatabase.sort()
         
-        //MARK: setting up Table View data source and delegate...
+        //setting up Table View data source and delegate...
         searchSheet.tableViewSearchResults.delegate = self
         searchSheet.tableViewSearchResults.dataSource = self
         
-        //MARK: setting up Search Bar delegate...
+        // setting up Search Bar delegate...
         searchSheet.searchBar.delegate = self
         
-        //MARK: initializing the array for the table view with all the names...
+        //initializing the array for the table view with all the names...
         namesForTableView = namesDatabase
     }
 }
 
 //MARK: adopting Table View protocols...
-extension SearchBottomSheetController: UITableViewDelegate, UITableViewDataSource{
+extension SearchCourseNumberBottomSheetController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return namesForTableView.count
     }
@@ -62,22 +58,35 @@ extension SearchBottomSheetController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(
             withIdentifier: Configs.searchTableViewID, for: indexPath) as! SearchTableCell
         
-        cell.labelTitle.text = namesForTableView[indexPath.row]
+        cell.labelTitle.text = namesForTableView[indexPath.row].courseID
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //MARK: course selected....
+        // TODO: 尚未完成，现在假设searchButtonSheet里存的是string，可以根据需要调整
+        showSearchResultScreen(CourseNumber: namesForTableView[indexPath.row])
+        //dismiss the bottom search sheet...
+        self.dismiss(animated: true)
+    }
+    
+    // TODO: 尚未完成，如果根据课号搜索，进入Search Result Screen, 列出所有教这个课的老师，再点击对应老师，进入Comment Screen
+    func showSearchResultScreen(CourseNumber : Course) {
+        
     }
 }
 
 //MARK: adopting the search bar protocol...
-extension SearchBottomSheetController: UISearchBarDelegate{
+extension SearchCourseNumberBottomSheetController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == ""{
             namesForTableView = namesDatabase
         }else{
             self.namesForTableView.removeAll()
 
-            for name in namesDatabase{
-                if name.contains(searchText){
-                    self.namesForTableView.append(name)
+            for course in namesDatabase{
+                if course.courseID.contains(searchText){
+                    self.namesForTableView.append(course)
                 }
             }
         }

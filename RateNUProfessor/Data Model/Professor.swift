@@ -11,6 +11,7 @@
 import Foundation
 
 struct Professor: Codable {
+    var professorUID: String
     // the name of professor
     var name: String
     // the classes this professor teach
@@ -21,10 +22,10 @@ struct Professor: Codable {
     var rateArray: [SingleRateUnit]
     
     init(name: String) {
+        self.professorUID = String()
         self.name = name
         self.classToTeach = [String]()
         self.avgScore = 0.0
         self.rateArray = [SingleRateUnit]()
     }
-    
 }

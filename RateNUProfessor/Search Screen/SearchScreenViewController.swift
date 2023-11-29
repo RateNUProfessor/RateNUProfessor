@@ -11,7 +11,8 @@ class SearchScreenViewController: UIViewController {
     
     let searchScreen = SearchScreenView()
     
-    let searchSheetController = SearchBottomSheetController()
+    let searchProfessorSheetController = SearchProfessorBottomSheetController()
+    let searchCourseNumberSheetController = SearchCourseNumberBottomSheetController()
     var searchSheetNavController: UINavigationController!
     
     override func loadView() {
@@ -27,19 +28,17 @@ class SearchScreenViewController: UIViewController {
         searchScreen.searchByCourseNumberButton.addTarget(self, action: #selector(onSearchByCourseNumberButtonTapped), for: .touchUpInside)
     }
     
-    func setupSearchBottomSheet(){
+    func setupSearchBottomSheet(type: String){
         //MARK: setting up bottom search sheet...
-//        if category == "Professor" {
-//            searchSheetController.namesForTableView.removeAll()
-//            searchSheetController.namesDatabase = ProfessorDatabase
-//        } else {
-//            searchSheetController.namesForTableView.removeAll()
-//            searchSheetController.namesDatabase = CourseNumberDatabase
-//        }
+        if type == "Professor" {
+            searchSheetNavController = UINavigationController(rootViewController: searchProfessorSheetController)
+        } else {
+            searchSheetNavController = UINavigationController(rootViewController: searchCourseNumberSheetController)
+        }
             
-        searchSheetNavController = UINavigationController(rootViewController: searchSheetController)
+        // searchSheetNavController = UINavigationController(rootViewController: searchProfessorSheetController)
         
-        // MARK: setting up modal style...
+        // setting up modal style...
         searchSheetNavController.modalPresentationStyle = .pageSheet
         
         if let bottomSearchSheet = searchSheetNavController.sheetPresentationController{
@@ -49,22 +48,32 @@ class SearchScreenViewController: UIViewController {
     }
     
     @objc func onSearchByProfessorButtonTapped(){
-        var ProfessorDatabase = ["Marvin Cook","Samira Jimenez","Coral Hancock","Xander Wade","Terence Mcneil","Dewey Buckley","Ophelia Higgins","Asiya Anthony","Francesco Knight","Claude Gonzalez","Demi Decker","Casey Park","Jon Hendrix","Hope Harvey","Richie Alexander","Carmen Proctor","Mercedes Callahan","Yahya Gibbs","Julian Pittman","Shauna Ray"]
+        // mock data for professor Database
+        // TODO: 现在为MockData, 需要implem从firebase中获得所有ProfessorName, 注意firebase是async，需要用completion
+        let Amy = Professor(name: "Amy")
+        let Jake = Professor(name: "Jake")
+        var ProfessorDatabase = [Amy, Jake]
         
-        searchSheetController.namesForTableView.removeAll()
-        searchSheetController.namesDatabase = ProfessorDatabase
+        searchProfessorSheetController.namesForTableView.removeAll()
+        searchProfessorSheetController.namesDatabase = ProfessorDatabase
         
-        setupSearchBottomSheet()
+        setupSearchBottomSheet(type: "Professor")
         present(searchSheetNavController, animated: true)
     }
     
     @objc func onSearchByCourseNumberButtonTapped(){
-        var CourseNumberDatabase = ["CS5001", "CS5002"]
         
-        searchSheetController.namesForTableView.removeAll()
-        searchSheetController.namesDatabase = CourseNumberDatabase
+        // mock data for courseNumber Database
+        // TODO: 现在为MockData, 需要implem从firebase中获得所有courseNumber，注意firebase是async，需要用completion
+        // TODO: 一点迷思，或者可以本地cache一个所有课号的array，这样不用每次都查...
+        let CS5001 = Course(courseID: "CS5001")
+        let CS5002 = Course(courseID: "CS5002")
+        var CourseNumberDatabase = [CS5001, CS5002]
         
-        setupSearchBottomSheet()
+        searchCourseNumberSheetController.namesForTableView.removeAll()
+        searchCourseNumberSheetController.namesDatabase = CourseNumberDatabase
+        
+        setupSearchBottomSheet(type: "Course")
         present(searchSheetNavController, animated: true)
     }
 }
