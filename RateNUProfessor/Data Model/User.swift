@@ -15,12 +15,14 @@ struct User: Codable{
     var name: String
     var email: String
     var password: String
+    var allComments: [SingleRateUnit]
     
     init(id: String, name: String, email: String, password: String) {
         self.id = id
         self.name = name
         self.email = email
         self.password = password
+        self.allComments = [SingleRateUnit]()
     }
     
     init(firebaseUser: FirebaseAuth.User) {
@@ -41,6 +43,7 @@ struct User: Codable{
         
         // TODO: Handle password assignment according to your requirements
         self.password = ""
+        self.allComments = [SingleRateUnit]()
     }
 
 }

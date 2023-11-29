@@ -27,12 +27,18 @@ class AddCommentScreenViewController: UIViewController {
         view.backgroundColor = .white
         title = "Add Comment Screen"
         
-        // if seccessfully have a new comment
-        if let newComment = generateNewComment() {
-            professor.rateArray.append(newComment)
-            // update the professor in the firebase
-            updateProfessorInFireBase()
-            updateUserInFireBase()
+        if let firebaseuser = firebaseAuthUser {
+            var user = User(firebaseUser: firebaseuser)
+            // if seccessfully have a new comment
+            if let newComment = generateNewComment() {
+                professor.rateArray.append(newComment)
+                // update the professor in the firebase
+                updateProfessorInFireBase()
+                
+                // update user
+                user.allComments.append(newComment)
+                updateUserInFireBase()
+            }
         }
     }
     
