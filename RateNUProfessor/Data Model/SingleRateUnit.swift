@@ -10,15 +10,17 @@
 import Foundation
 
 struct SingleRateUnit: Codable {
-    var rateStudent: String
-    var rateProfessor: String
-    var reatClass: String
+    var rateStudent: User
+    var rateProfessor: Professor
+    var rateClass: String
     var rateScore: Double
+    var rateComment: String
     
-    init(rateStudent: String, rateProfessor: String, reatClass: String, rateScore: Double) {
+    init(rateStudent: User, rateProfessor: Professor, rateClass: String, rateScore: Double) {
         self.rateStudent = rateStudent
         self.rateProfessor = rateProfessor
-        self.reatClass = reatClass
+        self.rateClass = rateClass
         self.rateScore = rateScore
+        self.rateComment = ""
     }
 }
