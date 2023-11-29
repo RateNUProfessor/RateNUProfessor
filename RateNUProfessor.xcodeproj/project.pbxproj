@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		186BAADE2B16CC81000030A1 /* SearchBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAADD2B16CC81000030A1 /* SearchBottomSheetController.swift */; };
+		186BAAE02B16CC9F000030A1 /* SearchBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAADF2B16CC9F000030A1 /* SearchBottomSheetView.swift */; };
+		186BAAE22B16CCBA000030A1 /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE12B16CCBA000030A1 /* SearchTableCell.swift */; };
 		18CFE5FE2B0A8ABB00529968 /* TabBarScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */; };
 		18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E12B099D6100AD34AA /* AppColors.swift */; };
 		18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E42B09A22D00AD34AA /* Professor.swift */; };
@@ -54,6 +57,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		186BAADD2B16CC81000030A1 /* SearchBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBottomSheetController.swift; sourceTree = "<group>"; };
+		186BAADF2B16CC9F000030A1 /* SearchBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBottomSheetView.swift; sourceTree = "<group>"; };
+		186BAAE12B16CCBA000030A1 /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
 		18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenViewController.swift; sourceTree = "<group>"; };
 		18D6A6E12B099D6100AD34AA /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		18D6A6E42B09A22D00AD34AA /* Professor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professor.swift; sourceTree = "<group>"; };
@@ -113,6 +119,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		186BAADC2B16CC63000030A1 /* Search Botton Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				186BAADD2B16CC81000030A1 /* SearchBottomSheetController.swift */,
+				186BAADF2B16CC9F000030A1 /* SearchBottomSheetView.swift */,
+				186BAAE12B16CCBA000030A1 /* SearchTableCell.swift */,
+			);
+			path = "Search Botton Sheet";
+			sourceTree = "<group>";
+		};
 		18CFE5FB2B0A88A500529968 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +175,7 @@
 		CE09F9122B043A1E0010DBAC /* RateNUProfessor */ = {
 			isa = PBXGroup;
 			children = (
+				186BAADC2B16CC63000030A1 /* Search Botton Sheet */,
 				18CFE5FC2B0A8A5800529968 /* Tab Bar Screen */,
 				18CFE5FB2B0A88A500529968 /* Shared */,
 				18D6A6E32B09A21A00AD34AA /* Data Model */,
@@ -401,11 +418,14 @@
 				CE09F9352B04422D0010DBAC /* LoginScreenView.swift in Sources */,
 				18D6A6E72B09A2E000AD34AA /* SingleRateUnit.swift in Sources */,
 				CE09F9552B0444570010DBAC /* PostCommentTableViewCell.swift in Sources */,
+				186BAADE2B16CC81000030A1 /* SearchBottomSheetController.swift in Sources */,
 				CE09F9182B043A1E0010DBAC /* ViewController.swift in Sources */,
+				186BAAE02B16CC9F000030A1 /* SearchBottomSheetView.swift in Sources */,
 				CE09FA512B0B28420010DBAC /* SignUpFirebaseManager.swift in Sources */,
 				CE09F9682B0445780010DBAC /* SearchResultTableViewCell.swift in Sources */,
 				CE09F94D2B0443760010DBAC /* SignUpScreenViewController.swift in Sources */,
 				CE09F95B2B0444B80010DBAC /* CommentTableViewCell.swift in Sources */,
+				186BAAE22B16CCBA000030A1 /* SearchTableCell.swift in Sources */,
 				CE09F9642B04454A0010DBAC /* SearchScreenViewController.swift in Sources */,
 				CE09F9372B0442460010DBAC /* SignUpScreenView.swift in Sources */,
 				CE09F9432B0442DA0010DBAC /* ChatScreenView.swift in Sources */,
