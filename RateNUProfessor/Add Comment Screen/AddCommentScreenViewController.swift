@@ -10,6 +10,8 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+//TODO: 将couseNumber改成下拉框
+//TODO: 增加每一个comment应该fields
 class AddCommentScreenViewController: UIViewController {
 
     let addCommentScreen = AddCommentScreenView()
@@ -41,26 +43,80 @@ class AddCommentScreenViewController: UIViewController {
             var user = User(firebaseUser: firebaseuser)
             // if seccessfully have a new comment
             if let newComment = generateNewComment() {
-                professor.rateArray.append(newComment)
+                // link the course with professor
+                updateCourseNumberInFirebase(professor: professor) { result in
+                    switch result {
+                    case .success:
+                        print("Link professor with courseNumber successfully")
+                    case .failure(let error):
+                        print("Error linking professor with courseID: \(error.localizedDescription)")
+                    }
+                }
                 // update the professor in the firebase
-                // updateProfessorInFirebase()
-                
-                user.allComments.append(newComment)
+                updateProfessorInFirebase(professor: professor, newComment: newComment) { result in
+                    switch result {
+                    case .success:
+                        print("Professor updated successfully")
+                        // TODO: 将comment更新后应该重新计算教授的总体score并更新
+                        // update Professor in firebase
+                    case .failure(let error):
+                        print("Error update professor: \(error.localizedDescription)")
+                    }
+                }
+                // update the user in firebase
                 updateUserInFirebase(user: user, newComment: newComment) { result in
                     switch result {
                     case .success:
-                        // reload the chat list
                         print("User updated successfully")
+                        // back to professor comment screen
+                        self.navigationController?.popViewController(animated: true)
+                        // TODO: 用notification center让comment screen update这条新增的comment
                     case .failure(let error):
-                        print("Error creating chat: \(error.localizedDescription)")
+                        print("Error update user: \(error.localizedDescription)")
                     }
                 }
             }
         }
     }
     
-    func updateProfessorInFirebase() {
-        
+    func updateProfessorInFirebase(professor: Professor, newComment: SingleRateUnit, completion: @escaping (Result<Void, Error>) -> Void) {
+        print("function updateProfessorInFirebase triggered")
+        do {
+            try database.collection("professors").document(professor.professorUID).collection("comments").addDocument(from: newComment) { error in
+                if let error = error {
+                    print("Error updating chat object: \(error.localizedDescription)")
+                    completion(.failure(error))
+                } else {
+                    print("Professor - comment updated in Firebase")
+                    completion(.success(()))
+                }
+            }
+        } catch {
+            print("Error setting data: \(error.localizedDescription)")
+            completion(.failure(error))
+        }
+    }
+    
+    // function to linke the courseNumber with the professor firebase reference
+    func updateCourseNumberInFirebase(professor: Professor, completion: @escaping (Result<Void, Error>) -> Void) {
+        //TODO: 在真正link前需要看一下是否已经关联过，不确定如果已经有这个documentID的话firebase会报错还是当作无事发生
+        let profRef = database.collection("professors").document(professor.professorUID)
+        if let courseNumber = addCommentScreen.textCourseNumber.text {
+            do {
+                try database.collection("courses").document(courseNumber).collection("professor").document(professor.professorUID).setData(["profReference": profRef]) { error in
+                    if let error = error {
+                        print("Error linking professor with courseNumber: \(error.localizedDescription)")
+                        completion(.failure(error))
+                    } else {
+                        print("Link Professor with CourseNumber succeed in Firebase")
+                        completion(.success(()))
+                    }
+                }
+            } catch {
+                print("Error setting data: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
+        }
     }
     
     func updateUserInFirebase(user: User, newComment: SingleRateUnit, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -71,7 +127,7 @@ class AddCommentScreenViewController: UIViewController {
                     print("Error updating chat object: \(error.localizedDescription)")
                     completion(.failure(error))
                 } else {
-                    print("Chat updated in Firebase")
+                    print("User - comment updated in Firebase")
                     completion(.success(()))
                 }
             }
@@ -79,6 +135,11 @@ class AddCommentScreenViewController: UIViewController {
             print("Error setting data: \(error.localizedDescription)")
             completion(.failure(error))
         }
+    }
+
+    
+    func ifProfessorAlreadyLinked() {
+        
     }
     
     func generateNewComment() -> SingleRateUnit? {

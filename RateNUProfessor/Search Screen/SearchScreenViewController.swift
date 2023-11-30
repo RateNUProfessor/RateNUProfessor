@@ -8,8 +8,14 @@
 import UIKit
 import FirebaseAuth
 
+// 现在的逻辑是可以根据professor Name搜索，或者根据课号搜索
+// （因为它们是两个object不能放在一起，并且firebase noSQL数据库暂时没有了解到怎么联合查询
+// 如果点击search by professor name, 进入comment screen, 直接展示有关这个professor的所有comment
+// 如果点击search by course number, 进入search result screen, 展示所有和这个课关联的professors，然后再点击professor，进入comment screen
+
+//TODO: 美化一下这个页面button
+//TODO: 如果有更好的搜索想法可以讨论
 class SearchScreenViewController: UIViewController {
-    
     let searchScreen = SearchScreenView()
     let notificationCenter = NotificationCenter.default
     
@@ -50,6 +56,7 @@ class SearchScreenViewController: UIViewController {
         }
     }
     
+    //TODO: search by courseNumber所有都没写
     @objc func onCourseNumberSelected(notification: Notification){
         if let selectedItem = notification.object{
             let searchResultScreen = ResultScreenViewController()
