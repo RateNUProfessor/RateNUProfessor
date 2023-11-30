@@ -69,7 +69,7 @@ class ProfileScreenView: UIView {
     
     func setupTabelViewComments(){
         tableViewComments = UITableView()
-        tableViewComments.register(PostCommentTableViewCell.self, forCellReuseIdentifier: Configs.tableViewCommentID)
+        tableViewComments.register(PostCommentTableViewCell.self, forCellReuseIdentifier: Configs.tableViewProfileCommentID)
         tableViewComments.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(tableViewComments)
     }
