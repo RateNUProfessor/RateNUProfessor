@@ -88,6 +88,7 @@ class SettingScreenView: UIView {
     func setupButtonCampus() {
         buttonCampus = UIButton(type: .system)
         buttonCampus.setTitle("San Jose", for: .normal)
+        buttonCampus.showsMenuAsPrimaryAction = true
         buttonCampus.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(buttonCampus)
     }
@@ -104,6 +105,11 @@ class SettingScreenView: UIView {
         buttonSave = UIButton(type: .system)
         buttonSave.setTitle("Save", for: .normal)
         buttonSave.translatesAutoresizingMaskIntoConstraints = false
+        buttonSave.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        buttonSave.setTitleColor(UIColor.white, for: .normal)
+        buttonSave.backgroundColor = AppColors.buttonColor
+        buttonSave.layer.cornerRadius = 8
+        buttonSave.clipsToBounds = true
         self.addSubview(buttonSave)
     }
     
@@ -124,6 +130,7 @@ class SettingScreenView: UIView {
             
             textFieldName.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 8),
             textFieldName.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
+            textFieldName.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
             labelCampus.topAnchor.constraint(equalTo: textFieldName.bottomAnchor, constant: 32),
             labelCampus.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
@@ -132,10 +139,13 @@ class SettingScreenView: UIView {
             buttonCampus.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
             
             buttonChangePwd.topAnchor.constraint(equalTo: buttonCampus.bottomAnchor, constant: 12),
-            buttonChangePwd.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
+            buttonChangePwd.leadingAnchor.constraint(equalTo: labelName.leadingAnchor, constant: 200),
             
             buttonSave.topAnchor.constraint(equalTo: buttonChangePwd.bottomAnchor, constant: 32),
-            buttonSave.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            buttonSave.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            buttonSave.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            buttonSave.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            buttonSave.heightAnchor.constraint(equalToConstant: 50)
 
         ])
     }

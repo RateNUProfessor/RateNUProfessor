@@ -7,11 +7,16 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseStorage
 
 class SettingScreenViewController: UIViewController {
 
     let settingsScreen = SettingScreenView()
     var selectedCampus = "San Jose"
+    var handleAuth: AuthStateDidChangeListenerHandle?
+    var currentUser:FirebaseAuth.User?
+    let database = Firestore.firestore()
     
     override func loadView() {
         view = settingsScreen
@@ -29,6 +34,28 @@ class SettingScreenViewController: UIViewController {
             style: .plain,
             target: self,
             action: #selector(onLogOutBarButtonTapped))
+        
+        settingsScreen.buttonSave.addTarget(self, action: #selector(onButtonSaveTapped), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
+            if user == nil{
+                self.currentUser = nil
+                self.settingsScreen.profileImage.setImage(UIImage(systemName: "person.fill"), for: .normal)
+    
+            }else{
+                self.currentUser = user
+                if let url = self.currentUser?.photoURL, let name = self.currentUser?.displayName {
+                    self.settingsScreen.profileImage.loadRemoteImage(from: url)
+                    self.settingsScreen.textFieldName.text = name
+                    self.settingsScreen.buttonCampus.setTitle(self.selectedCampus, for: .normal)
+                }
+                
+            }
+        }
     }
     
     @objc func onLogOutBarButtonTapped(){
@@ -46,6 +73,24 @@ class SettingScreenViewController: UIViewController {
         logoutAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         self.present(logoutAlert, animated: true)
+    }
+    
+    @objc func onButtonSaveTapped() {
+        let name = settingsScreen.textFieldName.text
+        let campus = selectedCampus
+        if let id = currentUser?.uid {
+            database.collection("users").document(id).updateData([
+                "name": name,
+                "campus": selectedCampus
+              ]) { err in
+                if let err = err {
+                  print("Error updating document: \(err)")
+                } else {
+                  print("Document successfully updated")
+                }
+              }
+        }
+       
     }
     
     func getCampusMenu() -> UIMenu{
