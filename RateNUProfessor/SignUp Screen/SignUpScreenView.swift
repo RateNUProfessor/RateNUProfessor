@@ -108,10 +108,17 @@ class SignUpScreenView: UIView {
     
     func setupbuttonCampusSelected(){
         buttonCampusSelected = UIButton(type: .system)
-        buttonCampusSelected.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        buttonCampusSelected.setTitle("Selected campus: ", for: .normal)
+        buttonCampusSelected.titleLabel?.font = .systemFont(ofSize: 16, weight: .light)
+        buttonCampusSelected.setTitle("Campus", for: .normal)
         buttonCampusSelected.showsMenuAsPrimaryAction = true
         buttonCampusSelected.translatesAutoresizingMaskIntoConstraints = false
+        buttonCampusSelected.setTitleColor(UIColor.lightGray, for: .normal)
+        buttonCampusSelected.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0);
+        buttonCampusSelected.layer.cornerRadius = 4
+        buttonCampusSelected.layer.borderWidth = 1
+        buttonCampusSelected.layer.borderColor = UIColor.systemGray5.cgColor
+        buttonCampusSelected.clipsToBounds = true
+        buttonCampusSelected.contentHorizontalAlignment = .left
         self.addSubview(buttonCampusSelected)
     }
     
@@ -134,11 +141,10 @@ class SignUpScreenView: UIView {
             textFieldEmail.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             textFieldEmail.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
-            buttonCampusSelected.topAnchor.constraint(equalTo: textFieldEmail.bottomAnchor, constant: 32),
-            buttonCampusSelected.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            buttonCampusSelected.topAnchor.constraint(equalTo: textFieldEmail.bottomAnchor, constant: 16),
             buttonCampusSelected.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             buttonCampusSelected.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            buttonCampusSelected.heightAnchor.constraint(equalToConstant: 50),
+            buttonCampusSelected.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             textFieldPassword.topAnchor.constraint(equalTo: buttonCampusSelected.bottomAnchor, constant: 16),
             textFieldPassword.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),

@@ -47,9 +47,6 @@ class SearchProfessorBottomSheetController: UIViewController {
         
         //initializing the array for the table view with all the names...
         namesForTableView = namesDatabase
-        
-        //TODO: 从firebase拿到所有professor，将其name展示在tableview里
-        //注意： namesDatabase = [Professor]()，里面存放的是professor格式的，方便之后传递到comment page
     }
 }
 
