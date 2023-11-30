@@ -43,14 +43,21 @@ class AddCommentScreenViewController: UIViewController {
             if let newComment = generateNewComment() {
                 professor.rateArray.append(newComment)
                 // update the professor in the firebase
+                updateProfessorInFirebase(professor: professor, newComment: newComment) { result in
+                    switch result {
+                    case .success:
+                        print("User updated successfully")
+                        // update Professor in firebase
+                    case .failure(let error):
+                        print("Error creating chat: \(error.localizedDescription)")
+                    }
+                }
                 // updateProfessorInFirebase()
-                
-                user.allComments.append(newComment)
                 updateUserInFirebase(user: user, newComment: newComment) { result in
                     switch result {
                     case .success:
-                        // reload the chat list
                         print("User updated successfully")
+                        // update Professor in firebase
                     case .failure(let error):
                         print("Error creating chat: \(error.localizedDescription)")
                     }
@@ -59,8 +66,22 @@ class AddCommentScreenViewController: UIViewController {
         }
     }
     
-    func updateProfessorInFirebase() {
-        
+    func updateProfessorInFirebase(professor: Professor, newComment: SingleRateUnit, completion: @escaping (Result<Void, Error>) -> Void) {
+        print("function updateProfessorInFirebase triggered")
+        do {
+            try database.collection("professors").document(professor.professorUID).collection("comments").addDocument(from: newComment) { error in
+                if let error = error {
+                    print("Error updating chat object: \(error.localizedDescription)")
+                    completion(.failure(error))
+                } else {
+                    print("Professor - comment updated in Firebase")
+                    completion(.success(()))
+                }
+            }
+        } catch {
+            print("Error setting data: \(error.localizedDescription)")
+            completion(.failure(error))
+        }
     }
     
     func updateUserInFirebase(user: User, newComment: SingleRateUnit, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -71,7 +92,10 @@ class AddCommentScreenViewController: UIViewController {
                     print("Error updating chat object: \(error.localizedDescription)")
                     completion(.failure(error))
                 } else {
-                    print("Chat updated in Firebase")
+                    print("User - comment updated in Firebase")
+                    // back to professor comment screen
+                    self.navigationController?.popViewController(animated: true)
+                    // TODO: 用notification center让comment screen update这条新增的comment
                     completion(.success(()))
                 }
             }
