@@ -46,6 +46,8 @@ struct User: Codable{
         // TODO: Handle password assignment according to your requirements
         self.password = ""
         self.allComments = [SingleRateUnit]()
+        // TODO: save campus info in firebase auth and get it here
+        self.campus = ""
     }
 
 }
