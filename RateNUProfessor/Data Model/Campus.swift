@@ -7,5 +7,5 @@
 
 import Foundation
 class Campus{
-    static let campus = ["Boston", "San Jose", "Oakland", "Seattle", "Vancouver", "Portland"]
+    static let campus = ["Boston, MA", "Silicon Valley, CA", "Oakland", "Seattle, WA", "Vancouver, Canada", "Portland, Maine", "Online", "Arlington, VA"]
 }

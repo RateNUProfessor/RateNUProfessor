@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 // 现在的逻辑是可以根据professor Name搜索，或者根据课号搜索
 // （因为它们是两个object不能放在一起，并且firebase noSQL数据库暂时没有了解到怎么联合查询
@@ -86,15 +87,52 @@ class SearchScreenViewController: UIViewController {
     @objc func onSearchByProfessorButtonTapped(){
         // mock data for professor Database
         // TODO: 现在为MockData, 需要implem从firebase中获得所有ProfessorName, 注意firebase是async，需要用completion
-        let MockProf = Professor(name: "MockProf")
-        let Jake = Professor(name: "Jake")
-        var ProfessorDatabase = [MockProf, Jake]
+//        let MockProf = Professor(name: "MockProf")
+//        let Jake = Professor(name: "Jake")
+//        var ProfessorDatabase = [MockProf, Jake]
         
-        searchProfessorSheetController.namesForTableView.removeAll()
-        searchProfessorSheetController.namesDatabase = ProfessorDatabase
+        self.searchProfessorSheetController.namesDatabase.removeAll()
+        getAllProfessorsFromFireBase { [weak self] names in
+            guard let self = self else { return }
+            
+            self.searchProfessorSheetController.namesDatabase.append(contentsOf: names)
+            print(self.searchProfessorSheetController.namesDatabase)
+            self.setupSearchBottomSheet(type: "Professor")
+            self.present(self.searchSheetNavController, animated: true)
+        }
         
-        setupSearchBottomSheet(type: "Professor")
-        present(searchSheetNavController, animated: true)
+//        searchProfessorSheetController.namesForTableView.removeAll()
+//        searchProfessorSheetController.namesDatabase = ProfessorDatabase
+//
+//        setupSearchBottomSheet(type: "Professor")
+//        present(searchSheetNavController, animated: true)
+    }
+    
+    func getAllProfessorsFromFireBase(completion: @escaping ([Professor]) -> Void) {
+        var tmp = [Professor]()
+        let db = Firestore.firestore()
+        let professorsCollection = db.collection("professors")
+
+        professorsCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    do {
+                       // Extracting user data
+                       let professorsData = document.data()
+                       if let professorName = professorsData["name"] as? String{
+                           let professor = Professor(name: professorName)
+                           tmp.append(professor)
+                       } else {
+                           print("Professor data does not contain a name")
+                       }
+                   }
+                }
+                completion(tmp)
+
+            }
+        }
     }
     
     @objc func onSearchByCourseNumberButtonTapped(){
@@ -102,14 +140,51 @@ class SearchScreenViewController: UIViewController {
         // mock data for courseNumber Database
         // TODO: 现在为MockData, 需要implem从firebase中获得所有courseNumber，注意firebase是async，需要用completion
         // TODO: 一点迷思，或者可以本地cache一个所有课号的array，这样不用每次都查...
-        let CS5001 = Course(courseID: "CS5001")
-        let CS5002 = Course(courseID: "CS5002")
-        var CourseNumberDatabase = [CS5001, CS5002]
+//        let CS5001 = Course(courseID: "CS5001")
+//        let CS5002 = Course(courseID: "CS5002")
+//        var CourseNumberDatabase = [CS5001, CS5002]
+//
+//        searchCourseNumberSheetController.namesForTableView.removeAll()
+//        searchCourseNumberSheetController.namesDatabase = CourseNumberDatabase
+//
+//        setupSearchBottomSheet(type: "Course")
+//        present(searchSheetNavController, animated: true)
         
-        searchCourseNumberSheetController.namesForTableView.removeAll()
-        searchCourseNumberSheetController.namesDatabase = CourseNumberDatabase
-        
-        setupSearchBottomSheet(type: "Course")
-        present(searchSheetNavController, animated: true)
+        self.searchCourseNumberSheetController.namesDatabase.removeAll()
+        getAllCoursesFromFireBase { [weak self] names in
+            guard let self = self else { return }
+            
+            self.searchCourseNumberSheetController.namesDatabase.append(contentsOf: names)
+            print(self.searchCourseNumberSheetController.namesDatabase)
+            self.setupSearchBottomSheet(type: "Course")
+            self.present(self.searchSheetNavController, animated: true)
+        }
+    }
+    
+    func getAllCoursesFromFireBase(completion: @escaping ([Course]) -> Void) {
+        var tmp = [Course]()
+        let db = Firestore.firestore()
+        let coursesCollection = db.collection("courses")
+
+        coursesCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    do {
+                       // Extracting user data
+                       let courseData = document.data()
+                       if let courseId = courseData["id"] as? String{
+                           let course = Course(courseID: courseId)
+                           tmp.append(course)
+                       } else {
+                           print("Professor data does not contain a name")
+                       }
+                   }
+                }
+                completion(tmp)
+
+            }
+        }
     }
 }
