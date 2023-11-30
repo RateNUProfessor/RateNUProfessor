@@ -142,9 +142,10 @@ class SignUpScreenView: UIView {
             textFieldEmail.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
             
             buttonCampusSelected.topAnchor.constraint(equalTo: textFieldEmail.bottomAnchor, constant: 16),
-            buttonCampusSelected.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            buttonCampusSelected.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            buttonCampusSelected.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9),
+            buttonCampusSelected.leadingAnchor.constraint(equalTo: textFieldEmail.leadingAnchor),
+            buttonCampusSelected.trailingAnchor.constraint(equalTo: textFieldEmail.trailingAnchor),
+            buttonCampusSelected.widthAnchor.constraint(equalTo: textFieldEmail.widthAnchor),
+            buttonCampusSelected.heightAnchor.constraint(equalTo: textFieldEmail.heightAnchor),
             
             textFieldPassword.topAnchor.constraint(equalTo: buttonCampusSelected.bottomAnchor, constant: 16),
             textFieldPassword.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),

@@ -34,7 +34,7 @@ class AddCommentScreenViewController: UIViewController {
         
         firebaseAuthUser = Auth.auth().currentUser
         addCommentScreen.buttonAdd.addTarget(self, action: #selector(buttonAddTapped), for: .touchUpInside)
-        
+        print("addcommentpage: \(firebaseAuthUser?.uid)")
     }
     
     @objc func buttonAddTapped() {

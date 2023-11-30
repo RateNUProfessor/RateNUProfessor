@@ -53,7 +53,8 @@ class PostCommentTableViewCell: UITableViewCell {
     
     func setupLableInfo(){
         labelInfo = UILabel()
-        labelInfo.font = UIFont.boldSystemFont(ofSize: 16)
+        labelInfo.font = UIFont.boldSystemFont(ofSize: 14)
+        labelInfo.textAlignment = .right
         labelInfo.textColor = .darkGray
         labelInfo.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelInfo)
@@ -100,7 +101,7 @@ class PostCommentTableViewCell: UITableViewCell {
             buttonDelete.topAnchor.constraint(equalTo: labelComment.bottomAnchor, constant: 8),
             buttonDelete.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -16),
             
-            wrapperCellView.heightAnchor.constraint(equalToConstant: 72)
+            wrapperCellView.heightAnchor.constraint(equalToConstant: 120)
         ])
     }
 

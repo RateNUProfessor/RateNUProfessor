@@ -88,7 +88,6 @@ extension SignUpScreenViewController{
                 print("Error occured: \(String(describing: error))")
             }else{
                 self.hideActivityIndicator()
-                self.navigationController?.popViewController(animated: true)
             }
         })
     }
@@ -102,7 +101,8 @@ extension SignUpScreenViewController{
             "uid": user.id,
             "name": user.name,
             "email": user.email,
-            "password": user.password
+            "password": user.password,
+            "campus": user.campus
         ]){(error) in
             if error == nil{
                 print(error)

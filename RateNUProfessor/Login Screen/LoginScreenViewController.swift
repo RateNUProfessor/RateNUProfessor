@@ -11,6 +11,8 @@ import FirebaseAuth
 class LoginScreenViewController: UIViewController {
     
     let loginScreen = LoginScreenView()
+    var handleAuth: AuthStateDidChangeListenerHandle?
+    var currentUser:FirebaseAuth.User?
     
     override func loadView() {
         view = loginScreen
@@ -20,7 +22,7 @@ class LoginScreenViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Login"
-        
+    
         loginScreen.buttonLogin.addTarget(self, action: #selector(onButtonLoginTapped), for: .touchUpInside)
 
     }
