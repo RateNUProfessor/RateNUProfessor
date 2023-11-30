@@ -14,7 +14,6 @@ class SettingScreenViewController: UIViewController {
 
     let settingsScreen = SettingScreenView()
     var selectedCampus = "San Jose"
-    var handleAuth: AuthStateDidChangeListenerHandle?
     var currentUser:FirebaseAuth.User?
     let database = Firestore.firestore()
     
@@ -41,19 +40,21 @@ class SettingScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        handleAuth = Auth.auth().addStateDidChangeListener{ auth, user in
-            if user == nil{
-                self.currentUser = nil
-                self.settingsScreen.profileImage.setImage(UIImage(systemName: "person.fill"), for: .normal)
-    
-            }else{
-                self.currentUser = user
-                if let url = self.currentUser?.photoURL, let name = self.currentUser?.displayName {
-                    self.settingsScreen.profileImage.loadRemoteImage(from: url)
-                    self.settingsScreen.textFieldName.text = name
+        if let url = self.currentUser?.photoURL, let name = self.currentUser?.displayName {
+            self.settingsScreen.profileImage.loadRemoteImage(from: url)
+            self.settingsScreen.textFieldName.text = name
+        }
+        
+        if let id = self.currentUser?.uid {
+            self.database.collection("users").document(id).getDocument { (document, error) in
+                if let error = error {
+                    print("Error getting document: \(error)")
+                } else if let document = document, document.exists {
+                    self.selectedCampus = document["campus"] as? String ?? "Unknown"
                     self.settingsScreen.buttonCampus.setTitle(self.selectedCampus, for: .normal)
+                } else {
+                    print("Document does not exist")
                 }
-                
             }
         }
     }

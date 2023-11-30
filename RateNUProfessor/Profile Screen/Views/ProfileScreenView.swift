@@ -36,6 +36,9 @@ class ProfileScreenView: UIView {
         profileImage.contentMode = .scaleToFill
         profileImage.clipsToBounds = true
         profileImage.layer.masksToBounds = true
+        profileImage.layer.cornerRadius = 10
+        profileImage.layer.borderWidth = 1.5
+        profileImage.layer.borderColor = AppColors.buttonColor.cgColor
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(profileImage)
     }
@@ -82,7 +85,7 @@ class ProfileScreenView: UIView {
             profileImage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 32),
             
             labelName.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 40),
-            labelName.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 100),
+            labelName.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 50),
             
             labelCampus.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 4),
             labelCampus.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),

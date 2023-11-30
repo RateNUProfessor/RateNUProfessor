@@ -29,7 +29,6 @@ class SignUpScreenViewController: UIViewController {
         signUpScreen.buttonTakePhoto.menu = getMenuImagePicker()
         signUpScreen.buttonCampusSelected.menu = getMenuTypes()
 
-        
         signUpScreen.buttonRegister.addTarget(self, action: #selector(onButtonRegisterTapped), for: .touchUpInside)
 
     }

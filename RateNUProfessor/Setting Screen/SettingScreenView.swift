@@ -43,6 +43,7 @@ class SettingScreenView: UIView {
         profileImage.contentHorizontalAlignment = .fill
         profileImage.contentVerticalAlignment = .fill
         profileImage.imageView?.contentMode = .scaleAspectFit
+        profileImage.imageView?.layer.cornerCurve = .circular
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(profileImage)
     }
@@ -139,7 +140,8 @@ class SettingScreenView: UIView {
             buttonCampus.leadingAnchor.constraint(equalTo: labelName.leadingAnchor),
             
             buttonChangePwd.topAnchor.constraint(equalTo: buttonCampus.bottomAnchor, constant: 12),
-            buttonChangePwd.leadingAnchor.constraint(equalTo: labelName.leadingAnchor, constant: 200),
+            //buttonChangePwd.leadingAnchor.constraint(equalTo: labelName.leadingAnchor, constant: 200),
+            buttonChangePwd.trailingAnchor.constraint(equalTo: textFieldName.trailingAnchor),
             
             buttonSave.topAnchor.constraint(equalTo: buttonChangePwd.bottomAnchor, constant: 32),
             buttonSave.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
