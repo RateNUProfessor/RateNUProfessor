@@ -31,13 +31,14 @@ class CommentScreenViewController: UIViewController {
         // 我这里在模拟的时候，直接写了一个叫mock professor的UID
         professorObj.professorUID = "wsxOITjTZc9JZUvWm0IH"
         
+        let student = User(id: "1", name: "Livia", email: "1@qq.com", password: "1111", campus: "San Jose")
         
         // TODO: 这里直接用mock data展示了comment，应该从firebase里拿这个professor所有的comments并展示
-        var rate1 = SingleRateUnit(rateStudent: student, rateProfessor: professorObj, rateClass: "CS5002", rateScore: 4.0, rateComment: "adshfgip3ohfjk23rje2", , rateSemaster: "23Fall", rateCampus: "San Jose")
+        var rate1 = SingleRateUnit(rateStudent: student, rateProfessor: professorObj, rateClass: "CS5002", rateScore: 4.0, rateComment: "adshfgip3ohfjk23rje2", rateSemaster: "23Fall", rateCampus: "San Jose")
         
-        var rate2 = SingleRateUnit(rateStudent: student, rateProfessor: professorObj, rateClass: "CS5001", rateScore: 3.0, rateComment: "not recommend!", , rateSemaster: "23Spring", rateCampus: "Boston")
+        var rate2 = SingleRateUnit(rateStudent: student, rateProfessor: professorObj, rateClass: "CS5001", rateScore: 3.0, rateComment: "not recommend!", rateSemaster: "23Spring", rateCampus: "Boston")
 
-        let student = User(id: "1", name: "Livia", email: "1@qq.com", password: "1111", campus: "San Jose")
+
         // let prof = Professor(name: "Jake")
        
         

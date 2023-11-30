@@ -155,7 +155,8 @@ class AddCommentScreenViewController: UIViewController {
         if let firebaseuser = firebaseAuthUser {
             if let score = Double(scoreString) {
                 let user = User(firebaseUser: firebaseuser)
-                let newComment = SingleRateUnit(rateStudent: user, rateProfessor: professor, rateClass: courseNumber, rateScore: score, rateComment: comment)
+                // TODO: get semaster and campus info from view screen
+                let newComment = SingleRateUnit(rateStudent: user, rateProfessor: professor, rateClass: courseNumber, rateScore: score, rateComment: comment, rateSemaster: "Fall23", rateCampus: "Boston")
                 return newComment
             } else {
                 showAlert(text: "Can't add new comment", from: self)
