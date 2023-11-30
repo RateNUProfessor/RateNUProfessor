@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import Firebase
 
 // 现在的逻辑是可以根据professor Name搜索，或者根据课号搜索
 // （因为它们是两个object不能放在一起，并且firebase noSQL数据库暂时没有了解到怎么联合查询
@@ -86,15 +87,41 @@ class SearchScreenViewController: UIViewController {
     @objc func onSearchByProfessorButtonTapped(){
         // mock data for professor Database
         // TODO: 现在为MockData, 需要implem从firebase中获得所有ProfessorName, 注意firebase是async，需要用completion
-        let MockProf = Professor(name: "MockProf")
-        let Jake = Professor(name: "Jake")
-        var ProfessorDatabase = [MockProf, Jake]
+//        let MockProf = Professor(name: "MockProf")
+//        let Jake = Professor(name: "Jake")
+//        var ProfessorDatabase = [MockProf, Jake]
         
-        searchProfessorSheetController.namesForTableView.removeAll()
-        searchProfessorSheetController.namesDatabase = ProfessorDatabase
+//        searchProfessorSheetController.namesForTableView.removeAll()
+//        searchProfessorSheetController.namesDatabase = ProfessorDatabase
+//
+//        setupSearchBottomSheet(type: "Professor")
+//        present(searchSheetNavController, animated: true)
         
-        setupSearchBottomSheet(type: "Professor")
-        present(searchSheetNavController, animated: true)
+        var ProfessorDatabase = [Professor]()
+        
+        let db = Firestore.firestore()
+        db.collection("professors").getDocuments { [weak self] (querySnapshot, err) in
+            guard let self = self else { return }
+
+            if let err = err {
+                print("Error getting documents: \(err)")
+                return
+            } else {
+                for document in querySnapshot!.documents {
+                    var professor = Professor(name: document.data()["name"] as? String ?? "Unknown")
+                    professor.professorUID = document.documentID
+
+                    ProfessorDatabase.append(professor)
+                }
+
+                // Update your UI here with the fetched professors
+                self.searchProfessorSheetController.namesForTableView.removeAll()
+                self.searchProfessorSheetController.namesDatabase = ProfessorDatabase
+
+                self.setupSearchBottomSheet(type: "Professor")
+                self.present(self.searchSheetNavController, animated: true)
+            }
+        }
     }
     
     @objc func onSearchByCourseNumberButtonTapped(){
@@ -102,14 +129,43 @@ class SearchScreenViewController: UIViewController {
         // mock data for courseNumber Database
         // TODO: 现在为MockData, 需要implem从firebase中获得所有courseNumber，注意firebase是async，需要用completion
         // TODO: 一点迷思，或者可以本地cache一个所有课号的array，这样不用每次都查...
-        let CS5001 = Course(courseID: "CS5001")
-        let CS5002 = Course(courseID: "CS5002")
-        var CourseNumberDatabase = [CS5001, CS5002]
+//        let CS5001 = Course(courseID: "CS5001")
+//        let CS5002 = Course(courseID: "CS5002")
+//        var CourseNumberDatabase = [CS5001, CS5002]
+//
+//        searchCourseNumberSheetController.namesForTableView.removeAll()
+//        searchCourseNumberSheetController.namesDatabase = CourseNumberDatabase
+//
+//        setupSearchBottomSheet(type: "Course")
+//        present(searchSheetNavController, animated: true)
         
-        searchCourseNumberSheetController.namesForTableView.removeAll()
-        searchCourseNumberSheetController.namesDatabase = CourseNumberDatabase
         
-        setupSearchBottomSheet(type: "Course")
-        present(searchSheetNavController, animated: true)
+        var CourseNumberDatabase = [Course]()
+
+        let db = Firestore.firestore()
+        db.collection("courses").getDocuments { [weak self] (querySnapshot, err) in
+            guard let self = self else { return }
+
+            if let err = err {
+                print("Error getting documents: \(err)")
+                return
+            } else {
+                for document in querySnapshot!.documents {
+                    let courseID = document.data()["id"] as? String ?? "Unknown ID"
+                    let courseName = document.data()["name"] as? String ?? "No Course Name"
+                    
+                    let course = Course(courseID: courseID)
+                    
+                    CourseNumberDatabase.append(course)
+                }
+
+                // Update your UI here with the fetched courses
+                self.searchCourseNumberSheetController.namesForTableView.removeAll()
+                self.searchCourseNumberSheetController.namesDatabase = CourseNumberDatabase
+
+                self.setupSearchBottomSheet(type: "Course")
+                self.present(self.searchSheetNavController, animated: true)
+            }
+        }
     }
 }
