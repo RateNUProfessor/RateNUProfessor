@@ -27,7 +27,18 @@ class ViewController: UIViewController {
         landingScreen.buttonSignIn.addTarget(self, action: #selector(onButtonSignInTapped), for: .touchUpInside)
         landingScreen.buttonSignUp.addTarget(self, action: #selector(onButtonSignUpTapped), for: .touchUpInside)
         
+
+        func presentViewControllerA() {
+          // call if logged in
+        }
+
+        func presentViewControllerB() {
+          // call if not logged in
+        }
+        
     }
+    
+    
     
     @objc func onButtonSignInTapped() {
         let loginController = LoginScreenViewController()

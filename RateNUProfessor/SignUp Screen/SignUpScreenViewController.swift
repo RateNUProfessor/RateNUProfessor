@@ -15,7 +15,7 @@ class SignUpScreenViewController: UIViewController {
     let childProgressView = ProgressSpinnerViewController()
     var pickedImage:UIImage?
     let storage = Storage.storage()
-    var selectedCampus = "Boston"
+    var selectedCampus = "Boston, MA"
     
     override func loadView() {
         view = signUpScreen
@@ -27,6 +27,8 @@ class SignUpScreenViewController: UIViewController {
         self.title = "Sign Up"
         
         signUpScreen.buttonTakePhoto.menu = getMenuImagePicker()
+        signUpScreen.buttonCampusSelected.menu = getMenuTypes()
+
         
         signUpScreen.buttonRegister.addTarget(self, action: #selector(onButtonRegisterTapped), for: .touchUpInside)
 
@@ -35,10 +37,11 @@ class SignUpScreenViewController: UIViewController {
     func getMenuTypes() -> UIMenu{
         var menuItems = [UIAction]()
         
-        for type in Campus.campus{
-            let menuItem = UIAction(title: type,handler: {(_) in
-                                self.selectedCampus = type
+        for campus in Campus.campus{
+            let menuItem = UIAction(title: campus,handler: {(_) in
+                                self.selectedCampus = campus
                                 self.signUpScreen.buttonCampusSelected.setTitle(self.selectedCampus, for: .normal)
+                self.signUpScreen.buttonCampusSelected.setTitleColor(UIColor.black, for: .normal)
                             })
             menuItems.append(menuItem)
         }

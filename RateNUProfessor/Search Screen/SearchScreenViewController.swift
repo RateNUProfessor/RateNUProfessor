@@ -7,7 +7,7 @@
 
 import UIKit
 import FirebaseAuth
-import Firebase
+import FirebaseFirestore
 
 // 现在的逻辑是可以根据professor Name搜索，或者根据课号搜索
 // （因为它们是两个object不能放在一起，并且firebase noSQL数据库暂时没有了解到怎么联合查询
@@ -120,6 +120,7 @@ class SearchScreenViewController: UIViewController {
 
                 self.setupSearchBottomSheet(type: "Professor")
                 self.present(self.searchSheetNavController, animated: true)
+
             }
         }
     }
@@ -165,6 +166,7 @@ class SearchScreenViewController: UIViewController {
 
                 self.setupSearchBottomSheet(type: "Course")
                 self.present(self.searchSheetNavController, animated: true)
+
             }
         }
     }
