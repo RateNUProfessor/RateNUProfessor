@@ -10,6 +10,8 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+//TODO: 将couseNumber改成下拉框
+//TODO: 增加每一个comment应该fields
 class AddCommentScreenViewController: UIViewController {
 
     let addCommentScreen = AddCommentScreenView()
@@ -54,10 +56,11 @@ class AddCommentScreenViewController: UIViewController {
                 updateProfessorInFirebase(professor: professor, newComment: newComment) { result in
                     switch result {
                     case .success:
-                        print("User updated successfully")
+                        print("Professor updated successfully")
+                        // TODO: 将comment更新后应该重新计算教授的总体score并更新
                         // update Professor in firebase
                     case .failure(let error):
-                        print("Error creating chat: \(error.localizedDescription)")
+                        print("Error update professor: \(error.localizedDescription)")
                     }
                 }
                 // update the user in firebase
@@ -69,7 +72,7 @@ class AddCommentScreenViewController: UIViewController {
                         self.navigationController?.popViewController(animated: true)
                         // TODO: 用notification center让comment screen update这条新增的comment
                     case .failure(let error):
-                        print("Error creating chat: \(error.localizedDescription)")
+                        print("Error update user: \(error.localizedDescription)")
                     }
                 }
             }

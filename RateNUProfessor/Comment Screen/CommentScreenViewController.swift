@@ -9,6 +9,9 @@ import UIKit
 
 class CommentScreenViewController: UIViewController {
 
+    //TODO: 有关view上的Todo
+    //TODO: 在页面上方应该有这个professor的平均分
+    //TODO: 每个comment展示的部分可以再改一下
     let commentScreen = CommentScreenView()
     // waiting to get the professor selected from the search screen
     var professorObj = Professor(name: "")
@@ -25,11 +28,17 @@ class CommentScreenViewController: UIViewController {
         
         // mock data
         let student = User(id: "1", name: "Livia", email: "1@qq.com", password: "1111")
+        // TODO: professor是从search screen传入，确保传入的时候里面是有UID的
+        // 我这里在模拟的时候，直接写了一个叫mock professor的UID
         professorObj.professorUID = "wsxOITjTZc9JZUvWm0IH"
         
+        
+        // TODO: 这里直接用mock data展示了comment，应该从firebase里拿这个professor所有的comments并展示
         var rate1 = SingleRateUnit(rateStudent: student, rateProfessor: professorObj, rateClass: "CS5002", rateScore: 4.0, rateComment: "adshfgip3ohfjk23rje2")
         
         var rate2 = SingleRateUnit(rateStudent: student, rateProfessor: professorObj, rateClass: "CS5001", rateScore: 3.0, rateComment: "not recommend!")
+        
+        //TODO: 需要notification center, 监听add new comment page新加的comment并reload tableview
         
         allScoresList.append(rate1)
         allScoresList.append(rate2)
