@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		186BAADE2B16CC81000030A1 /* SearchProfessorBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAADD2B16CC81000030A1 /* SearchProfessorBottomSheetController.swift */; };
+		186BAAE02B16CC9F000030A1 /* SearchBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAADF2B16CC9F000030A1 /* SearchBottomSheetView.swift */; };
+		186BAAE22B16CCBA000030A1 /* SearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE12B16CCBA000030A1 /* SearchTableCell.swift */; };
+		186BAAE42B16DC3C000030A1 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE32B16DC3C000030A1 /* Course.swift */; };
+		186BAAE62B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE52B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift */; };
+		186BAAE82B16E7B9000030A1 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE72B16E7B9000030A1 /* NotificationNames.swift */; };
+		186BAAEA2B16EC74000030A1 /* CommentTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAE92B16EC74000030A1 /* CommentTableViewManager.swift */; };
+		186BAAEC2B17E4A4000030A1 /* commonFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186BAAEB2B17E4A4000030A1 /* commonFunction.swift */; };
 		18CFE5FE2B0A8ABB00529968 /* TabBarScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */; };
 		18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E12B099D6100AD34AA /* AppColors.swift */; };
 		18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6A6E42B09A22D00AD34AA /* Professor.swift */; };
@@ -51,9 +59,21 @@
 		CE09FA552B0B2A260010DBAC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09FA542B0B2A260010DBAC /* User.swift */; };
 		CE09FA582B0B3E430010DBAC /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09FA572B0B3E430010DBAC /* Configs.swift */; };
 		CE09FA5A2B0B45D20010DBAC /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09FA592B0B45D20010DBAC /* Campus.swift */; };
+		CED2C3F22B17EC0A001BB6E7 /* SignUpPhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F12B17EC0A001BB6E7 /* SignUpPhotoManager.swift */; };
+		CED2C3F42B17F019001BB6E7 /* ImageViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F32B17F019001BB6E7 /* ImageViewUtils.swift */; };
+		CED2C3F82B181EBA001BB6E7 /* CommentsTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F72B181EBA001BB6E7 /* CommentsTableViewManager.swift */; };
+		CED2C3FA2B1826E7001BB6E7 /* UIButtonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F92B1826E7001BB6E7 /* UIButtonUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		186BAADD2B16CC81000030A1 /* SearchProfessorBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProfessorBottomSheetController.swift; sourceTree = "<group>"; };
+		186BAADF2B16CC9F000030A1 /* SearchBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBottomSheetView.swift; sourceTree = "<group>"; };
+		186BAAE12B16CCBA000030A1 /* SearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableCell.swift; sourceTree = "<group>"; };
+		186BAAE32B16DC3C000030A1 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		186BAAE52B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCourseNumberButtomSheetController.swift; sourceTree = "<group>"; };
+		186BAAE72B16E7B9000030A1 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
+		186BAAE92B16EC74000030A1 /* CommentTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewManager.swift; sourceTree = "<group>"; };
+		186BAAEB2B17E4A4000030A1 /* commonFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commonFunction.swift; sourceTree = "<group>"; };
 		18CFE5FD2B0A8ABB00529968 /* TabBarScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarScreenViewController.swift; sourceTree = "<group>"; };
 		18D6A6E12B099D6100AD34AA /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		18D6A6E42B09A22D00AD34AA /* Professor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professor.swift; sourceTree = "<group>"; };
@@ -96,6 +116,10 @@
 		CE09FA542B0B2A260010DBAC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE09FA572B0B3E430010DBAC /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
 		CE09FA592B0B45D20010DBAC /* Campus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
+		CED2C3F12B17EC0A001BB6E7 /* SignUpPhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPhotoManager.swift; sourceTree = "<group>"; };
+		CED2C3F32B17F019001BB6E7 /* ImageViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewUtils.swift; sourceTree = "<group>"; };
+		CED2C3F72B181EBA001BB6E7 /* CommentsTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewManager.swift; sourceTree = "<group>"; };
+		CED2C3F92B1826E7001BB6E7 /* UIButtonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,10 +137,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		186BAADC2B16CC63000030A1 /* Search Botton Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				186BAADD2B16CC81000030A1 /* SearchProfessorBottomSheetController.swift */,
+				186BAADF2B16CC9F000030A1 /* SearchBottomSheetView.swift */,
+				186BAAE12B16CCBA000030A1 /* SearchTableCell.swift */,
+				186BAAE52B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift */,
+			);
+			path = "Search Botton Sheet";
+			sourceTree = "<group>";
+		};
 		18CFE5FB2B0A88A500529968 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				CE09FA572B0B3E430010DBAC /* Configs.swift */,
 				18D6A6E12B099D6100AD34AA /* AppColors.swift */,
+				186BAAE72B16E7B9000030A1 /* NotificationNames.swift */,
+				186BAAEB2B17E4A4000030A1 /* commonFunction.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -136,6 +174,7 @@
 				18D6A6E62B09A2E000AD34AA /* SingleRateUnit.swift */,
 				CE09FA542B0B2A260010DBAC /* User.swift */,
 				CE09FA592B0B45D20010DBAC /* Campus.swift */,
+				186BAAE32B16DC3C000030A1 /* Course.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -159,6 +198,7 @@
 		CE09F9122B043A1E0010DBAC /* RateNUProfessor */ = {
 			isa = PBXGroup;
 			children = (
+				186BAADC2B16CC63000030A1 /* Search Botton Sheet */,
 				18CFE5FC2B0A8A5800529968 /* Tab Bar Screen */,
 				18CFE5FB2B0A88A500529968 /* Shared */,
 				18D6A6E32B09A21A00AD34AA /* Data Model */,
@@ -180,7 +220,8 @@
 				CE09F91E2B043A210010DBAC /* LaunchScreen.storyboard */,
 				CE09F9212B043A210010DBAC /* Info.plist */,
 				CE09F9272B043E7D0010DBAC /* GoogleService-Info.plist */,
-				CE09FA572B0B3E430010DBAC /* Configs.swift */,
+				CED2C3F32B17F019001BB6E7 /* ImageViewUtils.swift */,
+				CED2C3F92B1826E7001BB6E7 /* UIButtonUtils.swift */,
 			);
 			path = RateNUProfessor;
 			sourceTree = "<group>";
@@ -207,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				CE09F94C2B0443760010DBAC /* SignUpScreenViewController.swift */,
+				CED2C3F12B17EC0A001BB6E7 /* SignUpPhotoManager.swift */,
 				CE09F9362B0442460010DBAC /* SignUpScreenView.swift */,
 				CE09FA502B0B28420010DBAC /* SignUpFirebaseManager.swift */,
 				CE09FA522B0B28EF0010DBAC /* SignUpProgressIndicatorManager.swift */,
@@ -228,6 +270,7 @@
 			children = (
 				CE09F9572B0444770010DBAC /* Views */,
 				CE09F9522B0444200010DBAC /* ProfileScreenViewController.swift */,
+				CED2C3F72B181EBA001BB6E7 /* CommentsTableViewManager.swift */,
 			);
 			path = "Profile Screen";
 			sourceTree = "<group>";
@@ -246,6 +289,7 @@
 			children = (
 				CE09F9582B0444A90010DBAC /* CommentScreenViewController.swift */,
 				CE09F95D2B0444CC0010DBAC /* Views */,
+				186BAAE92B16EC74000030A1 /* CommentTableViewManager.swift */,
 			);
 			path = "Comment Screen";
 			sourceTree = "<group>";
@@ -395,39 +439,51 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE09F9592B0444A90010DBAC /* CommentScreenViewController.swift in Sources */,
+				186BAAEA2B16EC74000030A1 /* CommentTableViewManager.swift in Sources */,
 				CE09F9392B04425C0010DBAC /* AddCommentScreenView.swift in Sources */,
 				CE09F93D2B04428F0010DBAC /* CommentScreenView.swift in Sources */,
 				18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */,
 				CE09F9352B04422D0010DBAC /* LoginScreenView.swift in Sources */,
+				186BAAEC2B17E4A4000030A1 /* commonFunction.swift in Sources */,
 				18D6A6E72B09A2E000AD34AA /* SingleRateUnit.swift in Sources */,
 				CE09F9552B0444570010DBAC /* PostCommentTableViewCell.swift in Sources */,
+				186BAADE2B16CC81000030A1 /* SearchProfessorBottomSheetController.swift in Sources */,
 				CE09F9182B043A1E0010DBAC /* ViewController.swift in Sources */,
+				186BAAE02B16CC9F000030A1 /* SearchBottomSheetView.swift in Sources */,
 				CE09FA512B0B28420010DBAC /* SignUpFirebaseManager.swift in Sources */,
 				CE09F9682B0445780010DBAC /* SearchResultTableViewCell.swift in Sources */,
 				CE09F94D2B0443760010DBAC /* SignUpScreenViewController.swift in Sources */,
+				186BAAE62B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift in Sources */,
 				CE09F95B2B0444B80010DBAC /* CommentTableViewCell.swift in Sources */,
+				186BAAE22B16CCBA000030A1 /* SearchTableCell.swift in Sources */,
 				CE09F9642B04454A0010DBAC /* SearchScreenViewController.swift in Sources */,
 				CE09F9372B0442460010DBAC /* SignUpScreenView.swift in Sources */,
 				CE09F9432B0442DA0010DBAC /* ChatScreenView.swift in Sources */,
 				CE09FA4F2B0B27F20010DBAC /* ProgressSpinnerDelegate.swift in Sources */,
 				CE09F9412B0442CC0010DBAC /* SettingScreenView.swift in Sources */,
+				CED2C3F42B17F019001BB6E7 /* ImageViewUtils.swift in Sources */,
 				CE09F9532B0444200010DBAC /* ProfileScreenViewController.swift in Sources */,
 				CE09F9142B043A1E0010DBAC /* AppDelegate.swift in Sources */,
 				18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */,
 				CE09FA582B0B3E430010DBAC /* Configs.swift in Sources */,
+				CED2C3F22B17EC0A001BB6E7 /* SignUpPhotoManager.swift in Sources */,
+				186BAAE82B16E7B9000030A1 /* NotificationNames.swift in Sources */,
 				CE09F94A2B0443330010DBAC /* LoginScreenViewController.swift in Sources */,
 				CE09F9622B0445390010DBAC /* ChatScreenViewController.swift in Sources */,
 				CE09F9502B0443E70010DBAC /* AddCommentScreenViewController.swift in Sources */,
 				CE09F9332B04419D0010DBAC /* LandingScreenView.swift in Sources */,
 				CE09FA552B0B2A260010DBAC /* User.swift in Sources */,
 				CE09F9662B04455F0010DBAC /* ResultScreenViewController.swift in Sources */,
+				CED2C3F82B181EBA001BB6E7 /* CommentsTableViewManager.swift in Sources */,
 				CE09FA4D2B0B27E10010DBAC /* ProgressSpinnerViewController.swift in Sources */,
 				CE09F93B2B04426D0010DBAC /* ProfileScreenView.swift in Sources */,
 				CE09F9472B0443010010DBAC /* ResultScreenView.swift in Sources */,
 				CE09FA532B0B28EF0010DBAC /* SignUpProgressIndicatorManager.swift in Sources */,
 				18CFE5FE2B0A8ABB00529968 /* TabBarScreenViewController.swift in Sources */,
+				186BAAE42B16DC3C000030A1 /* Course.swift in Sources */,
 				CE09FA5A2B0B45D20010DBAC /* Campus.swift in Sources */,
 				CE09F9452B0442EB0010DBAC /* SearchScreenView.swift in Sources */,
+				CED2C3FA2B1826E7001BB6E7 /* UIButtonUtils.swift in Sources */,
 				CE09F9162B043A1E0010DBAC /* SceneDelegate.swift in Sources */,
 				CE09F95F2B04450D0010DBAC /* SettingScreenViewController.swift in Sources */,
 			);

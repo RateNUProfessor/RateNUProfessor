@@ -7,23 +7,22 @@
 
 import UIKit
 
+// 展示所有和这个课关联的professor
+// 点击每一个tableViewCell进入相应professor的comment screen
 class ResultScreenViewController: UIViewController {
+
+    let resultScreen = ResultScreenView()
+    
+    override func loadView() {
+        view = resultScreen
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        title = "Search Result"
+        
+        //TODO: 从firebase获取这个课号的所有professor，展示在tableView里
+        //TODO: 点击这个tableview可以进入到对应professor的comment page
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
