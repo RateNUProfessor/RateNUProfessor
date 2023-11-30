@@ -91,45 +91,35 @@ class SearchScreenViewController: UIViewController {
 //        let Jake = Professor(name: "Jake")
 //        var ProfessorDatabase = [MockProf, Jake]
         
-        self.searchProfessorSheetController.namesDatabase.removeAll()
-        getAllProfessorsFromFireBase { [weak self] names in
-            guard let self = self else { return }
-            
-            self.searchProfessorSheetController.namesDatabase.append(contentsOf: names)
-            print(self.searchProfessorSheetController.namesDatabase)
-            self.setupSearchBottomSheet(type: "Professor")
-            self.present(self.searchSheetNavController, animated: true)
-        }
-        
 //        searchProfessorSheetController.namesForTableView.removeAll()
 //        searchProfessorSheetController.namesDatabase = ProfessorDatabase
 //
 //        setupSearchBottomSheet(type: "Professor")
 //        present(searchSheetNavController, animated: true)
-    }
-    
-    func getAllProfessorsFromFireBase(completion: @escaping ([Professor]) -> Void) {
-        var tmp = [Professor]()
+        
+        var ProfessorDatabase = [Professor]()
+        
         let db = Firestore.firestore()
-        let professorsCollection = db.collection("professors")
+        db.collection("professors").getDocuments { [weak self] (querySnapshot, err) in
+            guard let self = self else { return }
 
-        professorsCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
+            if let err = err {
+                print("Error getting documents: \(err)")
+                return
             } else {
                 for document in querySnapshot!.documents {
-                    do {
-                       // Extracting user data
-                       let professorsData = document.data()
-                       if let professorName = professorsData["name"] as? String{
-                           let professor = Professor(name: professorName)
-                           tmp.append(professor)
-                       } else {
-                           print("Professor data does not contain a name")
-                       }
-                   }
+                    var professor = Professor(name: document.data()["name"] as? String ?? "Unknown")
+                    professor.professorUID = document.documentID
+
+                    ProfessorDatabase.append(professor)
                 }
-                completion(tmp)
+
+                // Update your UI here with the fetched professors
+                self.searchProfessorSheetController.namesForTableView.removeAll()
+                self.searchProfessorSheetController.namesDatabase = ProfessorDatabase
+
+                self.setupSearchBottomSheet(type: "Professor")
+                self.present(self.searchSheetNavController, animated: true)
 
             }
         }
@@ -150,39 +140,32 @@ class SearchScreenViewController: UIViewController {
 //        setupSearchBottomSheet(type: "Course")
 //        present(searchSheetNavController, animated: true)
         
-        self.searchCourseNumberSheetController.namesDatabase.removeAll()
-        getAllCoursesFromFireBase { [weak self] names in
-            guard let self = self else { return }
-            
-            self.searchCourseNumberSheetController.namesDatabase.append(contentsOf: names)
-            print(self.searchCourseNumberSheetController.namesDatabase)
-            self.setupSearchBottomSheet(type: "Course")
-            self.present(self.searchSheetNavController, animated: true)
-        }
-    }
-    
-    func getAllCoursesFromFireBase(completion: @escaping ([Course]) -> Void) {
-        var tmp = [Course]()
-        let db = Firestore.firestore()
-        let coursesCollection = db.collection("courses")
+        
+        var CourseNumberDatabase = [Course]()
 
-        coursesCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
+        let db = Firestore.firestore()
+        db.collection("courses").getDocuments { [weak self] (querySnapshot, err) in
+            guard let self = self else { return }
+
+            if let err = err {
+                print("Error getting documents: \(err)")
+                return
             } else {
                 for document in querySnapshot!.documents {
-                    do {
-                       // Extracting user data
-                       let courseData = document.data()
-                       if let courseId = courseData["id"] as? String{
-                           let course = Course(courseID: courseId)
-                           tmp.append(course)
-                       } else {
-                           print("Professor data does not contain a name")
-                       }
-                   }
+                    let courseID = document.data()["id"] as? String ?? "Unknown ID"
+                    let courseName = document.data()["name"] as? String ?? "No Course Name"
+                    
+                    let course = Course(courseID: courseID)
+                    
+                    CourseNumberDatabase.append(course)
                 }
-                completion(tmp)
+
+                // Update your UI here with the fetched courses
+                self.searchCourseNumberSheetController.namesForTableView.removeAll()
+                self.searchCourseNumberSheetController.namesDatabase = CourseNumberDatabase
+
+                self.setupSearchBottomSheet(type: "Course")
+                self.present(self.searchSheetNavController, animated: true)
 
             }
         }
