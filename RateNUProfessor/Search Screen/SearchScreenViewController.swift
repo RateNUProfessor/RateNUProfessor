@@ -18,7 +18,7 @@ class SearchScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Search"
+        title = "Rate NU Professor"
     }
     
 

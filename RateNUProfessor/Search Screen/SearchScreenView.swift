@@ -10,6 +10,9 @@ import UIKit
 class SearchScreenView: UIView {
 
     var labelSearch: UILabel!
+    var labelProfName: UILabel!
+    var labelCourseId: UILabel!
+    var labelCollege: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,6 +20,8 @@ class SearchScreenView: UIView {
         self.backgroundColor = .white
         
         setupLabelSearch()
+        setupProfName()
+        setupCourseId()
         
         initConstraints()
         
@@ -24,7 +29,7 @@ class SearchScreenView: UIView {
     
     func setupLabelSearch() {
         labelSearch = UILabel()
-        labelSearch.text = "This is Search Page"
+        labelSearch.text = "Search Professor"
         labelSearch.font = UIFont.boldSystemFont(ofSize: 32)
         labelSearch.textAlignment = .center
         labelSearch.translatesAutoresizingMaskIntoConstraints = false
