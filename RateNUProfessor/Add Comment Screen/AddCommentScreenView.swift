@@ -18,6 +18,8 @@ class AddCommentScreenView: UIView {
 
     var labelComment: UILabel!
     var textComment: UITextField!
+    
+    var buttonAdd: UIButton!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,6 +63,12 @@ class AddCommentScreenView: UIView {
         textComment.placeholder = "Enter comment"
         textComment.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(textComment)
+        
+        buttonAdd = UIButton(type: .system)
+        buttonAdd.setTitle("Add", for: .normal)
+        buttonAdd.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        buttonAdd.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(buttonAdd)
     }
 
     func setupConstraints() {
@@ -88,6 +96,11 @@ class AddCommentScreenView: UIView {
             textComment.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             textComment.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             textComment.heightAnchor.constraint(equalToConstant: 80),
+            
+            buttonAdd.topAnchor.constraint(equalTo: textComment.bottomAnchor, constant: 20),
+            buttonAdd.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            buttonAdd.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            buttonAdd.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
 

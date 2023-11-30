@@ -7,10 +7,13 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class AddCommentScreenViewController: UIViewController {
 
     let addCommentScreen = AddCommentScreenView()
+    let database = Firestore.firestore()
     
     
     // receive the professor object from the All Comment Screen
@@ -27,27 +30,55 @@ class AddCommentScreenViewController: UIViewController {
         view.backgroundColor = .white
         title = "Add Comment Screen"
         
+        firebaseAuthUser = Auth.auth().currentUser
+        addCommentScreen.buttonAdd.addTarget(self, action: #selector(buttonAddTapped), for: .touchUpInside)
+        
+    }
+    
+    @objc func buttonAddTapped() {
         if let firebaseuser = firebaseAuthUser {
+            print("buttonAddTapped Triggered")
             var user = User(firebaseUser: firebaseuser)
             // if seccessfully have a new comment
             if let newComment = generateNewComment() {
                 professor.rateArray.append(newComment)
                 // update the professor in the firebase
-                updateProfessorInFireBase()
+                // updateProfessorInFirebase()
                 
-                // update user
                 user.allComments.append(newComment)
-                updateUserInFireBase()
+                updateUserInFirebase(user: user, newComment: newComment) { result in
+                    switch result {
+                    case .success:
+                        // reload the chat list
+                        print("User updated successfully")
+                    case .failure(let error):
+                        print("Error creating chat: \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
     
-    func updateProfessorInFireBase() {
+    func updateProfessorInFirebase() {
         
     }
     
-    func updateUserInFireBase() {
-        
+    func updateUserInFirebase(user: User, newComment: SingleRateUnit, completion: @escaping (Result<Void, Error>) -> Void) {
+        print("function updateUserInFirebase triggered")
+        do {
+            try database.collection("users").document(user.id).collection("comments").addDocument(from: newComment) { error in
+                if let error = error {
+                    print("Error updating chat object: \(error.localizedDescription)")
+                    completion(.failure(error))
+                } else {
+                    print("Chat updated in Firebase")
+                    completion(.success(()))
+                }
+            }
+        } catch {
+            print("Error setting data: \(error.localizedDescription)")
+            completion(.failure(error))
+        }
     }
     
     func generateNewComment() -> SingleRateUnit? {
