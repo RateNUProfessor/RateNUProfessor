@@ -10,10 +10,11 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseStorage
 
 extension SignUpScreenViewController{
     
-    func registerNewAccount(){
+    func registerNewAccount(photoURL: URL?){
         let name = signUpScreen.textFieldName.text
         let email = signUpScreen.textFieldEmail.text
         let password = signUpScreen.textFieldPassword.text
@@ -38,9 +39,9 @@ extension SignUpScreenViewController{
                 showActivityIndicator()
                 Auth.auth().createUser(withEmail: uwEmail, password: uwPassword, completion: {result, error in
                     if error == nil{
-                        self.setNameOfTheUserInFirebaseAuth(name: uwName)
+                        self.setNameAndPhotoOfTheUserInFirebaseAuth(name: uwName, email: uwEmail, photoURL: photoURL)
                         let uid = Auth.auth().currentUser?.uid
-                        var user = User(id: uid!, name: uwName, email: uwEmail, password: uwPassword)
+                        var user = User(id: uid!, name: uwName, email: uwEmail, password: uwPassword, campus: self.selectedCampus)
                         self.saveUserToFireStore(user)
                     }else{
                         if let uwError = error {
@@ -50,6 +51,46 @@ extension SignUpScreenViewController{
                 })
             }
         }
+    }
+    
+    func uploadProfilePhotoToStorage(){
+        var profilePhotoURL:URL?
+        
+        if let image = pickedImage{
+            if let jpegData = image.jpegData(compressionQuality: 80){
+                let storageRef = storage.reference()
+                let imagesRepo = storageRef.child("imagesUsers")
+                let imageRef = imagesRepo.child("\(NSUUID().uuidString).jpg")
+                
+                let uploadTask = imageRef.putData(jpegData, completion: {(metadata, error) in
+                    if error == nil{
+                        imageRef.downloadURL(completion: {(url, error) in
+                            if error == nil{
+                                profilePhotoURL = url
+                                self.registerNewAccount(photoURL: profilePhotoURL)
+                            }
+                        })
+                    }
+                })
+            }
+        }else{
+            registerNewAccount(photoURL: profilePhotoURL)
+        }
+    }
+    
+    func setNameAndPhotoOfTheUserInFirebaseAuth(name: String, email: String, photoURL: URL?){
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = name
+        changeRequest?.photoURL = photoURL
+        
+        changeRequest?.commitChanges(completion: {(error) in
+            if error != nil{
+                print("Error occured: \(String(describing: error))")
+            }else{
+                self.hideActivityIndicator()
+                self.navigationController?.popViewController(animated: true)
+            }
+        })
     }
     
     func saveUserToFireStore(_ user: User){
@@ -69,21 +110,6 @@ extension SignUpScreenViewController{
                 print("New user saved.")
             }
         }
-    }
-
-    func setNameOfTheUserInFirebaseAuth(name: String){
-        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-        changeRequest?.displayName = name
-        changeRequest?.commitChanges(completion: {(error) in
-            if error == nil{
-                self.hideActivityIndicator()
-
-            }else{
-                if let uwError = error {
-                    self.showErrorMessage((String(describing: uwError)))
-                }
-            }
-        })
     }
     
     func isValidEmail(_ email: String) -> Bool {

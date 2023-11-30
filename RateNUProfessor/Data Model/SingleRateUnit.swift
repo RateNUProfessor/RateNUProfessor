@@ -15,12 +15,16 @@ struct SingleRateUnit: Codable {
     var rateClass: String
     var rateScore: Double
     var rateComment: String
+    var rateSemaster: String
+    var rateCampus: String
     
-    init(rateStudent: User, rateProfessor: Professor, rateClass: String, rateScore: Double) {
+    init(rateStudent: User, rateProfessor: Professor, rateClass: String, rateScore: Double, rateSemaster: String, rateCampus: String) {
         self.rateStudent = rateStudent
         self.rateProfessor = rateProfessor
         self.rateClass = rateClass
         self.rateScore = rateScore
         self.rateComment = ""
+        self.rateSemaster = rateSemaster
+        self.rateCampus = rateCampus
     }
 }
