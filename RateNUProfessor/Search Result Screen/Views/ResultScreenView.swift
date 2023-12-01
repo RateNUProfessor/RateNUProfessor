@@ -23,19 +23,10 @@ class ResultScreenView: UIView {
         
     }
     
-//    func setupLabelSearch() {
-//        labelSearch = UILabel()
-//        labelSearch.text = "This is Search Result Page"
-//        labelSearch.font = UIFont.boldSystemFont(ofSize: 32)
-//        labelSearch.textAlignment = .center
-//        labelSearch.translatesAutoresizingMaskIntoConstraints = false
-//        self.addSubview(labelSearch)
-//    }
-    
     func setupTableViewProfessors() {
         tableViewProfessors = UITableView()
         tableViewProfessors.translatesAutoresizingMaskIntoConstraints = false
-        tableViewProfessors.register(SearchResultTableViewCell.self, forCellReuseIdentifier: "selectedCourseToGetProf")
+        tableViewProfessors.register(SearchResultTableViewCell.self, forCellReuseIdentifier: Configs.selectedCourseToGetProf)
         self.addSubview(tableViewProfessors)
     }
     

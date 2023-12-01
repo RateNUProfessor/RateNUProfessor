@@ -28,20 +28,33 @@ class ResultScreenViewController: UIViewController {
         
         //TODO: 从firebase获取这个课号的所有professor，展示在tableView里
         //TODO: 点击这个tableview可以进入到对应professor的comment page
-        resultScreen.tableViewProfessors.register(SearchResultTableViewCell.self, forCellReuseIdentifier: "selectedCourseToGetProf")
+        resultScreen.tableViewProfessors.register(SearchResultTableViewCell.self, forCellReuseIdentifier: Configs.selectedCourseToGetProf)
         resultScreen.tableViewProfessors.delegate = self
         resultScreen.tableViewProfessors.dataSource = self
         
         if let courseID = selectedCourseID {
             fetchProfessorsForCourse(courseID: courseID)
         }
+        
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func backButtonTapped() {
+        // 处理返回按钮点击
+        // 如果是以模态方式呈现，则关闭当前视图控制器
+        // 如果是推送到导航堆栈，则返回上一个视图控制器
+        navigationController?.popViewController(animated: true)
     }
     
     private func fetchProfessorsForCourse(courseID: String) {
+        print("Fetching professors for course ID: \(courseID)")
         var updatedProfessors = [Professor]()
         
         let db = Firestore.firestore()
-        db.collection("courses").document(courseID).collection("professors").getDocuments { [weak self] (querySnapshot, error) in
+        print("line45")
+        db.collection("courses").document(courseID).collection("professor").getDocuments { [weak self] (querySnapshot, error) in
+            print("line47")
             guard let self = self else {
                 print("Error: Self is nil")
                 return
@@ -51,32 +64,43 @@ class ResultScreenViewController: UIViewController {
                 print("Error fetching professors for course: \(error.localizedDescription)")
                 return
             }
-
+            
+            print("line58")
             if let querySnapshot = querySnapshot, querySnapshot.documents.isEmpty {
                 self.foundProfessors = false
                 self.professors = []
                 self.resultScreen.tableViewProfessors.reloadData()
                 return
             }
-
+            print("line65")
+            print("Query Snapshot Documents: \(querySnapshot!.documents)")
+            print("line67")
             let group = DispatchGroup()
             for document in querySnapshot!.documents {
                 group.enter()
                 let professorID = document.documentID
+                print("Found professor ID: \(professorID)")
+                
                 db.collection("professors").document(professorID).getDocument { (profDoc, err) in
+                    if let err = err {
+                        print("Error fetching professor document: \(err.localizedDescription)")
+                        group.leave()
+                        return
+                    }
+
                     if let profDoc = profDoc, profDoc.exists {
-                        var professor = Professor(name: profDoc.data()?["name"] as? String ?? "Unknown")
-                        professor.professorUID = professorID
-                        updatedProfessors.append(professor)
-                    } else {
-                        print("Error fetching professor: \(err?.localizedDescription ?? "Unknown error")")
+                        if let professorName = profDoc.data()?["name"] as? String {
+                            var professor = Professor(name: professorName)
+                            professor.professorUID = professorID
+                            updatedProfessors.append(professor)
+                        }
                     }
                     group.leave()
                 }
             }
 
             group.notify(queue: .main) {
-                print("Fetched professors group notify: \(updatedProfessors)")
+                print("Completed fetching professors. Total count: \(updatedProfessors.count)")
                 self.professors = updatedProfessors
                 self.resultScreen.tableViewProfessors.reloadData()
             }
@@ -99,7 +123,7 @@ extension ResultScreenViewController: UITableViewDelegate, UITableViewDataSource
             return cell
         }
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "selectedCourseToGetProf", for: indexPath) as? SearchResultTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Configs.selectedCourseToGetProf, for: indexPath) as? SearchResultTableViewCell else {
             return UITableViewCell()
         }
 
