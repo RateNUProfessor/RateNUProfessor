@@ -28,6 +28,7 @@ class LoginScreenViewController: UIViewController {
     }
     
     @objc func onButtonLoginTapped() {
+        //FIXME: did not conduct user login
         let tabBarController = TabBarScreenViewController()
         self.navigationController?.pushViewController(tabBarController, animated: true)
     }

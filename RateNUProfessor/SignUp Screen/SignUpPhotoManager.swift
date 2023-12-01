@@ -8,11 +8,12 @@
 import UIKit
 import PhotosUI
 
+//MARK: extension for selecting photos from gallery
 extension SignUpScreenViewController:PHPickerViewControllerDelegate{
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true)
         
-        print(results)
+        print("DEBUG: info of the selected picture: \(results)")
         
         let itemprovider = results.map(\.itemProvider)
         
@@ -36,7 +37,7 @@ extension SignUpScreenViewController:PHPickerViewControllerDelegate{
         }
     }
 }
-
+//MARK: extension for using camera
 extension SignUpScreenViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
