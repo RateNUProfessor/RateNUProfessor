@@ -30,7 +30,16 @@ class TabBarScreenViewController: UITabBarController, UITabBarControllerDelegate
         tabProfile.tabBarItem = tabProfileBarItem
         tabProfile.title = "Profile"
         
-        self.viewControllers = [tabSearch, tabProfile]
+        let tabChat = UINavigationController(rootViewController: ChatScreenViewController())
+        let tabChatBarItem = UITabBarItem(
+            title: "Chat",
+            image: UIImage(systemName: "message")?.withRenderingMode(.alwaysOriginal).withTintColor(UIColor.black),
+            selectedImage: UIImage(systemName: "message.fill")
+        )
+        tabChat.tabBarItem = tabChatBarItem
+        tabChat.title = "Chat"
+        
+        self.viewControllers = [tabSearch, tabChat, tabProfile]
     }
     
     override func viewDidLoad() {

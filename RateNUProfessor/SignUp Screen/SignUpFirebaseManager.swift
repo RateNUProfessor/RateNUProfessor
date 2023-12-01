@@ -101,7 +101,6 @@ extension SignUpScreenViewController{
             "uid": user.id,
             "name": user.name,
             "email": user.email,
-            "password": user.password,
             "campus": user.campus
         ]){(error) in
             if error == nil{

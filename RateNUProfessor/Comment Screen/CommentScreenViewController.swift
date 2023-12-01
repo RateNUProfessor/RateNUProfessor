@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class CommentScreenViewController: UIViewController {
 
@@ -16,6 +18,8 @@ class CommentScreenViewController: UIViewController {
     // waiting to get the professor selected from the search screen
     var professorObj = Professor(name: "")
     var allScoresList = [SingleRateUnit]()
+    var currentUser:FirebaseAuth.User?
+    let database = Firestore.firestore()
         
     override func loadView() {
         view = commentScreen
@@ -24,12 +28,35 @@ class CommentScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "All Rate Scores"
+        title = professorObj.name
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        //currentUser = Auth.auth().currentUser
+        
+        database.collection("professors")
+            .document(professorObj.professorUID)
+            .collection("comments")
+            .addSnapshotListener(includeMetadataChanges: false, listener: {querySnapshot, error in
+                if let documents = querySnapshot?.documents{
+                    self.allScoresList.removeAll()
+                    for document in documents{
+                        do{
+                            let comment  = try document.data(as: SingleRateUnit.self)
+                            self.allScoresList.append(comment)
+                        }catch{
+                            print(error)
+                        }
+                    }
+                        self.allScoresList.sort(by: {$0.rateSemester < $1.rateSemester})
+                        self.commentScreen.tableViewComments.reloadData()
+                    }
+                })
+        
         
         // mock data
         // TODO: professor是从search screen传入，确保传入的时候里面是有UID的
         // 我这里在模拟的时候，直接写了一个叫mock professor的UID
-        professorObj.professorUID = "wsxOITjTZc9JZUvWm0IH"
+        //professorObj.professorUID = "wsxOITjTZc9JZUvWm0IH"
         
         let student = User(id: "1", name: "Livia", email: "1@qq.com", password: "1111", campus: "San Jose")
         
@@ -41,16 +68,11 @@ class CommentScreenViewController: UIViewController {
 
         // let prof = Professor(name: "Jake")
        
-        
         //TODO: 需要notification center, 监听add new comment page新加的comment并reload tableview
         
         allScoresList.append(rate1)
         allScoresList.append(rate2)
         
-        
-        
-        
-
         
         commentScreen.tableViewComments.delegate = self
         commentScreen.tableViewComments.dataSource = self
@@ -61,11 +83,8 @@ class CommentScreenViewController: UIViewController {
     
     @objc func onAddCommentButtonTapped() {
         let addCommentScreenViewController = AddCommentScreenViewController()
-        
         // pass the professor object to Add Comment Screen
         addCommentScreenViewController.professor = professorObj
-        
-        
         navigationController?.pushViewController(addCommentScreenViewController, animated: true)
     }
 

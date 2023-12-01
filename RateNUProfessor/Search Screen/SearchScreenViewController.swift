@@ -51,17 +51,18 @@ class SearchScreenViewController: UIViewController {
     }
     
     @objc func onProfessorSelected(notification: Notification){
-        if let selectedItem = notification.object{
-            let commentScreen = CommentScreenViewController()
-            navigationController?.pushViewController(commentScreen, animated: true)
+        if let selectedItem = notification.object as? Professor {
+            let commentController = CommentScreenViewController()
+            commentController.professorObj = selectedItem
+            navigationController?.pushViewController(commentController, animated: true)
         }
     }
     
     //TODO: search by courseNumber所有都没写
     @objc func onCourseNumberSelected(notification: Notification){
-        if let selectedItem = notification.object{
-            let searchResultScreen = ResultScreenViewController()
-            navigationController?.pushViewController(searchResultScreen, animated: true)
+        if let selectedItem = notification.object as? Course {
+            let searchResultController = ResultScreenViewController()
+            navigationController?.pushViewController(searchResultController, animated: true)
         }
     }
     

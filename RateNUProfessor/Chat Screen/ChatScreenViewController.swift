@@ -6,24 +6,25 @@
 //
 
 import UIKit
+import FirebaseAuth
+import MessageKit
+import FirebaseFirestore
 
 class ChatScreenViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    let chatScreen = ChatScreenView()
+    
+    var messages: [Message] = []
+    
+    override func loadView() {
+        view = chatScreen
     }
     
 
-    /*
-    // MARK: - Navigation
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "Chat"
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
-
 }
