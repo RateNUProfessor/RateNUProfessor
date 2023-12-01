@@ -12,20 +12,9 @@ import FirebaseFirestore
 class ViewController: UIViewController {
     
     let landingScreen = LandingScreenView()
-    var handleAuth: AuthStateDidChangeListenerHandle?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        handleAuth = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
-            guard let self = self else { return }
-
-            if user != nil {
-                let topBarVC = TabBarScreenViewController()
-                self.navigationController?.pushViewController(topBarVC, animated: true)
-            } else {
-            }
-        }
     }
     
     override func loadView() {
@@ -37,14 +26,18 @@ class ViewController: UIViewController {
         
         landingScreen.buttonSignIn.addTarget(self, action: #selector(onButtonSignInTapped), for: .touchUpInside)
         landingScreen.buttonSignUp.addTarget(self, action: #selector(onButtonSignUpTapped), for: .touchUpInside)
-    }
+        
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let handleAuth = handleAuth {
-            Auth.auth().removeStateDidChangeListener(handleAuth)
+        func presentViewControllerA() {
+          // call if logged in
         }
+
+        func presentViewControllerB() {
+          // call if not logged in
+        }
+        
     }
+    
     
     
     @objc func onButtonSignInTapped() {
@@ -52,8 +45,12 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(loginController, animated: true)
     }
     
+    
     @objc func onButtonSignUpTapped() {
         let signUpController = SignUpScreenViewController()
         self.navigationController?.pushViewController(signUpController, animated: true)
     }
+
+
 }
+
