@@ -36,13 +36,13 @@ class ResultScreenViewController: UIViewController {
             fetchProfessorsForCourse(courseID: courseID)
         }
         
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem = backButton
+//        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
+//        navigationItem.leftBarButtonItem = backButton
     }
     
-    @objc func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
+//    @objc func backButtonTapped() {
+//        navigationController?.popViewController(animated: true)
+//    }
     
     private func fetchProfessorsForCourse(courseID: String) {
         print("Fetching professors for course ID: \(courseID)")
