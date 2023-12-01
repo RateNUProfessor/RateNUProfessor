@@ -38,6 +38,7 @@ class AddCommentScreenViewController: UIViewController {
         
         getYearData()
         getCourseList()
+        print(courseNumberDatabase)
         
         addCommentScreen.pickerYear.dataSource = self
         addCommentScreen.pickerYear.delegate = self
