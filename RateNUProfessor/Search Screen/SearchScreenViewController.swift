@@ -60,9 +60,10 @@ class SearchScreenViewController: UIViewController {
     
     //TODO: search by courseNumber所有都没写
     @objc func onCourseNumberSelected(notification: Notification){
-        if let selectedItem = notification.object as? Course {
-            let searchResultController = ResultScreenViewController()
-            navigationController?.pushViewController(searchResultController, animated: true)
+        if let selectedCourse = notification.object as? Course { // 这里将notification.object转换为Course类型
+            let searchResultScreen = ResultScreenViewController()
+            searchResultScreen.selectedCourseID = selectedCourse.courseID // 使用转换后的对象获取courseID
+            navigationController?.pushViewController(searchResultScreen, animated: true)
         }
     }
     
