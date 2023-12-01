@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestore
 
 extension ProfileScreenViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -16,8 +17,40 @@ extension ProfileScreenViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Configs.tableViewProfileCommentID, for: indexPath) as! PostCommentTableViewCell
         cell.labelName.text = comments[indexPath.row].rateProfessor.name
-        cell.labelInfo.text = "\(comments[indexPath.row].rateClass), \(comments[indexPath.row].rateCampus), \(comments[indexPath.row].rateSemaster)"
+        cell.labelInfo.text = "\(comments[indexPath.row].rateClass), \(comments[indexPath.row].rateCampus), \(comments[indexPath.row].rateSemester)"
         cell.labelComment.text = "\(comments[indexPath.row].rateComment)"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete"){ action, view, completion   in
+            
+            let alert = UIAlertController(title: "Delete the comment?", message: "Are you sure you want to delete the comment?", preferredStyle: .actionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {_ in
+                
+                //TODO: delete comments from firebase
+                //self.deleteANote(token: self.authToken!, id: self.comments[indexPath.row]._id)
+                if let id = self.currentUser?.uid {
+        
+                    self.database.collection("users")
+                        .document(id)
+                        .collection("comments")
+                        .document(self.comments[indexPath.row].commentId).delete() { err in
+                        if let err = err {
+                          print("Error removing document: \(err)")
+                        } else {
+                          print("Document successfully removed!")
+                        }
+                      }
+                }
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .default))
+            self.present(alert, animated: true)
+        }
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
     }
 }

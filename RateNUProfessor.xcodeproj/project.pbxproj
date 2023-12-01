@@ -63,6 +63,8 @@
 		CED2C3F42B17F019001BB6E7 /* ImageViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F32B17F019001BB6E7 /* ImageViewUtils.swift */; };
 		CED2C3F82B181EBA001BB6E7 /* CommentsTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F72B181EBA001BB6E7 /* CommentsTableViewManager.swift */; };
 		CED2C3FA2B1826E7001BB6E7 /* UIButtonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F92B1826E7001BB6E7 /* UIButtonUtils.swift */; };
+		CED2C3FE2B194DAE001BB6E7 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3FD2B194DAE001BB6E7 /* Term.swift */; };
+		CED2C4022B1966E4001BB6E7 /* PickerYearTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C4012B1966E4001BB6E7 /* PickerYearTerm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +122,8 @@
 		CED2C3F32B17F019001BB6E7 /* ImageViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewUtils.swift; sourceTree = "<group>"; };
 		CED2C3F72B181EBA001BB6E7 /* CommentsTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewManager.swift; sourceTree = "<group>"; };
 		CED2C3F92B1826E7001BB6E7 /* UIButtonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonUtils.swift; sourceTree = "<group>"; };
+		CED2C3FD2B194DAE001BB6E7 /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
+		CED2C4012B1966E4001BB6E7 /* PickerYearTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerYearTerm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,7 @@
 				CE09FA542B0B2A260010DBAC /* User.swift */,
 				CE09FA592B0B45D20010DBAC /* Campus.swift */,
 				186BAAE32B16DC3C000030A1 /* Course.swift */,
+				CED2C3FD2B194DAE001BB6E7 /* Term.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				CE09F94F2B0443E70010DBAC /* AddCommentScreenViewController.swift */,
+				CED2C4012B1966E4001BB6E7 /* PickerYearTerm.swift */,
 				CE09F9382B04425C0010DBAC /* AddCommentScreenView.swift */,
 			);
 			path = "Add Comment Screen";
@@ -454,6 +460,7 @@
 				CE09F9682B0445780010DBAC /* SearchResultTableViewCell.swift in Sources */,
 				CE09F94D2B0443760010DBAC /* SignUpScreenViewController.swift in Sources */,
 				186BAAE62B16DE5F000030A1 /* SearchCourseNumberButtomSheetController.swift in Sources */,
+				CED2C4022B1966E4001BB6E7 /* PickerYearTerm.swift in Sources */,
 				CE09F95B2B0444B80010DBAC /* CommentTableViewCell.swift in Sources */,
 				186BAAE22B16CCBA000030A1 /* SearchTableCell.swift in Sources */,
 				CE09F9642B04454A0010DBAC /* SearchScreenViewController.swift in Sources */,
@@ -484,6 +491,7 @@
 				CE09FA5A2B0B45D20010DBAC /* Campus.swift in Sources */,
 				CE09F9452B0442EB0010DBAC /* SearchScreenView.swift in Sources */,
 				CED2C3FA2B1826E7001BB6E7 /* UIButtonUtils.swift in Sources */,
+				CED2C3FE2B194DAE001BB6E7 /* Term.swift in Sources */,
 				CE09F9162B043A1E0010DBAC /* SceneDelegate.swift in Sources */,
 				CE09F95F2B04450D0010DBAC /* SettingScreenViewController.swift in Sources */,
 			);

@@ -13,7 +13,6 @@ class PostCommentTableViewCell: UITableViewCell {
     var labelName: UILabel!
     var labelInfo: UILabel!
     var labelComment: UILabel!
-    var buttonDelete: UIButton!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,7 +21,6 @@ class PostCommentTableViewCell: UITableViewCell {
         setupLabelName()
         setupLableInfo()
         setupLabelComment()
-        setupButtonDelete()
         
         initConstraints()
     }
@@ -66,17 +64,7 @@ class PostCommentTableViewCell: UITableViewCell {
         labelComment.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelComment)
     }
-    
-    func setupButtonDelete(){
-        buttonDelete = UIButton(type: .system)
-        buttonDelete.setTitle("", for: .normal)
-        buttonDelete.setImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-        buttonDelete.contentHorizontalAlignment = .fill
-        buttonDelete.contentVerticalAlignment = .fill
-        buttonDelete.imageView?.contentMode = .scaleAspectFit
-        buttonDelete.translatesAutoresizingMaskIntoConstraints = false
-        wrapperCellView.addSubview(buttonDelete)
-    }
+
     
     func initConstraints(){
         NSLayoutConstraint.activate([
@@ -98,10 +86,7 @@ class PostCommentTableViewCell: UITableViewCell {
             labelComment.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
             labelComment.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
             
-            buttonDelete.topAnchor.constraint(equalTo: labelComment.bottomAnchor, constant: 8),
-            buttonDelete.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -16),
-            
-            wrapperCellView.heightAnchor.constraint(equalToConstant: 120)
+            wrapperCellView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 
