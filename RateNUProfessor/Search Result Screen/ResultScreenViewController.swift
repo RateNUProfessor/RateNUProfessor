@@ -41,9 +41,6 @@ class ResultScreenViewController: UIViewController {
     }
     
     @objc func backButtonTapped() {
-        // 处理返回按钮点击
-        // 如果是以模态方式呈现，则关闭当前视图控制器
-        // 如果是推送到导航堆栈，则返回上一个视图控制器
         navigationController?.popViewController(animated: true)
     }
     
@@ -133,10 +130,12 @@ extension ResultScreenViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedProfessor = professors[indexPath.row]
-        let commentScreenVC = CommentScreenViewController()
-        commentScreenVC.professorObj = selectedProfessor
-        navigationController?.pushViewController(commentScreenVC, animated: true)
+        if foundProfessors {
+            let selectedProfessor = professors[indexPath.row]
+            let commentScreenVC = CommentScreenViewController()
+            commentScreenVC.professorObj = selectedProfessor
+            navigationController?.pushViewController(commentScreenVC, animated: true)
+        }
     }
     
 }
