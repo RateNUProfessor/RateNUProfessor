@@ -102,7 +102,7 @@ class AddCommentScreenViewController: UIViewController {
                     switch result {
                     case .success:
                         print("Professor updated successfully")
-                        // TODO: 将comment更新后应该重新计算教授的总体score并更新
+                        // TODO: 将comment更新后应该重新计算教授的总体score并更新，
                         // update Professor in firebase
                     case .failure(let error):
                         print("Error update professor: \(error.localizedDescription)")
