@@ -35,11 +35,7 @@ class SettingScreenViewController: UIViewController {
             action: #selector(onLogOutBarButtonTapped))
         
         settingsScreen.buttonSave.addTarget(self, action: #selector(onButtonSaveTapped), for: .touchUpInside)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    
+        
         if let url = self.currentUser?.photoURL, let name = self.currentUser?.displayName {
             self.settingsScreen.profileImage.loadRemoteImage(from: url)
             self.settingsScreen.textFieldName.text = name
@@ -57,6 +53,11 @@ class SettingScreenViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
     }
     
     @objc func onLogOutBarButtonTapped(){

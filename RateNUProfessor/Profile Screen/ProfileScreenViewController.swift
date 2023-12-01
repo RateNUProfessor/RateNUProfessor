@@ -30,7 +30,6 @@ class ProfileScreenViewController: UIViewController {
         title = "Profile"
         
         currentUser = Auth.auth().currentUser
-        print("profilepage: \(currentUser?.uid)")
         
         profileScreen.tableViewComments.delegate = self
         profileScreen.tableViewComments.dataSource = self
@@ -77,7 +76,7 @@ class ProfileScreenViewController: UIViewController {
                                 print(error)
                             }
                         }
-                        self.comments.sort(by: {$0.rateSemaster < $1.rateSemaster})
+                        self.comments.sort(by: {$0.rateSemester < $1.rateSemester})
                         self.profileScreen.tableViewComments.reloadData()
                     }
                 })
