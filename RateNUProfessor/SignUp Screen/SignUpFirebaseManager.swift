@@ -23,33 +23,37 @@ extension SignUpScreenViewController{
         if let uwName = name, let uwEmail = email, let uwPassword = password, let uwRepeatPwd = repeatPwd {
             
             if (uwName.isEmpty || uwEmail.isEmpty || uwPassword.isEmpty || uwRepeatPwd.isEmpty) {
-                showEmptyError()
+                showErrorMessage("Text Field can not be empty")
+                return // once a condition is not met, we end this function
             }
             if (!isValidEmail(uwEmail)) {
-                showEmailError()
+                showErrorMessage("Email Address is invalid. Please try again!")
+                return
             }
             if (uwPassword != uwRepeatPwd) {
-                showWrongPasswordError()
+                showErrorMessage("Repeat password does not match. Please try again!")
+                return
             }
             if (uwPassword.count < 6) {
                 showErrorMessage("Password must be at least 6 characters long.")
+                return
             }
             
-            if (!uwName.isEmpty && !uwEmail.isEmpty && !uwPassword.isEmpty && !uwRepeatPwd.isEmpty && isValidEmail(uwEmail) && uwPassword == uwRepeatPwd && uwPassword.count >= 6) {
-                showActivityIndicator()
-                Auth.auth().createUser(withEmail: uwEmail, password: uwPassword, completion: {result, error in
-                    if error == nil{
-                        self.setNameAndPhotoOfTheUserInFirebaseAuth(name: uwName, email: uwEmail, photoURL: photoURL)
-                        let uid = Auth.auth().currentUser?.uid
-                        var user = User(id: uid!, name: uwName, email: uwEmail, password: uwPassword, campus: self.selectedCampus)
-                        self.saveUserToFireStore(user)
-                    }else{
-                        if let uwError = error {
-                            self.showErrorMessage((String(describing: uwError)))
-                        }
-                    }
-                })
-            }
+            showActivityIndicator()
+            Auth.auth().createUser(withEmail: uwEmail, password: uwPassword, completion: {result, error in
+                if error == nil{
+                    self.setNameAndPhotoOfTheUserInFirebaseAuth(name: uwName, email: uwEmail, photoURL: photoURL)
+                    
+                    let uid = Auth.auth().currentUser?.uid // Note the newly created user is the current user
+                    var user = User(id: uid!, name: uwName, email: uwEmail, password: uwPassword, campus: self.selectedCampus)
+                    self.saveUserToFireStore(user)
+                }else{
+                    self.hideActivityIndicator()
+                    // do not display all the error message to the user. They dislike it
+                    self.showErrorMessage("Error: Failed to register")
+                }
+            })
+            
         }
     }
     
@@ -70,6 +74,8 @@ extension SignUpScreenViewController{
                                 self.registerNewAccount(photoURL: profilePhotoURL)
                             }
                         })
+                    } else {
+                        self.hideActivityIndicator()
                     }
                 })
             }
@@ -84,10 +90,9 @@ extension SignUpScreenViewController{
         changeRequest?.photoURL = photoURL
         
         changeRequest?.commitChanges(completion: {(error) in
-            if error != nil{
+            self.hideActivityIndicator()
+            if error != nil {
                 print("Error occured: \(String(describing: error))")
-            }else{
-                self.hideActivityIndicator()
             }
         })
     }
@@ -103,10 +108,11 @@ extension SignUpScreenViewController{
             "email": user.email,
             "campus": user.campus
         ]){(error) in
+            self.hideActivityIndicator()
             if error == nil{
-                print(error)
+                print("DEBUG: New user saved to FireStore.")
             } else {
-                print("New user saved.")
+                print("DEBUG: New user failed to be saved to FireStore")
             }
         }
     }
@@ -116,24 +122,6 @@ extension SignUpScreenViewController{
 
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
-    }
-    
-    func showEmptyError() {
-        let alert = UIAlertController(title: "ERROR", message: "Text Field can not be empty", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
-    }
-    
-    func showEmailError() {
-        let alert = UIAlertController(title: "ERROR", message: "Email Address is invalid. Please try again!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
-    }
-    
-    func showWrongPasswordError() {
-        let alert = UIAlertController(title: "ERROR", message: "Repeat password does not match. Please try again!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
     }
     
     func showErrorMessage(_ message: String) {
