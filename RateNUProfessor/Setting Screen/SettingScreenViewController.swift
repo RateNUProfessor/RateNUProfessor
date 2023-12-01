@@ -62,36 +62,21 @@ class SettingScreenViewController: UIViewController {
 
     }
     
-    @objc func onLogOutBarButtonTapped() {
-        let logoutAlert = UIAlertController(title: "Logging out", message: "Are you sure you want to log out?", preferredStyle: .actionSheet)
-        
-        logoutAlert.addAction(UIAlertAction(title: "Yes, log out", style: .destructive, handler: { _ in
-            do {
-                try Auth.auth().signOut()
-                // Navigate back to the specific ViewController
-                if let viewControllers = self.navigationController?.viewControllers {
-                    for viewController in viewControllers {
-                        if viewController is ViewController { // Replace 'ViewController' with the actual class name
-                            self.navigationController?.popToViewController(viewController, animated: true)
-                            return
-                        }
-                    }
+    @objc func onLogOutBarButtonTapped(){
+        let logoutAlert = UIAlertController(title: "Logging out!", message: "Are you sure want to log out?",
+            preferredStyle: .actionSheet)
+        logoutAlert.addAction(UIAlertAction(title: "Yes, log out!", style: .default, handler: {(_) in
+                do{
+                    try Auth.auth().signOut()
+                    self.navigationController?.popToRootViewController(animated: true)
+                }catch{
+                    print("Error occured!")
                 }
-            } catch {
-                self.presentErrorAlert()
-            }
-        }))
-        
+            })
+        )
         logoutAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-
+        
         self.present(logoutAlert, animated: true)
-    }
-
-    
-    private func presentErrorAlert() {
-        let errorAlert = UIAlertController(title: "Error", message: "An error occurred while trying to log out. Please try again.", preferredStyle: .alert)
-        errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(errorAlert, animated: true)
     }
     
     @objc func onButtonSaveTapped() {
