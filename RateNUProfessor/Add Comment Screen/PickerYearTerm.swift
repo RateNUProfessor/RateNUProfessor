@@ -17,6 +17,8 @@ extension AddCommentScreenViewController: UIPickerViewDelegate, UIPickerViewData
             return Term.term.count
         } else if pickerView == self.addCommentScreen.pickerYear {
             return years.count
+        } else if pickerView == self.addCommentScreen.pickerCourse {
+            return coursesList.count
         }
        return 1
     }
@@ -28,6 +30,9 @@ extension AddCommentScreenViewController: UIPickerViewDelegate, UIPickerViewData
         } else if pickerView == self.addCommentScreen.pickerYear {
             self.selectedYear = years[row]
             return years[row]
+        } else if pickerView == self.addCommentScreen.pickerCourse {
+            self.selectedCourse = coursesList[row]
+            return coursesList[row]
         }
        return ""
     }
@@ -38,6 +43,9 @@ extension AddCommentScreenViewController: UIPickerViewDelegate, UIPickerViewData
               self.view.endEditing(false)
         } else if pickerView == self.addCommentScreen.pickerYear{
             self.addCommentScreen.textFieldYear.text = years[row]
+              self.view.endEditing(false)
+        } else if pickerView == self.addCommentScreen.pickerCourse{
+            self.addCommentScreen.textFieldCourse.text = coursesList[row]
               self.view.endEditing(false)
         }
     }
