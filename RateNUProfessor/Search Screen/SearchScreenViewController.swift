@@ -51,8 +51,9 @@ class SearchScreenViewController: UIViewController {
     }
     
     @objc func onProfessorSelected(notification: Notification){
-        if let selectedItem = notification.object{
+        if let professor = notification.object as? Professor {
             let commentScreen = CommentScreenViewController()
+            commentScreen.professorObj = professor
             navigationController?.pushViewController(commentScreen, animated: true)
         }
     }

@@ -10,6 +10,7 @@ import UIKit
 class CommentScreenView: UIView {
     var tableViewComments: UITableView!
     var floatingButtonAddComment: UIButton!
+    var averageScoreLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,7 +18,15 @@ class CommentScreenView: UIView {
         
         setupTableViewComments()
         setupFloatingButtonAddComment()
+        setupAverageScoreLabel()
         initConstraints()
+    }
+    
+    func setupAverageScoreLabel() {
+        averageScoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        averageScoreLabel.textAlignment = .center
+        // 添加到视图
+        addSubview(averageScoreLabel)
     }
     
     func setupTableViewComments() {
@@ -38,17 +47,25 @@ class CommentScreenView: UIView {
     
     func initConstraints() {
         NSLayoutConstraint.activate([
-            tableViewComments.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8),
+            // Constraints for averageScoreLabel
+            averageScoreLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+            averageScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            averageScoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            // Constraints for tableViewComments
+            tableViewComments.topAnchor.constraint(equalTo: averageScoreLabel.bottomAnchor, constant: 10),
             tableViewComments.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -8),
             tableViewComments.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             tableViewComments.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
-            floatingButtonAddComment.widthAnchor.constraint(equalToConstant: 40),
-            floatingButtonAddComment.heightAnchor.constraint(equalToConstant: 40),
+            // Constraints for floatingButtonAddComment
+            floatingButtonAddComment.widthAnchor.constraint(equalToConstant: 60), // Modified for a larger button
+            floatingButtonAddComment.heightAnchor.constraint(equalToConstant: 60), // Modified for a larger button
             floatingButtonAddComment.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             floatingButtonAddComment.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

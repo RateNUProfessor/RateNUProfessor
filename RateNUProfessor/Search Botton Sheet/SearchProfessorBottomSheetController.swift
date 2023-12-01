@@ -66,7 +66,8 @@ extension SearchProfessorBottomSheetController: UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //MARK: name selected....
-        notificationCenter.post(name: .professorSelected, object: namesForTableView[indexPath.row])
+        let selectedProfessor = namesForTableView[indexPath.row]
+        notificationCenter.post(name: .professorSelected, object: selectedProfessor)
         //showProfessorCommentScreen(ProfessorSelected: namesForTableView[indexPath.row])
         //dismiss the bottom search sheet...
         self.dismiss(animated: true)
