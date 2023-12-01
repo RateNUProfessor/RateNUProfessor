@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
 class CommentScreenViewController: UIViewController {
 
@@ -29,6 +30,7 @@ class CommentScreenViewController: UIViewController {
         view.backgroundColor = .white
         
         title = professorObj.name
+        navigationController?.navigationBar.prefersLargeTitles = true
 
         /// updated below:
         fetchCommentsForProfessor()

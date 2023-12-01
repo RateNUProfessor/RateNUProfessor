@@ -19,6 +19,8 @@ class AddCommentScreenViewController: UIViewController {
     var selectedYear = "2023"
     var selectedTerm = "Spring"
     var years = [String]()
+    var coursesList = [String]()
+    var courseNumberDatabase = [Course]()
     
     // receive the professor object from the All Comment Screen
     var professor = Professor(name: "")
@@ -35,6 +37,8 @@ class AddCommentScreenViewController: UIViewController {
         title = professor.name
         
         getYearData()
+        getCourseList()
+        print(courseNumberDatabase)
         
         addCommentScreen.pickerYear.dataSource = self
         addCommentScreen.pickerYear.delegate = self
@@ -43,64 +47,35 @@ class AddCommentScreenViewController: UIViewController {
         
         firebaseAuthUser = Auth.auth().currentUser
         addCommentScreen.buttonAdd.addTarget(self, action: #selector(buttonAddTapped), for: .touchUpInside)
-        addCommentScreen.buttonCourseNumber.menu = getMenuCourses()
     }
     
     func getYearData() {
         var currentYear = Calendar.current.component(.year, from: Date())
-        for year in (currentYear - 10)...(currentYear + 20) {
+        for year in (currentYear - 5)...(currentYear + 5) {
             years.append("\(year)")
         }
     }
-    
-    
-    func getMenuCourses() -> UIMenu{
-        var menuItems = [UIAction]()
-        var courseNumberDatabase = [Course]()
-        var coursesList = [String]()
-        
-        getAllCoursesFromFireBase { [weak self] course in
-            guard let self = self else { return }
-            courseNumberDatabase.append(contentsOf: course)
-        }
-        
+
+    func getCourseList(){
+        getCoursesFromFirestore()
         for course in courseNumberDatabase {
             coursesList.append(course.courseID)
         }
-        
-        for courseId in coursesList {
-            let menuItem = UIAction(title: courseId,handler: {(_) in
-                                self.selectedCourse = courseId
-                                self.addCommentScreen.buttonCourseNumber.setTitle(self.selectedCourse, for: .normal)
-                            })
-            menuItems.append(menuItem)
-        }
-        
-        return UIMenu(title: "Select course", children: menuItems)
-        
     }
     
-    func getAllCoursesFromFireBase(completion: @escaping ([Course]) -> Void) {
-        var tmp = [Course]()
-        let coursesCollection = database.collection("courses")
-
-        coursesCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
+    func getCoursesFromFirestore(){
+        database.collection("courses").getDocuments { [weak self] (querySnapshot, err) in
+            guard let self = self else { return }
+            if let err = err {
+                print("Error getting documents: \(err)")
+                return
             } else {
                 for document in querySnapshot!.documents {
-                    do {
-                       let courseData = document.data()
-                       if let courseId = courseData["id"] as? String {
-                           let course = Course(courseID: courseId)
-                           tmp.append(course)
-                       } else {
-                           print("User data does not contain a name")
-                       }
-                   }
+                    let courseID = document.data()["id"] as? String ?? "Unknown ID"
+                    let courseName = document.data()["name"] as? String ?? "No Course Name"
+                    let course = Course(courseID: courseID)
+                    self.courseNumberDatabase.append(course)
                 }
-                completion(tmp)
-
             }
         }
     }
@@ -171,7 +146,7 @@ class AddCommentScreenViewController: UIViewController {
     func updateCourseNumberInFirebase(professor: Professor, completion: @escaping (Result<Void, Error>) -> Void) {
         //TODO: 在真正link前需要看一下是否已经关联过，不确定如果已经有这个documentID的话firebase会报错还是当作无事发生
         let profRef = database.collection("professors").document(professor.professorUID)
-        if let courseNumber = addCommentScreen.buttonCourseNumber.titleLabel?.text {
+        if let courseNumber = addCommentScreen.textFieldCourse.text {
             do {
                 try database.collection("courses").document(courseNumber).collection("professor").document(professor.professorUID).setData(["profReference": profRef]) { error in
                     if let error = error {
@@ -214,7 +189,7 @@ class AddCommentScreenViewController: UIViewController {
     
     func generateNewComment() -> SingleRateUnit? {
         // if any required field is nil
-        guard let courseNumber = addCommentScreen.buttonCourseNumber.titleLabel?.text,
+        guard let courseNumber = addCommentScreen.textFieldCourse.text,
               let scoreString = addCommentScreen.textScore.text,
               let comment = addCommentScreen.textComment.text,
               let firebaseUser = firebaseAuthUser else {
