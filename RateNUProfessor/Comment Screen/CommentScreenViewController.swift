@@ -34,9 +34,9 @@ class CommentScreenViewController: UIViewController {
         let student = User(id: "1", name: "Livia", email: "1@qq.com", password: "1111", campus: "San Jose")
         
         // TODO: 这里直接用mock data展示了comment，应该从firebase里拿这个professor所有的comments并展示
-        var rate1 = SingleRateUnit(rateStudent: student, rateProfessor: professorObj, rateClass: "CS5002", rateScore: 4.0, rateComment: "adshfgip3ohfjk23rje2", rateSemaster: "23Fall", rateCampus: "San Jose")
+        var rate1 = SingleRateUnit(commentId: "pg5mNrXQ7MePF1UBT0WM", rateStudent: student, rateProfessor: professorObj, rateClass: "CS5002", rateScore: 4.0, rateComment: "adshfgip3ohfjk23rje2", rateSemester: "23Fall", rateCampus: "San Jose")
         
-        var rate2 = SingleRateUnit(rateStudent: student, rateProfessor: professorObj, rateClass: "CS5001", rateScore: 3.0, rateComment: "not recommend!", rateSemaster: "23Spring", rateCampus: "Boston")
+        var rate2 = SingleRateUnit(commentId: "oC9QpLgkJY2cbh8D0Qer", rateStudent: student, rateProfessor: professorObj, rateClass: "CS5001", rateScore: 3.0, rateComment: "not recommend!", rateSemester: "23Spring", rateCampus: "Boston")
 
 
         // let prof = Professor(name: "Jake")
