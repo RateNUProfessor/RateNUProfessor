@@ -16,19 +16,18 @@ class AddCommentScreenViewController: UIViewController {
     let addCommentScreen = AddCommentScreenView()
     let database = Firestore.firestore()
 //    var selectedCourse = "CS5001"
-//    var selectedYear = "2023"
-//    var selectedTerm = "Spring"
+    var selectedYear = "2023"
+    var selectedTerm = "Spring"
     
     // Variables to store user-selected values
     var selectedCourse = ""
-    var selectedYear = ""
-    var selectedTerm = ""
+//    var selectedYear = ""
+//    var selectedTerm = ""
+    var years = [String]()
     
     // receive the professor object from the All Comment Screen
     var professor = Professor(name: "")
     var firebaseAuthUser:FirebaseAuth.User?
-    
-    
 
     override func loadView() {
         view = addCommentScreen
@@ -37,7 +36,9 @@ class AddCommentScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Add Comment Screen"
+        title = professor.name
+        
+        getYearData()
         
         addCommentScreen.pickerYear.dataSource = self
         addCommentScreen.pickerYear.delegate = self
@@ -49,8 +50,6 @@ class AddCommentScreenViewController: UIViewController {
         addCommentScreen.buttonCourseNumber.menu = getMenuCourses()
 
     }
-    
-
     
     func getMenuCourses() -> UIMenu {
         var menuItems = [UIAction]()
@@ -83,7 +82,12 @@ class AddCommentScreenViewController: UIViewController {
         return UIMenu(title: "Loading courses...", children: [])
     }
 
-
+    func getYearData() {
+        var currentYear = Calendar.current.component(.year, from: Date())
+        for year in (currentYear - 5)...(currentYear + 5) {
+            years.append("\(year)")
+        }
+    }
     
     @objc func buttonAddTapped() {
         print("buttonAddTapped called line 85")

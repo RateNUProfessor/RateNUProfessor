@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
 class CommentScreenViewController: UIViewController {
 
@@ -26,8 +27,7 @@ class CommentScreenViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        title = professorObj.name
-        
+        title = professorObj.name        
         // mock data
         // TODO: professor是从search screen传入，确保传入的时候里面是有UID的
         // 我这里在模拟的时候，直接写了一个叫mock professor的UID
@@ -54,6 +54,7 @@ class CommentScreenViewController: UIViewController {
         
         // updated below:
 //        fetchCommentsForProfessor()
+
         
         commentScreen.tableViewComments.delegate = self
         commentScreen.tableViewComments.dataSource = self
