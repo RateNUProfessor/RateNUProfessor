@@ -41,15 +41,15 @@ class SearchResultTableViewCell: UITableViewCell {
     
     func initConstraints() {
         NSLayoutConstraint.activate([
-            wrapperCellView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4),
-            wrapperCellView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
-            wrapperCellView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
-            wrapperCellView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -4),
+            wrapperCellView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8), 
+            wrapperCellView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+            wrapperCellView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            wrapperCellView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
             
-            labelProfessorName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 8),
-            labelProfessorName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 10),
-            labelProfessorName.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -10),
-            labelProfessorName.heightAnchor.constraint(equalToConstant: 20)
+            labelProfessorName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 12),
+            labelProfessorName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
+            labelProfessorName.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -16),
+            labelProfessorName.bottomAnchor.constraint(equalTo: wrapperCellView.bottomAnchor, constant: -12)
         ])
     }
     
