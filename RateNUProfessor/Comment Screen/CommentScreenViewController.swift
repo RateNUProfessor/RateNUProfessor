@@ -18,8 +18,6 @@ class CommentScreenViewController: UIViewController {
     // waiting to get the professor selected from the search screen
     var professorObj = Professor(name: "")
     var allScoresList = [SingleRateUnit]()
-    var currentUser:FirebaseAuth.User?
-    let database = Firestore.firestore()
         
     override func loadView() {
         view = commentScreen
@@ -29,11 +27,34 @@ class CommentScreenViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        title = professorObj.name
-        navigationController?.navigationBar.prefersLargeTitles = true
+        title = professorObj.name        
+        // mock data
+        // TODO: professor是从search screen传入，确保传入的时候里面是有UID的
+        // 我这里在模拟的时候，直接写了一个叫mock professor的UID
+//        professorObj.professorUID = "wsxOITjTZc9JZUvWm0IH"
+//
+//        let student = User(id: "1", name: "Livia", email: "1@qq.com", password: "1111", campus: "San Jose")
+//
+//        // TODO: 这里直接用mock data展示了comment，应该从firebase里拿这个professor所有的comments并展示
+//        var rate1 = SingleRateUnit(commentId: "pg5mNrXQ7MePF1UBT0WM", rateStudent: student, rateProfessor: professorObj, rateClass: "CS5002", rateScore: 4.0, rateComment: "adshfgip3ohfjk23rje2", rateSemester: "23Fall", rateCampus: "San Jose")
+//
+//        var rate2 = SingleRateUnit(commentId: "oC9QpLgkJY2cbh8D0Qer", rateStudent: student, rateProfessor: professorObj, rateClass: "CS5001", rateScore: 3.0, rateComment: "not recommend!", rateSemester: "23Spring", rateCampus: "Boston")
+//
+//
+//        // let prof = Professor(name: "Jake")
+//
+//
+//        //TODO: 需要notification center, 监听add new comment page新加的comment并reload tableview
+//
+//        allScoresList.append(rate1)
+//        allScoresList.append(rate2)
+        
+        
+        
+        
+        // updated below:
+//        fetchCommentsForProfessor()
 
-        /// updated below:
-        fetchCommentsForProfessor()
         
         commentScreen.tableViewComments.delegate = self
         commentScreen.tableViewComments.dataSource = self
@@ -41,6 +62,13 @@ class CommentScreenViewController: UIViewController {
         
         commentScreen.floatingButtonAddComment.addTarget(self, action: #selector(onAddCommentButtonTapped), for: .touchUpInside)
         
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleNewComment(_:)), name: NSNotification.Name("NewCommentAdded"), object: nil)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchCommentsForProfessor()
     }
     
     
@@ -116,12 +144,13 @@ class CommentScreenViewController: UIViewController {
                 // 当所有评论都被处理后，计算平均分
                 if numberOfScores > 0 {
                     let averageScore = totalScore / Double(numberOfScores)
-                    self?.commentScreen.averageScoreLabel.text = "Average Score: \(averageScore)"
+                    self?.commentScreen.averageScoreLabel.text = "Average Score: \(String(format: "%.2f", averageScore))"
                 } else {
                     self?.commentScreen.averageScoreLabel.text = "No Scores Available"
                 }
                 self?.commentScreen.tableViewComments.reloadData()
             }
+
         }
     }
 
@@ -130,9 +159,26 @@ class CommentScreenViewController: UIViewController {
     
     @objc func onAddCommentButtonTapped() {
         let addCommentScreenViewController = AddCommentScreenViewController()
+        
         // pass the professor object to Add Comment Screen
         addCommentScreenViewController.professor = professorObj
+        
+        
         navigationController?.pushViewController(addCommentScreenViewController, animated: true)
+    }
+    
+    @objc func handleNewComment(_ notification: Notification) {
+        if let newComment = notification.userInfo?["newComment"] as? SingleRateUnit {
+            print("New comment received: \(newComment)")
+
+            // Add the new comment to the list of comments
+            allScoresList.append(newComment)
+
+            // Refresh the table view to show the new comment
+            commentScreen.tableViewComments.reloadData()
+        } else {
+            print("Failed to receive new comment")
+        }
     }
 
 

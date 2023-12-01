@@ -9,6 +9,7 @@ import UIKit
 
 class AddCommentScreenView: UIView {
     
+    var labelProfessor: UILabel!
     var labelCourseNumber: UILabel!
     var textFieldCourse: UITextField!
 
@@ -40,6 +41,12 @@ class AddCommentScreenView: UIView {
 
     func setupViews() {
         
+        labelProfessor = UILabel()
+        labelProfessor.text = "Professor"
+        labelProfessor.font = UIFont.boldSystemFont(ofSize: 28)
+        labelProfessor.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(labelProfessor)
+        
         labelCourseNumber = UILabel()
         labelCourseNumber.text = "Course Number"
         labelCourseNumber.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +69,7 @@ class AddCommentScreenView: UIView {
 
         textScore = UITextField()
         textScore.borderStyle = .roundedRect
-        textScore.keyboardType = .decimalPad
+        textScore.keyboardType = .numberPad
         textScore.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(textScore)
         
@@ -126,11 +133,14 @@ class AddCommentScreenView: UIView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            labelScore.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
+            labelProfessor.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
+            labelProfessor.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            
+            labelScore.topAnchor.constraint(equalTo: labelProfessor.bottomAnchor, constant: 20),
             labelScore.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
 
             textScore.topAnchor.constraint(equalTo: labelScore.bottomAnchor, constant: 8),
-            textScore.leadingAnchor.constraint(equalTo: labelScore.leadingAnchor, constant: 80),
+            textScore.leadingAnchor.constraint(equalTo: labelProfessor.leadingAnchor, constant: -80),
             textScore.heightAnchor.constraint(equalToConstant: 50),
             textScore.widthAnchor.constraint(equalToConstant: 30),
             

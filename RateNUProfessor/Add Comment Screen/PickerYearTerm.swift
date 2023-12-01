@@ -20,10 +20,17 @@ extension AddCommentScreenViewController: UIPickerViewDelegate, UIPickerViewData
         } else if pickerView == self.addCommentScreen.pickerCourse {
             return coursesList.count
         }
-       return 1
+        return 0 // Default return
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        var year = [String]()
+        var i = 2000
+        while i < 2100 {
+            i += 1
+            year.append("\(i)")
+        }
+        
         if pickerView == self.addCommentScreen.pickerTerm {
             self.selectedTerm = Term.term[row]
             return Term.term[row]
@@ -38,11 +45,18 @@ extension AddCommentScreenViewController: UIPickerViewDelegate, UIPickerViewData
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        var year = [String]()
+        var i = 2000
+        while i < 2100 {
+            i += 1
+            year.append("\(i)")
+        }
+        
         if pickerView == self.addCommentScreen.pickerTerm {
             self.addCommentScreen.textFieldTerm.text = Term.term[row]
               self.view.endEditing(false)
         } else if pickerView == self.addCommentScreen.pickerYear{
-            self.addCommentScreen.textFieldYear.text = years[row]
+            self.addCommentScreen.textFieldYear.text = year[row]
               self.view.endEditing(false)
         } else if pickerView == self.addCommentScreen.pickerCourse{
             self.addCommentScreen.textFieldCourse.text = coursesList[row]
