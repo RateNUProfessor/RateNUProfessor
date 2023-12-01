@@ -19,7 +19,7 @@ class SearchBottomSheetView: UIView {
         
         //MARK: Search Bar...
         searchBar = UISearchBar()
-        searchBar.placeholder = "Search names.."
+        searchBar.placeholder = "Search..."
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(searchBar)
         

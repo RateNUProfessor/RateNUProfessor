@@ -65,15 +65,17 @@ extension SearchCourseNumberBottomSheetController: UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // course selected....
-        notificationCenter.post(name: .courseNumberSelected, object: namesForTableView[indexPath.row])
+//        notificationCenter.post(name: .courseNumberSelected, object: namesForTableView[indexPath.row])
         // showSearchResultScreen(CourseNumber: namesForTableView[indexPath.row])
         //dismiss the bottom search sheet...
-        self.dismiss(animated: true)
+        
+        let selectedCourse = self.namesForTableView[indexPath.row]
+        notificationCenter.post(name: .courseNumberSelected, object: selectedCourse)
+        dismiss(animated: true, completion: nil)
     }
     
     // TODO: 尚未完成，如果根据课号搜索，进入Search Result Screen, 列出所有教这个课的老师，再点击对应老师，进入Comment Screen
 //    func showSearchResultScreen(CourseNumber : Course) {
-//
 //    }
 }
 

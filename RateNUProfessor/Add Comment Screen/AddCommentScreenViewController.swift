@@ -10,13 +10,15 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-//TODO: 将couseNumber改成下拉框
 //TODO: 增加每一个comment应该fields
 class AddCommentScreenViewController: UIViewController {
 
     let addCommentScreen = AddCommentScreenView()
     let database = Firestore.firestore()
-    
+    var selectedCourse = "CS5001"
+    var selectedYear = "2023"
+    var selectedTerm = "Spring"
+    var years = [String]()
     
     // receive the professor object from the All Comment Screen
     var professor = Professor(name: "")
@@ -26,16 +28,84 @@ class AddCommentScreenViewController: UIViewController {
     override func loadView() {
         view = addCommentScreen
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Add Comment Screen"
+        title = professor.name
+        
+        getYearData()
+        
+        addCommentScreen.pickerYear.dataSource = self
+        addCommentScreen.pickerYear.delegate = self
+        addCommentScreen.pickerTerm.dataSource = self
+        addCommentScreen.pickerTerm.delegate = self
         
         firebaseAuthUser = Auth.auth().currentUser
         addCommentScreen.buttonAdd.addTarget(self, action: #selector(buttonAddTapped), for: .touchUpInside)
-        print("addcommentpage: \(firebaseAuthUser?.uid)")
+        addCommentScreen.buttonCourseNumber.menu = getMenuCourses()
     }
+    
+    func getYearData() {
+        var currentYear = Calendar.current.component(.year, from: Date())
+        for year in (currentYear - 10)...(currentYear + 20) {
+            years.append("\(year)")
+        }
+    }
+    
+    
+    func getMenuCourses() -> UIMenu{
+        var menuItems = [UIAction]()
+        var courseNumberDatabase = [Course]()
+        var coursesList = [String]()
+        
+        getAllCoursesFromFireBase { [weak self] course in
+            guard let self = self else { return }
+            courseNumberDatabase.append(contentsOf: course)
+        }
+        
+        for course in courseNumberDatabase {
+            coursesList.append(course.courseID)
+        }
+        
+        for courseId in coursesList {
+            let menuItem = UIAction(title: courseId,handler: {(_) in
+                                self.selectedCourse = courseId
+                                self.addCommentScreen.buttonCourseNumber.setTitle(self.selectedCourse, for: .normal)
+                            })
+            menuItems.append(menuItem)
+        }
+        
+        return UIMenu(title: "Select course", children: menuItems)
+        
+    }
+    
+    func getAllCoursesFromFireBase(completion: @escaping ([Course]) -> Void) {
+        var tmp = [Course]()
+        let coursesCollection = database.collection("courses")
+
+        coursesCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    do {
+                       let courseData = document.data()
+                       if let courseId = courseData["id"] as? String {
+                           let course = Course(courseID: courseId)
+                           tmp.append(course)
+                       } else {
+                           print("User data does not contain a name")
+                       }
+                   }
+                }
+                completion(tmp)
+
+            }
+        }
+    }
+    
+
     
     @objc func buttonAddTapped() {
         if let firebaseuser = firebaseAuthUser {
@@ -101,7 +171,7 @@ class AddCommentScreenViewController: UIViewController {
     func updateCourseNumberInFirebase(professor: Professor, completion: @escaping (Result<Void, Error>) -> Void) {
         //TODO: 在真正link前需要看一下是否已经关联过，不确定如果已经有这个documentID的话firebase会报错还是当作无事发生
         let profRef = database.collection("professors").document(professor.professorUID)
-        if let courseNumber = addCommentScreen.textCourseNumber.text {
+        if let courseNumber = addCommentScreen.buttonCourseNumber.titleLabel?.text {
             do {
                 try database.collection("courses").document(courseNumber).collection("professor").document(professor.professorUID).setData(["profReference": profRef]) { error in
                     if let error = error {
@@ -144,7 +214,7 @@ class AddCommentScreenViewController: UIViewController {
     
     func generateNewComment() -> SingleRateUnit? {
         // if any required field is nil
-        guard let courseNumber = addCommentScreen.textCourseNumber.text,
+        guard let courseNumber = addCommentScreen.buttonCourseNumber.titleLabel?.text,
               let scoreString = addCommentScreen.textScore.text,
               let comment = addCommentScreen.textComment.text,
               let firebaseUser = firebaseAuthUser else {
@@ -156,7 +226,7 @@ class AddCommentScreenViewController: UIViewController {
             if let score = Double(scoreString) {
                 let user = User(firebaseUser: firebaseuser)
                 // TODO: get semaster and campus info from view screen
-                let newComment = SingleRateUnit(rateStudent: user, rateProfessor: professor, rateClass: courseNumber, rateScore: score, rateComment: comment, rateSemaster: "Fall23", rateCampus: "Boston")
+                let newComment = SingleRateUnit(commentId: "", rateStudent: user, rateProfessor: professor, rateClass: courseNumber, rateScore: score, rateComment: comment, rateSemester: "Fall23", rateCampus: "Boston")
                 return newComment
             } else {
                 showAlert(text: "Can't add new comment", from: self)

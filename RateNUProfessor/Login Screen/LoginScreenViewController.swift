@@ -28,7 +28,9 @@ class LoginScreenViewController: UIViewController {
     }
     
     @objc func onButtonLoginTapped() {
-        //FIXME: did not conduct user login
+        if let email = loginScreen.textFieldEmail.text, let password = loginScreen.textFieldPassword.text {
+            signInToFirebase(email: email, password: password)
+        }
         let tabBarController = TabBarScreenViewController()
         self.navigationController?.pushViewController(tabBarController, animated: true)
     }
@@ -36,8 +38,8 @@ class LoginScreenViewController: UIViewController {
     func signInToFirebase(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password, completion: {(result, error) in
             if error == nil{
-                let searchScreenController = SearchScreenViewController()
-                self.navigationController?.pushViewController(searchScreenController, animated: true)
+//                let searchScreenController = SearchScreenViewController()
+//                self.navigationController?.pushViewController(searchScreenController, animated: true)
             }else{
                 self.showErrorMessage("User not found or Wrong password. Please try again.")
             }

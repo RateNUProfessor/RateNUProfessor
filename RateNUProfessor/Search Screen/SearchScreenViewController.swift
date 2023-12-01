@@ -51,16 +51,18 @@ class SearchScreenViewController: UIViewController {
     }
     
     @objc func onProfessorSelected(notification: Notification){
-        if let selectedItem = notification.object{
-            let commentScreen = CommentScreenViewController()
-            navigationController?.pushViewController(commentScreen, animated: true)
+        if let selectedItem = notification.object as? Professor {
+            let commentController = CommentScreenViewController()
+            commentController.professorObj = selectedItem
+            navigationController?.pushViewController(commentController, animated: true)
         }
     }
     
     //TODO: search by courseNumber所有都没写
     @objc func onCourseNumberSelected(notification: Notification){
-        if let selectedItem = notification.object{
+        if let selectedCourse = notification.object as? Course { // 这里将notification.object转换为Course类型
             let searchResultScreen = ResultScreenViewController()
+            searchResultScreen.selectedCourseID = selectedCourse.courseID // 使用转换后的对象获取courseID
             navigationController?.pushViewController(searchResultScreen, animated: true)
         }
     }
@@ -85,17 +87,6 @@ class SearchScreenViewController: UIViewController {
     }
     
     @objc func onSearchByProfessorButtonTapped(){
-        // mock data for professor Database
-        // TODO: 现在为MockData, 需要implem从firebase中获得所有ProfessorName, 注意firebase是async，需要用completion
-//        let MockProf = Professor(name: "MockProf")
-//        let Jake = Professor(name: "Jake")
-//        var ProfessorDatabase = [MockProf, Jake]
-        
-//        searchProfessorSheetController.namesForTableView.removeAll()
-//        searchProfessorSheetController.namesDatabase = ProfessorDatabase
-//
-//        setupSearchBottomSheet(type: "Professor")
-//        present(searchSheetNavController, animated: true)
         
         var ProfessorDatabase = [Professor]()
         
@@ -126,20 +117,6 @@ class SearchScreenViewController: UIViewController {
     }
     
     @objc func onSearchByCourseNumberButtonTapped(){
-        
-        // mock data for courseNumber Database
-        // TODO: 现在为MockData, 需要implem从firebase中获得所有courseNumber，注意firebase是async，需要用completion
-        // TODO: 一点迷思，或者可以本地cache一个所有课号的array，这样不用每次都查...
-//        let CS5001 = Course(courseID: "CS5001")
-//        let CS5002 = Course(courseID: "CS5002")
-//        var CourseNumberDatabase = [CS5001, CS5002]
-//
-//        searchCourseNumberSheetController.namesForTableView.removeAll()
-//        searchCourseNumberSheetController.namesDatabase = CourseNumberDatabase
-//
-//        setupSearchBottomSheet(type: "Course")
-//        present(searchSheetNavController, animated: true)
-        
         
         var CourseNumberDatabase = [Course]()
 
