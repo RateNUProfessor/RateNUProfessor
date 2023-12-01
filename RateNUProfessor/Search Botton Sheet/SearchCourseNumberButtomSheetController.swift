@@ -27,6 +27,7 @@ class SearchCourseNumberBottomSheetController: UIViewController {
         self.namesForTableView = namesDatabase
         self.searchSheet.tableViewSearchResults.reloadData()
         print(namesDatabase)
+        
     }
     
     
