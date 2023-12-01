@@ -15,26 +15,29 @@ class AddCommentScreenViewController: UIViewController {
 
     let addCommentScreen = AddCommentScreenView()
     let database = Firestore.firestore()
-    var selectedCourse = "CS5001"
-    var selectedYear = "2023"
-    var selectedTerm = "Spring"
-    var years = [String]()
+//    var selectedCourse = "CS5001"
+//    var selectedYear = "2023"
+//    var selectedTerm = "Spring"
+    
+    // Variables to store user-selected values
+    var selectedCourse = ""
+    var selectedYear = ""
+    var selectedTerm = ""
     
     // receive the professor object from the All Comment Screen
     var professor = Professor(name: "")
     var firebaseAuthUser:FirebaseAuth.User?
     
+    
 
     override func loadView() {
         view = addCommentScreen
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = professor.name
-        
-        getYearData()
+        title = "Add Comment Screen"
         
         addCommentScreen.pickerYear.dataSource = self
         addCommentScreen.pickerYear.delegate = self
@@ -44,110 +47,127 @@ class AddCommentScreenViewController: UIViewController {
         firebaseAuthUser = Auth.auth().currentUser
         addCommentScreen.buttonAdd.addTarget(self, action: #selector(buttonAddTapped), for: .touchUpInside)
         addCommentScreen.buttonCourseNumber.menu = getMenuCourses()
-    }
-    
-    func getYearData() {
-        var currentYear = Calendar.current.component(.year, from: Date())
-        for year in (currentYear - 10)...(currentYear + 20) {
-            years.append("\(year)")
-        }
-    }
-    
-    
-    func getMenuCourses() -> UIMenu{
-        var menuItems = [UIAction]()
-        var courseNumberDatabase = [Course]()
-        var coursesList = [String]()
-        
-        getAllCoursesFromFireBase { [weak self] course in
-            guard let self = self else { return }
-            courseNumberDatabase.append(contentsOf: course)
-        }
-        
-        for course in courseNumberDatabase {
-            coursesList.append(course.courseID)
-        }
-        
-        for courseId in coursesList {
-            let menuItem = UIAction(title: courseId,handler: {(_) in
-                                self.selectedCourse = courseId
-                                self.addCommentScreen.buttonCourseNumber.setTitle(self.selectedCourse, for: .normal)
-                            })
-            menuItems.append(menuItem)
-        }
-        
-        return UIMenu(title: "Select course", children: menuItems)
-        
-    }
-    
-    func getAllCoursesFromFireBase(completion: @escaping ([Course]) -> Void) {
-        var tmp = [Course]()
-        let coursesCollection = database.collection("courses")
 
-        coursesCollection.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
+    }
+    
+
+    
+    func getMenuCourses() -> UIMenu {
+        var menuItems = [UIAction]()
+        
+        // Fetch courses from Firestore
+        database.collection("courses").getDocuments { [weak self] (querySnapshot, err) in
+            guard let self = self else { return }
+
+            if let err = err {
+                print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    do {
-                       let courseData = document.data()
-                       if let courseId = courseData["id"] as? String {
-                           let course = Course(courseID: courseId)
-                           tmp.append(course)
-                       } else {
-                           print("User data does not contain a name")
-                       }
-                   }
+                    // Assuming each document has an "id" field with the course ID
+                    if let courseID = document.data()["id"] as? String {
+                        let menuItem = UIAction(title: courseID, handler: { _ in
+                            self.selectedCourse = courseID
+                            self.addCommentScreen.buttonCourseNumber.setTitle(courseID, for: .normal)
+                        })
+                        menuItems.append(menuItem)
+                    }
                 }
-                completion(tmp)
+            }
 
+            let menu = UIMenu(title: "Select course", children: menuItems)
+            DispatchQueue.main.async {
+                self.addCommentScreen.buttonCourseNumber.menu = menu
             }
         }
+        
+        return UIMenu(title: "Loading courses...", children: [])
     }
-    
+
 
     
     @objc func buttonAddTapped() {
-        if let firebaseuser = firebaseAuthUser {
-            print("buttonAddTapped Triggered")
-            var user = User(firebaseUser: firebaseuser)
-            // if seccessfully have a new comment
-            if let newComment = generateNewComment() {
-                // link the course with professor
-                updateCourseNumberInFirebase(professor: professor) { result in
-                    switch result {
-                    case .success:
-                        print("Link professor with courseNumber successfully")
-                    case .failure(let error):
-                        print("Error linking professor with courseID: \(error.localizedDescription)")
-                    }
+        print("buttonAddTapped called line 85")
+        
+        guard let firebaseuser = firebaseAuthUser else {
+            print("No Firebase user found")
+            return
+        }
+        
+        if let newComment = generateNewComment() {
+            // if successfully have a new comment
+            print("New comment generated")
+            
+            // Sequentially updating professor and user in Firebase
+            let dispatchGroup = DispatchGroup()
+            
+            dispatchGroup.enter()
+            updateCourseNumberInFirebase(professor: professor) { result in
+                switch result {
+                case .success:
+                    print("Link professor with courseNumber successfully")
+                case .failure(let error):
+                    print("Error linking professor with courseID: \(error.localizedDescription)")
                 }
-                // update the professor in the firebase
-                updateProfessorInFirebase(professor: professor, newComment: newComment) { result in
-                    switch result {
-                    case .success:
-                        print("Professor updated successfully")
-                        // TODO: 将comment更新后应该重新计算教授的总体score并更新
-                        // update Professor in firebase
-                    case .failure(let error):
-                        print("Error update professor: \(error.localizedDescription)")
-                    }
-                }
-                // update the user in firebase
-                updateUserInFirebase(user: user, newComment: newComment) { result in
-                    switch result {
-                    case .success:
-                        print("User updated successfully")
-                        // back to professor comment screen
-                        self.navigationController?.popViewController(animated: true)
-                        // TODO: 用notification center让comment screen update这条新增的comment
-                    case .failure(let error):
-                        print("Error update user: \(error.localizedDescription)")
-                    }
-                }
+                dispatchGroup.leave()
             }
+
+            dispatchGroup.enter()
+            updateProfessorInFirebase(professor: professor, newComment: newComment) { result in
+                switch result {
+                case .success:
+                    print("Professor updated successfully")
+                    // Recalculate professor's score if needed
+                    // recalculateProfessorScore(professorUID: professor.professorUID)
+                case .failure(let error):
+                    print("Error update professor: \(error.localizedDescription)")
+                }
+                dispatchGroup.leave()
+            }
+
+            dispatchGroup.enter()
+            updateUserInFirebase(user: User(firebaseUser: firebaseuser), newComment: newComment) { result in
+                switch result {
+                case .success:
+                    print("User updated successfully")
+                case .failure(let error):
+                    print("Error update user: \(error.localizedDescription)")
+                }
+                dispatchGroup.leave()
+            }
+
+            dispatchGroup.notify(queue: .main) {
+                // All Firebase updates are done here
+                // Notify other parts of the app that a new comment has been added
+//                NotificationCenter.default.post(name: NSNotification.Name("NewCommentAdded"), object: nil, userInfo: ["newComment": newComment])
+                
+                // Pop the current view controller
+                self.navigationController?.popViewController(animated: true)
+            }
+        } else {
+            print("Failed to generate new comment")
         }
     }
+
+    
+    func generateNewComment() -> SingleRateUnit? {
+        // Ensure required fields are not empty and score is a valid number
+        guard let scoreString = addCommentScreen.textScore.text,
+              let comment = addCommentScreen.textComment.text,
+              let score = Double(scoreString),
+              !selectedCourse.isEmpty,
+              !selectedYear.isEmpty,
+              !selectedTerm.isEmpty,
+              let firebaseuser = firebaseAuthUser else {
+            showAlert(text: "Input field is empty or invalid", from: self)
+            return nil
+        }
+        
+        let user = User(firebaseUser: firebaseuser)
+        let semester = "\(selectedYear)\(selectedTerm)"
+        let newComment = SingleRateUnit(commentId: "", rateStudent: user, rateProfessor: professor, rateClass: selectedCourse, rateScore: score, rateComment: comment, rateSemester: semester, rateCampus: "Boston")
+        return newComment
+    }
+    
     
     func updateProfessorInFirebase(professor: Professor, newComment: SingleRateUnit, completion: @escaping (Result<Void, Error>) -> Void) {
         print("function updateProfessorInFirebase triggered")
@@ -190,15 +210,17 @@ class AddCommentScreenViewController: UIViewController {
     }
     
     func updateUserInFirebase(user: User, newComment: SingleRateUnit, completion: @escaping (Result<Void, Error>) -> Void) {
-        print("function updateUserInFirebase triggered")
         do {
             try database.collection("users").document(user.id).collection("comments").addDocument(from: newComment) { error in
                 if let error = error {
-                    print("Error updating chat object: \(error.localizedDescription)")
+                    print("Error updating user comment: \(error.localizedDescription)")
                     completion(.failure(error))
                 } else {
-                    print("User - comment updated in Firebase")
+                    print("User comment updated in Firebase")
                     completion(.success(()))
+                    
+                    // Correctly placed notification
+//                    NotificationCenter.default.post(name: NSNotification.Name("NewCommentAdded"), object: nil, userInfo: ["newComment": newComment])
                 }
             }
         } catch {
@@ -207,32 +229,14 @@ class AddCommentScreenViewController: UIViewController {
         }
     }
 
+
+
+
     
     func ifProfessorAlreadyLinked() {
         
     }
     
-    func generateNewComment() -> SingleRateUnit? {
-        // if any required field is nil
-        guard let courseNumber = addCommentScreen.buttonCourseNumber.titleLabel?.text,
-              let scoreString = addCommentScreen.textScore.text,
-              let comment = addCommentScreen.textComment.text,
-              let firebaseUser = firebaseAuthUser else {
-                    showAlert(text: "Input field is empty", from: self)
-                    return nil // Return nil if any required field is nil
-        }
-        
-        if let firebaseuser = firebaseAuthUser {
-            if let score = Double(scoreString) {
-                let user = User(firebaseUser: firebaseuser)
-                // TODO: get semaster and campus info from view screen
-                let newComment = SingleRateUnit(commentId: "", rateStudent: user, rateProfessor: professor, rateClass: courseNumber, rateScore: score, rateComment: comment, rateSemester: "Fall23", rateCampus: "Boston")
-                return newComment
-            } else {
-                showAlert(text: "Can't add new comment", from: self)
-                return nil
-            }
-        }
-        return nil
-    }
+
 }
+
