@@ -65,6 +65,10 @@
 		CED2C3FA2B1826E7001BB6E7 /* UIButtonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F92B1826E7001BB6E7 /* UIButtonUtils.swift */; };
 		CED2C3FE2B194DAE001BB6E7 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3FD2B194DAE001BB6E7 /* Term.swift */; };
 		CED2C4022B1966E4001BB6E7 /* PickerYearTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C4012B1966E4001BB6E7 /* PickerYearTerm.swift */; };
+		CED2C4092B197385001BB6E7 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = CED2C4082B197385001BB6E7 /* MessageKit */; };
+		CED2C41F2B1980BE001BB6E7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C41E2B1980BE001BB6E7 /* Message.swift */; };
+		CED2C4212B198241001BB6E7 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C4202B198241001BB6E7 /* Chat.swift */; };
+		CED2C4232B198259001BB6E7 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C4222B198259001BB6E7 /* ChatUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +128,9 @@
 		CED2C3F92B1826E7001BB6E7 /* UIButtonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonUtils.swift; sourceTree = "<group>"; };
 		CED2C3FD2B194DAE001BB6E7 /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		CED2C4012B1966E4001BB6E7 /* PickerYearTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerYearTerm.swift; sourceTree = "<group>"; };
+		CED2C41E2B1980BE001BB6E7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		CED2C4202B198241001BB6E7 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		CED2C4222B198259001BB6E7 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +142,7 @@
 				CE09F9312B0440750010DBAC /* FirebaseStorage in Frameworks */,
 				CE09F92D2B0440750010DBAC /* FirebaseFirestore in Frameworks */,
 				CE09F92F2B0440750010DBAC /* FirebaseFirestoreSwift in Frameworks */,
+				CED2C4092B197385001BB6E7 /* MessageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +188,9 @@
 				CE09FA592B0B45D20010DBAC /* Campus.swift */,
 				186BAAE32B16DC3C000030A1 /* Course.swift */,
 				CED2C3FD2B194DAE001BB6E7 /* Term.swift */,
+				CED2C41E2B1980BE001BB6E7 /* Message.swift */,
+				CED2C4202B198241001BB6E7 /* Chat.swift */,
+				CED2C4222B198259001BB6E7 /* ChatUser.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -384,6 +395,7 @@
 				CE09F92C2B0440750010DBAC /* FirebaseFirestore */,
 				CE09F92E2B0440750010DBAC /* FirebaseFirestoreSwift */,
 				CE09F9302B0440750010DBAC /* FirebaseStorage */,
+				CED2C4082B197385001BB6E7 /* MessageKit */,
 			);
 			productName = RateNUProfessor;
 			productReference = CE09F9102B043A1E0010DBAC /* RateNUProfessor.app */;
@@ -415,6 +427,7 @@
 			mainGroup = CE09F9072B043A1E0010DBAC;
 			packageReferences = (
 				CE09F9292B0440750010DBAC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CED2C4072B197385001BB6E7 /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
 			productRefGroup = CE09F9112B043A1E0010DBAC /* Products */;
 			projectDirPath = "";
@@ -447,6 +460,7 @@
 				CE09F9592B0444A90010DBAC /* CommentScreenViewController.swift in Sources */,
 				186BAAEA2B16EC74000030A1 /* CommentTableViewManager.swift in Sources */,
 				CE09F9392B04425C0010DBAC /* AddCommentScreenView.swift in Sources */,
+				CED2C41F2B1980BE001BB6E7 /* Message.swift in Sources */,
 				CE09F93D2B04428F0010DBAC /* CommentScreenView.swift in Sources */,
 				18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */,
 				CE09F9352B04422D0010DBAC /* LoginScreenView.swift in Sources */,
@@ -456,6 +470,7 @@
 				186BAADE2B16CC81000030A1 /* SearchProfessorBottomSheetController.swift in Sources */,
 				CE09F9182B043A1E0010DBAC /* ViewController.swift in Sources */,
 				186BAAE02B16CC9F000030A1 /* SearchBottomSheetView.swift in Sources */,
+				CED2C4212B198241001BB6E7 /* Chat.swift in Sources */,
 				CE09FA512B0B28420010DBAC /* SignUpFirebaseManager.swift in Sources */,
 				CE09F9682B0445780010DBAC /* SearchResultTableViewCell.swift in Sources */,
 				CE09F94D2B0443760010DBAC /* SignUpScreenViewController.swift in Sources */,
@@ -474,6 +489,7 @@
 				18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */,
 				CE09FA582B0B3E430010DBAC /* Configs.swift in Sources */,
 				CED2C3F22B17EC0A001BB6E7 /* SignUpPhotoManager.swift in Sources */,
+				CED2C4232B198259001BB6E7 /* ChatUser.swift in Sources */,
 				186BAAE82B16E7B9000030A1 /* NotificationNames.swift in Sources */,
 				CE09F94A2B0443330010DBAC /* LoginScreenViewController.swift in Sources */,
 				CE09F9622B0445390010DBAC /* ChatScreenViewController.swift in Sources */,
@@ -723,6 +739,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		CED2C4072B197385001BB6E7 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -745,6 +769,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE09F9292B0440750010DBAC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		CED2C4082B197385001BB6E7 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CED2C4072B197385001BB6E7 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

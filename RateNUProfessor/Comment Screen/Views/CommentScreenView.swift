@@ -8,6 +8,7 @@
 import UIKit
 
 class CommentScreenView: UIView {
+
     var tableViewComments: UITableView!
     var floatingButtonAddComment: UIButton!
     
