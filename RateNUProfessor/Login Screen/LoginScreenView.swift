@@ -78,8 +78,6 @@ class LoginScreenView: UIView {
     }
     
     
-
-    
     func initConstraints() {
         NSLayoutConstraint.activate([
             
@@ -107,7 +105,6 @@ class LoginScreenView: UIView {
             buttonLogin.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             buttonLogin.heightAnchor.constraint(equalToConstant: 50),
 
-            
         ])
     }
     
