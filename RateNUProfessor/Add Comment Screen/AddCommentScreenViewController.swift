@@ -18,7 +18,7 @@ class AddCommentScreenViewController: UIViewController {
     var selectedCourse = "CS5001"
     var selectedYear = "2023"
     var selectedTerm = "Spring"
-    
+    var years = [String]()
     
     // receive the professor object from the All Comment Screen
     var professor = Professor(name: "")
@@ -28,11 +28,13 @@ class AddCommentScreenViewController: UIViewController {
     override func loadView() {
         view = addCommentScreen
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Add Comment Screen"
+        title = professor.name
+        
+        getYearData()
         
         addCommentScreen.pickerYear.dataSource = self
         addCommentScreen.pickerYear.delegate = self
@@ -44,35 +46,63 @@ class AddCommentScreenViewController: UIViewController {
         addCommentScreen.buttonCourseNumber.menu = getMenuCourses()
     }
     
+    func getYearData() {
+        var currentYear = Calendar.current.component(.year, from: Date())
+        for year in (currentYear - 10)...(currentYear + 20) {
+            years.append("\(year)")
+        }
+    }
+    
+    
     func getMenuCourses() -> UIMenu{
         var menuItems = [UIAction]()
-        var courseNumberDatabase = [String]()
+        var courseNumberDatabase = [Course]()
+        var coursesList = [String]()
         
-        database.collection("courses").getDocuments { [weak self] (querySnapshot, err) in
+        getAllCoursesFromFireBase { [weak self] course in
             guard let self = self else { return }
+            courseNumberDatabase.append(contentsOf: course)
+        }
+        
+        for course in courseNumberDatabase {
+            coursesList.append(course.courseID)
+        }
+        
+        for courseId in coursesList {
+            let menuItem = UIAction(title: courseId,handler: {(_) in
+                                self.selectedCourse = courseId
+                                self.addCommentScreen.buttonCourseNumber.setTitle(self.selectedCourse, for: .normal)
+                            })
+            menuItems.append(menuItem)
+        }
+        
+        return UIMenu(title: "Select course", children: menuItems)
+        
+    }
+    
+    func getAllCoursesFromFireBase(completion: @escaping ([Course]) -> Void) {
+        var tmp = [Course]()
+        let coursesCollection = database.collection("courses")
 
-            if let err = err {
-                print("Error getting documents: \(err)")
-                return
+        coursesCollection.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
-                    let courseID = document.data()["id"] as? String ?? "Unknown ID"
-                    let course = Course(courseID: courseID)
-                    
-                    courseNumberDatabase.append(course.courseID)
+                    do {
+                       let courseData = document.data()
+                       if let courseId = courseData["id"] as? String {
+                           let course = Course(courseID: courseId)
+                           tmp.append(course)
+                       } else {
+                           print("User data does not contain a name")
+                       }
+                   }
                 }
-                
-                for course in courseNumberDatabase {
-                    let menuItem = UIAction(title: course,handler: {(_) in
-                                        self.selectedCourse = course
-                                        self.addCommentScreen.buttonCourseNumber.setTitle(self.selectedCourse, for: .normal)
-                                    })
-                    menuItems.append(menuItem)
-                }
+                completion(tmp)
+
             }
         }
-        return UIMenu(title: "Select course", children: menuItems)
-
     }
     
 

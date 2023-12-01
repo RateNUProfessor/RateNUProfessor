@@ -17,6 +17,8 @@ class CommentScreenViewController: UIViewController {
     // waiting to get the professor selected from the search screen
     var professorObj = Professor(name: "")
     var allScoresList = [SingleRateUnit]()
+    var currentUser:FirebaseAuth.User?
+    let database = Firestore.firestore()
         
     override func loadView() {
         view = commentScreen
@@ -27,31 +29,7 @@ class CommentScreenViewController: UIViewController {
         view.backgroundColor = .white
         
         title = professorObj.name
-        
-        // mock data
-        // TODO: professor是从search screen传入，确保传入的时候里面是有UID的
-        // 我这里在模拟的时候，直接写了一个叫mock professor的UID
-//        professorObj.professorUID = "wsxOITjTZc9JZUvWm0IH"
-//
-//        let student = User(id: "1", name: "Livia", email: "1@qq.com", password: "1111", campus: "San Jose")
-//
-//        // TODO: 这里直接用mock data展示了comment，应该从firebase里拿这个professor所有的comments并展示
-//        var rate1 = SingleRateUnit(commentId: "pg5mNrXQ7MePF1UBT0WM", rateStudent: student, rateProfessor: professorObj, rateClass: "CS5002", rateScore: 4.0, rateComment: "adshfgip3ohfjk23rje2", rateSemester: "23Fall", rateCampus: "San Jose")
-//
-//        var rate2 = SingleRateUnit(commentId: "oC9QpLgkJY2cbh8D0Qer", rateStudent: student, rateProfessor: professorObj, rateClass: "CS5001", rateScore: 3.0, rateComment: "not recommend!", rateSemester: "23Spring", rateCampus: "Boston")
-//
-//
-//        // let prof = Professor(name: "Jake")
-//
-//
-//        //TODO: 需要notification center, 监听add new comment page新加的comment并reload tableview
-//
-//        allScoresList.append(rate1)
-//        allScoresList.append(rate2)
-        
-        
-        
-        
+
         /// updated below:
         fetchCommentsForProfessor()
         
@@ -150,11 +128,8 @@ class CommentScreenViewController: UIViewController {
     
     @objc func onAddCommentButtonTapped() {
         let addCommentScreenViewController = AddCommentScreenViewController()
-        
         // pass the professor object to Add Comment Screen
         addCommentScreenViewController.professor = professorObj
-        
-        
         navigationController?.pushViewController(addCommentScreenViewController, animated: true)
     }
 

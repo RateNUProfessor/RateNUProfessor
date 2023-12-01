@@ -13,7 +13,7 @@ import FirebaseStorage
 class SettingScreenViewController: UIViewController {
 
     let settingsScreen = SettingScreenView()
-    var selectedCampus = "San Jose"
+    var selectedCampus = "San Jose, CA"
     var currentUser:FirebaseAuth.User?
     let database = Firestore.firestore()
     
@@ -28,6 +28,8 @@ class SettingScreenViewController: UIViewController {
         view.backgroundColor = .white
         title = "Settings"
         
+        currentUser = Auth.auth().currentUser
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Logout",
             style: .plain,
@@ -36,12 +38,12 @@ class SettingScreenViewController: UIViewController {
         
         settingsScreen.buttonSave.addTarget(self, action: #selector(onButtonSaveTapped), for: .touchUpInside)
         
-        if let url = self.currentUser?.photoURL, let name = self.currentUser?.displayName {
+        if let url = currentUser?.photoURL, let name = currentUser?.displayName {
             self.settingsScreen.profileImage.loadRemoteImage(from: url)
             self.settingsScreen.textFieldName.text = name
         }
         
-        if let id = self.currentUser?.uid {
+        if let id = currentUser?.uid {
             self.database.collection("users").document(id).getDocument { (document, error) in
                 if let error = error {
                     print("Error getting document: \(error)")
