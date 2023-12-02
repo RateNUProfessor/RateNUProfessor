@@ -113,10 +113,10 @@ class ProfileScreenViewController: UIViewController {
         }
     }
     
-    @objc func onChangePasswordButtonTapped() {
-        let changePasswordVC = ChangePasswordViewController()
-        navigationController?.pushViewController(changePasswordVC, animated: true)
-    }
+//    @objc func onChangePasswordButtonTapped() {
+//        let changePasswordVC = ChangePasswordViewController()
+//        navigationController?.pushViewController(changePasswordVC, animated: true)
+//    }
     
     @objc func onSettingsBarButtonTapped() {
         let settingsController = SettingScreenViewController()

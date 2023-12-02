@@ -23,6 +23,13 @@ class CommentScreenView: UIView {
     }
     
     func setupAverageScoreLabel() {
+        averageScoreLabel.layer.borderWidth = 1.5
+        averageScoreLabel.backgroundColor = AppColors.buttonColor
+        averageScoreLabel.layer.cornerRadius = 10
+        averageScoreLabel.layer.borderColor = AppColors.buttonColor.cgColor
+        averageScoreLabel.layer.masksToBounds = true
+        averageScoreLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        averageScoreLabel.textColor = .white
         averageScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         averageScoreLabel.textAlignment = .center
         // 添加到视图
@@ -49,12 +56,13 @@ class CommentScreenView: UIView {
         NSLayoutConstraint.activate([
             // Constraints for averageScoreLabel
             averageScoreLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            averageScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            averageScoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            averageScoreLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            averageScoreLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            averageScoreLabel.heightAnchor.constraint(equalToConstant: 50),
             
             // Constraints for tableViewComments
-            tableViewComments.topAnchor.constraint(equalTo: averageScoreLabel.bottomAnchor, constant: 10),
-            tableViewComments.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -8),
+            tableViewComments.topAnchor.constraint(equalTo: averageScoreLabel.bottomAnchor, constant: 20),
+            tableViewComments.bottomAnchor.constraint(equalTo: floatingButtonAddComment.topAnchor, constant: -20),
             tableViewComments.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             tableViewComments.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             

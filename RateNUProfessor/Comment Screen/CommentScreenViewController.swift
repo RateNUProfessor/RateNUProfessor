@@ -10,10 +10,7 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class CommentScreenViewController: UIViewController {
-
-    //TODO: 有关view上的Todo
-    //TODO: 在页面上方应该有这个professor的平均分
-    //TODO: 每个comment展示的部分可以再改一下
+    
     let commentScreen = CommentScreenView()
     // waiting to get the professor selected from the search screen
     var professorObj = Professor(name: "")
@@ -31,18 +28,6 @@ class CommentScreenViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         
-//        //TODO: 需要notification center, 监听add new comment page新加的comment并reload tableview
-//
-//        allScoresList.append(rate1)
-//        allScoresList.append(rate2)
-        
-        
-        
-        
-        // updated below:
-//        fetchCommentsForProfessor()
-
-        
         commentScreen.tableViewComments.delegate = self
         commentScreen.tableViewComments.dataSource = self
         commentScreen.tableViewComments.separatorStyle = .none
@@ -57,8 +42,6 @@ class CommentScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         fetchCommentsForProfessor()
     }
-    
-    
     
     func fetchCommentsForProfessor() {
         let professorUID = professorObj.professorUID
@@ -132,6 +115,16 @@ class CommentScreenViewController: UIViewController {
                 if numberOfScores > 0 {
                     let averageScore = totalScore / Double(numberOfScores)
                     self?.commentScreen.averageScoreLabel.text = "Average Score: \(String(format: "%.2f", averageScore))"
+                    db.collection("professors").document(professorUID).updateData([
+                        "avgScore": "\(String(format: "%.2f", averageScore))"
+                    ]) { err in
+                        if let err = err {
+                          print("Error updating document: \(err)")
+                        } else {
+                          print("Document successfully updated")
+                        }
+                    }
+                    //self?.professorObj.avgScore = averageScore
                 } else {
                     self?.commentScreen.averageScoreLabel.text = "No Scores Available"
                 }
@@ -140,9 +133,6 @@ class CommentScreenViewController: UIViewController {
 
         }
     }
-
-
-
     
     @objc func onAddCommentButtonTapped() {
         let addCommentScreenViewController = AddCommentScreenViewController()
@@ -167,8 +157,6 @@ class CommentScreenViewController: UIViewController {
             print("Failed to receive new comment")
         }
     }
-
-
 }
 
 
@@ -183,23 +171,11 @@ extension CommentScreenViewController: UITableViewDelegate, UITableViewDataSourc
         let curRateItem = allScoresList[indexPath.row]
        
         cell.labelScore.text = "\(curRateItem.rateScore)"
-        cell.labelClass.text = "\(curRateItem.rateClass)"
+        cell.labelClass.text = "\(curRateItem.rateClass), \(curRateItem.rateSemester)"
         cell.labelComment.text = "\(curRateItem.rateComment)"
         
         return cell
     }
-    
-//    func convertToDateAndTime(_ date: TimeInterval? ) -> String? {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.timeZone = .current
-//        if let date = date {
-//            let date = Date(timeIntervalSince1970: date)
-//            dateFormatter.dateFormat = "YY/MM/dd, hh:mm"
-//            return dateFormatter.string(from: date)
-//        } else {
-//            return nil
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 

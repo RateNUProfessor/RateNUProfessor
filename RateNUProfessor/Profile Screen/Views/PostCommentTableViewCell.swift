@@ -73,7 +73,7 @@ class PostCommentTableViewCell: UITableViewCell {
             wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             
-            labelName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 8),
+            labelName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 10),
             labelName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
             labelName.heightAnchor.constraint(equalToConstant: 20),
             labelName.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
