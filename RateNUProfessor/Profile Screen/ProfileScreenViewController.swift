@@ -73,6 +73,7 @@ class ProfileScreenViewController: UIViewController {
         
         profileScreen.labelName.text = currentUser?.displayName
                 
+        
         if let url = currentUser?.photoURL{
             self.profileScreen.profileImage.loadRemoteImage(from: url)
         }
@@ -110,6 +111,11 @@ class ProfileScreenViewController: UIViewController {
                     }
                 })
         }
+    }
+    
+    @objc func onChangePasswordButtonTapped() {
+        let changePasswordVC = ChangePasswordViewController()
+        navigationController?.pushViewController(changePasswordVC, animated: true)
     }
     
     @objc func onSettingsBarButtonTapped() {

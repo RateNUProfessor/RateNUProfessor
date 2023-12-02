@@ -40,6 +40,7 @@ class SettingScreenViewController: UIViewController {
             action: #selector(onLogOutBarButtonTapped))
         
         settingsScreen.buttonSave.addTarget(self, action: #selector(onButtonSaveTapped), for: .touchUpInside)
+        settingsScreen.buttonChangePwd.addTarget(self, action: #selector(onChangePasswordButtonTapped), for: .touchUpInside)
         
         if let url = currentUser?.photoURL, let name = currentUser?.displayName {
             self.settingsScreen.profileImage.loadRemoteImage(from: url)
@@ -60,6 +61,33 @@ class SettingScreenViewController: UIViewController {
         }
         fetchUserData()
     }
+    
+    @objc func onChangePasswordButtonTapped() {
+        let changePasswordVC = ChangePasswordViewController()
+        changePasswordVC.onPasswordChange = { [weak self] newPassword in
+            self?.updatePasswordInDatabase(newPassword)
+        }
+        navigationController?.pushViewController(changePasswordVC, animated: true)
+    }
+
+    func updatePasswordInDatabase(_ newPassword: String) {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("User not logged in")
+            return
+        }
+
+        let db = Firestore.firestore()
+        let userDocument = db.collection("users").document(userID)
+        userDocument.updateData(["password": newPassword]) { error in
+            if let error = error {
+                print("Error updating password in Firestore: \(error.localizedDescription)")
+            } else {
+                print("Password updated in Firestore successfully")
+            }
+        }
+    }
+
+
     
     private func fetchUserData() {
         if let id = currentUser?.uid {
