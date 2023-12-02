@@ -31,7 +31,7 @@ class CommentTableViewCell: UITableViewCell {
     
     func setupScoreLabel() {
         labelScore = UILabel()
-        labelScore.font = UIFont.systemFont(ofSize: 16)
+        labelScore.font = UIFont.boldSystemFont(ofSize: 20)
         labelScore.textAlignment = .right
         labelScore.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelScore)
@@ -39,7 +39,7 @@ class CommentTableViewCell: UITableViewCell {
     
     func setupClassLabel() {
         labelClass = UILabel()
-        labelClass.font = UIFont.systemFont(ofSize: 14)
+        labelClass.font = UIFont.systemFont(ofSize: 16)
         labelClass.textColor = .gray
         labelClass.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelClass)
@@ -47,7 +47,7 @@ class CommentTableViewCell: UITableViewCell {
     
     func setupCommentLabel() {
         labelComment = UILabel()
-        labelComment.font = UIFont.systemFont(ofSize: 14)
+        labelComment.font = UIFont.systemFont(ofSize: 16)
         labelComment.textColor = .darkGray
         labelComment.numberOfLines = 2 // Adjust the number of lines as needed
         labelComment.translatesAutoresizingMaskIntoConstraints = false

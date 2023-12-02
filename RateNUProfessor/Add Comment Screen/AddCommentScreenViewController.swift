@@ -168,7 +168,7 @@ class AddCommentScreenViewController: UIViewController {
         }
         
         let user = User(firebaseUser: firebaseuser)
-        let semester = "\(selectedYear)\(selectedTerm)"
+        let semester = "\(selectedYear) \(selectedTerm)"
         let newComment = SingleRateUnit(commentId: "", rateStudent: user, rateProfessor: professor, rateClass: selectedCourse, rateScore: score, rateComment: comment, rateSemester: semester, rateCampus: "Boston")
         return newComment
     }

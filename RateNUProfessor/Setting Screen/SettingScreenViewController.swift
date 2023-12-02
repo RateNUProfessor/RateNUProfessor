@@ -17,6 +17,8 @@ class SettingScreenViewController: UIViewController {
     var currentUser:FirebaseAuth.User?
     let database = Firestore.firestore()
     var loadingIndicator: UIActivityIndicatorView?
+    //let changePasswordView = ChangePasswordView()
+    var onPasswordChange: ((String) -> Void)?
     
     override func loadView() {
         view = settingsScreen
@@ -63,11 +65,123 @@ class SettingScreenViewController: UIViewController {
     }
     
     @objc func onChangePasswordButtonTapped() {
-        let changePasswordVC = ChangePasswordViewController()
-        changePasswordVC.onPasswordChange = { [weak self] newPassword in
+//        let changePasswordVC = ChangePasswordViewController()
+        onPasswordChange = { [weak self] newPassword in
             self?.updatePasswordInDatabase(newPassword)
         }
-        navigationController?.pushViewController(changePasswordVC, animated: true)
+//        navigationController?.pushViewController(changePasswordVC, animated: true)
+        
+        
+        let changePwdAlert = UIAlertController(
+            title: "Change Password?",
+            message: "Please enter a new password.",
+            preferredStyle: .alert)
+        
+        changePwdAlert.addTextField{ textField in
+            textField.placeholder = "New Password"
+            textField.contentMode = .center
+        }
+   
+        changePwdAlert.addTextField{ textField in
+            textField.placeholder = "Confirm New Password"
+            textField.contentMode = .center
+            textField.isSecureTextEntry = true
+        }
+
+        let changePwdAction = UIAlertAction(title: "Change Password", style: .default, handler: {(_) in
+            
+            guard let newPassword = changePwdAlert.textFields![0].text,
+                  let confirmPassword = changePwdAlert.textFields![1].text,
+                  !newPassword.isEmpty else {
+                      self.presentErrorAlert(message: "Please enter a new password.")
+                return
+            }
+            
+            guard newPassword == confirmPassword else {
+                self.presentErrorAlert(message: "Passwords do not match.")
+                return
+            }
+
+            // Prompt the user for their current password for reauthentication
+            self.presentReauthenticationAlert { [weak self] currentPassword in
+                self?.reauthenticateUser(currentPassword: currentPassword) {
+                    self?.updatePassword(newPassword: newPassword)
+                }
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(_) in
+            changePwdAlert.view.superview?.addGestureRecognizer(
+                UITapGestureRecognizer(target: self, action: #selector(self.onTapOutsideAlert))
+            )
+        })
+        
+        changePwdAlert.addAction(changePwdAction)
+        changePwdAlert.addAction(cancelAction)
+        
+        self.present(changePwdAlert, animated: true, completion: {() in
+            changePwdAlert.view.superview?.isUserInteractionEnabled = true
+            changePwdAlert.view.superview?.addGestureRecognizer(
+                UITapGestureRecognizer(target: self, action: #selector(self.onTapOutsideAlert))
+            )
+        })
+    }
+    
+    private func reauthenticateUser(currentPassword: String, completion: @escaping () -> Void) {
+        guard let user = Auth.auth().currentUser, let email = user.email else {
+            presentErrorAlert(message: "Unable to get user details for reauthentication.")
+            return
+        }
+
+        let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
+        user.reauthenticate(with: credential) { [weak self] _, error in
+            if let error = error {
+                self?.presentErrorAlert(message: "Reauthentication failed: \(error.localizedDescription)")
+            } else {
+                completion()
+            }
+        }
+    }
+
+    private func updatePassword(newPassword: String) {
+        //changePasswordView.loadingIndicator.startAnimating()
+
+        Auth.auth().currentUser?.updatePassword(to: newPassword) { [weak self] error in
+            //self?.changePasswordView.loadingIndicator.stopAnimating()
+            if let error = error {
+                self?.presentErrorAlert(message: "Failed to change password: \(error.localizedDescription)")
+            } else {
+                self?.onPasswordChange?(newPassword)
+                self?.showSuccessAndPop()
+            }
+        }
+    }
+
+    private func showSuccessAndPop() {
+        let alert = UIAlertController(title: "Success", message: "Password changed successfully", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    private func presentReauthenticationAlert(completion: @escaping (String) -> Void) {
+        let alert = UIAlertController(title: "Reauthenticate", message: "Enter your current password to continue.", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "Current Password"
+            textField.isSecureTextEntry = true
+        }
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { _ in
+            if let currentPassword = alert.textFields?.first?.text {
+                completion(currentPassword)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(alert, animated: true)
+    }
+    
+    @objc func onTapOutsideAlert(){
+        self.dismiss(animated: true)
     }
 
     func updatePasswordInDatabase(_ newPassword: String) {
@@ -86,8 +200,6 @@ class SettingScreenViewController: UIViewController {
             }
         }
     }
-
-
     
     private func fetchUserData() {
         if let id = currentUser?.uid {

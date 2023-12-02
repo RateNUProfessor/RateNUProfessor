@@ -32,7 +32,7 @@ extension ProfileScreenViewController: UITableViewDelegate, UITableViewDataSourc
                 //TODO: delete comments from firebase
                 //self.deleteANote(token: self.authToken!, id: self.comments[indexPath.row]._id)
                 if let id = self.currentUser?.uid {
-        
+                   
                     self.database.collection("users")
                         .document(id)
                         .collection("comments")
@@ -44,6 +44,7 @@ extension ProfileScreenViewController: UITableViewDelegate, UITableViewDataSourc
                         }
                       }
                 }
+                
                 
             }))
             

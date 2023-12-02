@@ -7,14 +7,11 @@
 
 import UIKit
 import FirebaseAuth
-import MessageKit
 import FirebaseFirestore
 
 class ChatScreenViewController: UIViewController {
     
     let chatScreen = ChatScreenView()
-    
-    var messages: [Message] = []
     
     override func loadView() {
         view = chatScreen
