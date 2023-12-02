@@ -26,11 +26,10 @@ class ResultScreenViewController: UIViewController {
         view.backgroundColor = .white
         title = "Search Result"
         
-        //TODO: 从firebase获取这个课号的所有professor，展示在tableView里
-        //TODO: 点击这个tableview可以进入到对应professor的comment page
         resultScreen.tableViewProfessors.register(SearchResultTableViewCell.self, forCellReuseIdentifier: Configs.selectedCourseToGetProf)
         resultScreen.tableViewProfessors.delegate = self
         resultScreen.tableViewProfessors.dataSource = self
+        resultScreen.tableViewProfessors.separatorStyle = .none
         
         if let courseID = selectedCourseID {
             fetchProfessorsForCourse(courseID: courseID)
@@ -86,14 +85,18 @@ class ResultScreenViewController: UIViewController {
                     }
 
                     if let profDoc = profDoc, profDoc.exists {
-                        if let professorName = profDoc.data()?["name"] as? String {
+                        if let professorName = profDoc.data()?["name"] as? String,
+                            let professorScore = profDoc.data()?["avgScore"] as? String {
                             var professor = Professor(name: professorName)
                             professor.professorUID = professorID
+                            professor.avgScore = Double(professorScore)!
                             updatedProfessors.append(professor)
                         }
                     }
                     group.leave()
                 }
+                
+                
             }
 
             group.notify(queue: .main) {
@@ -125,7 +128,8 @@ extension ResultScreenViewController: UITableViewDelegate, UITableViewDataSource
         }
 
         let professor = professors[indexPath.row]
-        cell.textLabel?.text = professor.name
+        cell.labelProfessorName?.text = professor.name
+        cell.labelAvgScore.text = "\(professor.avgScore)"
         return cell
     }
     

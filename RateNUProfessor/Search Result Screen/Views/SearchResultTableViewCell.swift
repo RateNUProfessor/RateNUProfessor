@@ -10,12 +10,14 @@ import UIKit
 class SearchResultTableViewCell: UITableViewCell {
     var wrapperCellView: UIView!
     var labelProfessorName: UILabel!
+    var labelAvgScore: UILabel!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupWrapperCellView()
         setupLabelProfessorName()
+        setupLabelAvgScore()
         initConstraints()
     }
     
@@ -34,9 +36,16 @@ class SearchResultTableViewCell: UITableViewCell {
     
     func setupLabelProfessorName() {
         labelProfessorName = UILabel()
-        labelProfessorName.font = UIFont.boldSystemFont(ofSize: 16)
+        labelProfessorName.font = UIFont.boldSystemFont(ofSize: 20)
         labelProfessorName.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelProfessorName)
+    }
+    
+    func setupLabelAvgScore() {
+        labelAvgScore = UILabel()
+        labelAvgScore.font = UIFont.boldSystemFont(ofSize: 20)
+        labelAvgScore.translatesAutoresizingMaskIntoConstraints = false
+        wrapperCellView.addSubview(labelAvgScore)
     }
     
     func initConstraints() {
@@ -47,9 +56,16 @@ class SearchResultTableViewCell: UITableViewCell {
             wrapperCellView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8),
             
             labelProfessorName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 12),
-            labelProfessorName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
-            labelProfessorName.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -16),
-            labelProfessorName.bottomAnchor.constraint(equalTo: wrapperCellView.bottomAnchor, constant: -12)
+            labelProfessorName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 30),
+            //labelProfessorName.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -16),
+            labelProfessorName.bottomAnchor.constraint(equalTo: wrapperCellView.bottomAnchor, constant: -12),
+            labelProfessorName.heightAnchor.constraint(equalToConstant: 50),
+            
+            labelAvgScore.topAnchor.constraint(equalTo: labelProfessorName.topAnchor),
+            labelAvgScore.leadingAnchor.constraint(equalTo: labelProfessorName.trailingAnchor, constant: -20),
+            labelAvgScore.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -30),
+            labelAvgScore.bottomAnchor.constraint(equalTo: labelProfessorName.bottomAnchor),
+            labelAvgScore.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     

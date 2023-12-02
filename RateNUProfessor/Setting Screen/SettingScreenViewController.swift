@@ -17,7 +17,7 @@ class SettingScreenViewController: UIViewController {
     var currentUser:FirebaseAuth.User?
     let database = Firestore.firestore()
     var loadingIndicator: UIActivityIndicatorView?
-    let changePasswordView = ChangePasswordView()
+    //let changePasswordView = ChangePasswordView()
     var onPasswordChange: ((String) -> Void)?
     
     override func loadView() {
@@ -66,10 +66,11 @@ class SettingScreenViewController: UIViewController {
     
     @objc func onChangePasswordButtonTapped() {
 //        let changePasswordVC = ChangePasswordViewController()
-//        changePasswordVC.onPasswordChange = { [weak self] newPassword in
-//            self?.updatePasswordInDatabase(newPassword)
-//        }
+        onPasswordChange = { [weak self] newPassword in
+            self?.updatePasswordInDatabase(newPassword)
+        }
 //        navigationController?.pushViewController(changePasswordVC, animated: true)
+        
         
         let changePwdAlert = UIAlertController(
             title: "Change Password?",
@@ -143,10 +144,10 @@ class SettingScreenViewController: UIViewController {
     }
 
     private func updatePassword(newPassword: String) {
-        changePasswordView.loadingIndicator.startAnimating()
+        //changePasswordView.loadingIndicator.startAnimating()
 
         Auth.auth().currentUser?.updatePassword(to: newPassword) { [weak self] error in
-            self?.changePasswordView.loadingIndicator.stopAnimating()
+            //self?.changePasswordView.loadingIndicator.stopAnimating()
             if let error = error {
                 self?.presentErrorAlert(message: "Failed to change password: \(error.localizedDescription)")
             } else {
