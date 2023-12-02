@@ -18,12 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-        if Auth.auth().currentUser != nil {
-            configureWindowAndMakeVisible(rootVC: SearchScreenViewController())
-        } else {
-            configureWindowAndMakeVisible(rootVC: ViewController())
-        }
-        
         return true
     }
 
@@ -42,10 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func configureWindowAndMakeVisible(rootVC: UIViewController) {
-        if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
-            window.rootViewController = rootVC
-            window.makeKeyAndVisible()
-        }
+
     }
 }
 
