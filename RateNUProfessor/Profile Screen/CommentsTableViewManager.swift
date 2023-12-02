@@ -32,7 +32,11 @@ extension ProfileScreenViewController: UITableViewDelegate, UITableViewDataSourc
                 //TODO: delete comments from firebase
                 //self.deleteANote(token: self.authToken!, id: self.comments[indexPath.row]._id)
                 if let id = self.currentUser?.uid {
+                    
+                    print("delete commet - check commentID")
+                    print(self.comments[indexPath.row].commentId)
                    
+                    // remove comment from user collection
                     self.database.collection("users")
                         .document(id)
                         .collection("comments")
@@ -40,7 +44,18 @@ extension ProfileScreenViewController: UITableViewDelegate, UITableViewDataSourc
                         if let err = err {
                           print("Error removing document: \(err)")
                         } else {
-                          print("Document successfully removed!")
+                          print("Document successfully removed from user Collection!")
+                        }
+                      }
+                    
+                    self.database.collection("professors")
+                        .document(self.comments[indexPath.row].rateProfessor.professorUID)
+                        .collection("comments")
+                        .document(self.comments[indexPath.row].commentId).delete() { err in
+                        if let err = err {
+                          print("Error removing document: \(err)")
+                        } else {
+                          print("Document successfully removed from professor Collection!")
                         }
                       }
                 }

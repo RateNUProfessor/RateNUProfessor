@@ -11,6 +11,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 //TODO: 增加每一个comment应该fields
+// add comment
 class AddCommentScreenViewController: UIViewController {
 
     let addCommentScreen = AddCommentScreenView()
@@ -118,26 +119,36 @@ class AddCommentScreenViewController: UIViewController {
             dispatchGroup.enter()
             updateProfessorInFirebase(professor: professor, newComment: newComment) { result in
                 switch result {
-                case .success:
+                case .success(let documentID):
                     print("Professor updated successfully")
                     // Recalculate professor's score if needed
                     // recalculateProfessorScore(professorUID: professor.professorUID)
+                    // get the documentID generated
+                    print(documentID)
+                    self.updateUserInFirebase(user: User(firebaseUser: firebaseuser), newComment: newComment, commentID: documentID) { result in
+                        switch result {
+                        case .success:
+                            print("User updated successfully")
+                        case .failure(let error):
+                            print("Error update user: \(error.localizedDescription)")
+                        }
+                    }
                 case .failure(let error):
                     print("Error update professor: \(error.localizedDescription)")
                 }
                 dispatchGroup.leave()
             }
 
-            dispatchGroup.enter()
-            updateUserInFirebase(user: User(firebaseUser: firebaseuser), newComment: newComment) { result in
-                switch result {
-                case .success:
-                    print("User updated successfully")
-                case .failure(let error):
-                    print("Error update user: \(error.localizedDescription)")
-                }
-                dispatchGroup.leave()
-            }
+//            dispatchGroup.enter()
+//            updateUserInFirebase(user: User(firebaseUser: firebaseuser), newComment: newComment, commentID: commentID) { result in
+//                switch result {
+//                case .success:
+//                    print("User updated successfully")
+//                case .failure(let error):
+//                    print("Error update user: \(error.localizedDescription)")
+//                }
+//                dispatchGroup.leave()
+//            }
 
             dispatchGroup.notify(queue: .main) {
                 // All Firebase updates are done here
@@ -173,16 +184,24 @@ class AddCommentScreenViewController: UIViewController {
     }
     
     
-    func updateProfessorInFirebase(professor: Professor, newComment: SingleRateUnit, completion: @escaping (Result<Void, Error>) -> Void) {
+    func updateProfessorInFirebase(professor: Professor, newComment: SingleRateUnit, completion: @escaping (Result<String, Error>) -> Void) {
         print("function updateProfessorInFirebase triggered")
         do {
-            try database.collection("professors").document(professor.professorUID).collection("comments").addDocument(from: newComment) { error in
+            let dbCommentRef = database.collection("professors").document(professor.professorUID).collection("comments")
+            var newDocumentRef: DocumentReference?
+            newDocumentRef = try dbCommentRef.addDocument(from: newComment) { error in
                 if let error = error {
                     print("Error updating chat object: \(error.localizedDescription)")
                     completion(.failure(error))
                 } else {
                     print("Professor - comment updated in Firebase")
-                    completion(.success(()))
+                    if let documentID = newDocumentRef?.documentID {
+                        dbCommentRef.document(documentID).updateData([
+                            "commentId": documentID
+                        ])
+                        completion(.success(documentID))
+                        // print(documentID)
+                    }
                 }
             }
         } catch {
@@ -190,6 +209,8 @@ class AddCommentScreenViewController: UIViewController {
             completion(.failure(error))
         }
     }
+
+
     
     // function to linke the courseNumber with the professor firebase reference
     func updateCourseNumberInFirebase(professor: Professor, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -213,16 +234,21 @@ class AddCommentScreenViewController: UIViewController {
         }
     }
     
-    func updateUserInFirebase(user: User, newComment: SingleRateUnit, completion: @escaping (Result<Void, Error>) -> Void) {
+    func updateUserInFirebase(user: User, newComment: SingleRateUnit, commentID: String, completion: @escaping (Result<Void, Error>) -> Void) {
         do {
-            try database.collection("users").document(user.id).collection("comments").addDocument(from: newComment) { error in
+            let dbRef = database.collection("users").document(user.id).collection("comments").document(commentID)
+            try dbRef.setData(from: newComment) { error in
                 if let error = error {
                     print("Error updating user comment: \(error.localizedDescription)")
                     completion(.failure(error))
                 } else {
                     print("User comment updated in Firebase")
+                    //set the commentId field
+                    dbRef.updateData([
+                        "commentId": commentID
+                    ])
                     completion(.success(()))
-                    
+
                     // Correctly placed notification
 //                    NotificationCenter.default.post(name: NSNotification.Name("NewCommentAdded"), object: nil, userInfo: ["newComment": newComment])
                 }
