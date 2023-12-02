@@ -92,6 +92,7 @@ class ProfileScreenViewController: UIViewController {
         }
  
         if let id = currentUser?.uid {
+            print("get All comment from user")
             database.collection("users")
                 .document(id)
                 .collection("comments")
@@ -100,8 +101,10 @@ class ProfileScreenViewController: UIViewController {
                         self.comments.removeAll()
                         for document in documents{
                             do{
-                                let comment  = try document.data(as: SingleRateUnit.self)
+                                var comment  = try document.data(as: SingleRateUnit.self)
+                                comment.commentId = document.documentID
                                 self.comments.append(comment)
+                                print(comment.commentId)
                             }catch{
                                 print(error)
                             }
