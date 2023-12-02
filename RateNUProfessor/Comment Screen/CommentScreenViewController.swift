@@ -123,7 +123,7 @@ class CommentScreenViewController: UIViewController {
                             self?.allScoresList.append(rate)
                         }
                         
-                        group.leave() // 离开组
+                        group.leave() 
                     }
             }
                         
