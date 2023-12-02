@@ -14,8 +14,6 @@ class ChatScreenViewController: UIViewController {
     
     let chatScreen = ChatScreenView()
     
-    var messages: [Message] = []
-    
     override func loadView() {
         view = chatScreen
     }
