@@ -16,7 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
         FirebaseApp.configure()
+        
+        // logout before reinstall the application
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Error signing out: \(error.localizedDescription)")
+        }
         
         return true
     }
