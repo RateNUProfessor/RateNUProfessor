@@ -56,7 +56,18 @@ extension ChatScreenViewController: UITableViewDelegate, UITableViewDataSource{
         let newChatController = AddNewChatViewController()
         newChatController.currentChat = chatsList[indexPath.row]
         // pass the other User to the new Chat controller
-        newChatController.otherUser = self.otherUser
+        // get the other user in this cell
+        let chat = chatsList[indexPath.row]
+        var cellOtherUser = User(id: "", name: "", email: "", password: "", campus: "")
+        for user in chat.users {
+            if user.id == currentUser?.uid {
+                continue
+            }
+            cellOtherUser = user
+        }
+        newChatController.otherUser = cellOtherUser
+//        print("Other User in Chat Screen Table cell")
+//        print(self.otherUser)
         newChatController.usersDictionary = self.usersDictionary
         navigationController?.pushViewController(newChatController, animated: true)
     }

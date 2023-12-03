@@ -46,6 +46,9 @@ class AddNewChatViewController: UIViewController {
         title = otherUser.name
         
         navigationController?.navigationBar.prefersLargeTitles = false
+        
+//        print("Other User in Add Chat Screen")
+//        print(self.otherUser)
     }
     
     @objc func sendMessage(){
