@@ -24,7 +24,25 @@ extension ChatScreenViewController: UITableViewDelegate, UITableViewDataSource{
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Configs.tableViewChatsID, for: indexPath) as! ChatsTableViewCell
             let chat = chatsList[indexPath.row]
-            let userEmails = chat.userEmails
+            //let userEmails = chat.userEmails
+            let userIds = chat.userIds
+            
+            // identify currentUser and other user
+//            let otherUserId = {
+//                for id in userIds {
+//                    if id != self.currentUser?.uid {
+//                        return id
+//                    }
+//                }
+//            }
+            
+            // set other user
+            for user in chat.users {
+                if user.id == currentUser?.uid {
+                    continue
+                }
+                otherUser = user
+            }
             
             cell.labelName.text = otherUser.name
             
@@ -37,8 +55,10 @@ extension ChatScreenViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let newChatController = AddNewChatViewController()
         newChatController.currentChat = chatsList[indexPath.row]
+        // pass the other User to the new Chat controller
         newChatController.otherUser = self.otherUser
         newChatController.usersDictionary = self.usersDictionary
         navigationController?.pushViewController(newChatController, animated: true)
     }
+    
 }

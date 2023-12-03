@@ -11,4 +11,5 @@ import UIKit
 struct AppColors {
     // set the button color
     static let buttonColor = UIColor(red: 1, green: 110.0/255.0, blue: 108.0/255.0, alpha: 1.0)
+    static let backgroundColor = UIColor(red: 1, green: 110.0/255.0, blue: 108.0/255.0, alpha: 0.4)
 }

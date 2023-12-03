@@ -34,6 +34,8 @@ class ChatScreenViewController: UIViewController {
         currentUser = Auth.auth().currentUser
         chatScreen.labelChat.text = "Welcome \(currentUser?.displayName ?? "Anonymous")!"
         observeCurrentUsers()
+        print("In Chat Screen View Controller")
+        print(usersDictionary)
     }
     
     func observeCurrentUsers(){
@@ -46,8 +48,7 @@ class ChatScreenViewController: UIViewController {
                     for document in documents{
                         do {
                             let user  = try document.data(as: User.self)
-                            self.usersDictionary.updateValue(user, forKey: user.email.lowercased())
-                            
+                            self.usersDictionary.updateValue(user, forKey: user.id)
                         }catch{
                             print(error)
                         }
@@ -57,6 +58,7 @@ class ChatScreenViewController: UIViewController {
             }
         )
     }
+    
     
     func observeCurrentChats(){
         //MARK: Observe Firestore database to display the chat list...
@@ -85,4 +87,5 @@ class ChatScreenViewController: UIViewController {
             }
         )
     }
+    
 }

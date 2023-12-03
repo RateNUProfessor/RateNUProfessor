@@ -12,6 +12,7 @@ struct Chat: Codable {
     @DocumentID var id: String?
     var latestTimeStamp: Int64?
     var lastMessage: String?
-    var userEmails: [String]
     var userIds: [String]
+    var userEmails: [String]
+    var users: [User]
 }

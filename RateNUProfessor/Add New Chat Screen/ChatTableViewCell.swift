@@ -130,7 +130,7 @@ class ChatTableViewCell: UITableViewCell {
             initConstraints(messageType: .incoming)
             
         case .outgoing:
-            wrapperCellView.backgroundColor = AppColors.buttonColor
+            wrapperCellView.backgroundColor = AppColors.backgroundColor
             
             labelMessage.textColor = .darkGray
             labelDate.textColor = .darkGray

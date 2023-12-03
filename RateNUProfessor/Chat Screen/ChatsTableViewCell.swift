@@ -29,7 +29,7 @@ class ChatsTableViewCell: UITableViewCell {
         wrapperCellView = UITableViewCell()
         
         //working with the shadows and colors...
-        wrapperCellView.backgroundColor = AppColors.buttonColor
+        wrapperCellView.backgroundColor = AppColors.backgroundColor
         wrapperCellView.layer.cornerRadius = 6.0
         wrapperCellView.layer.shadowColor = UIColor.lightGray.cgColor
         wrapperCellView.layer.shadowOffset = .zero

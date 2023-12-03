@@ -196,13 +196,17 @@ extension CommentScreenViewController: UITableViewDelegate, UITableViewDataSourc
                         tabBarController.selectedIndex = desiredTabIndex
                         if let selectedNavController = tabBarController.selectedViewController as? UINavigationController {
                             let addNewChatController = AddNewChatViewController()
-                            addNewChatController.currentChat = Chat(lastMessage: "",
-                                                                    userEmails: [self.currentUser!.email!, otherUser.email],
-                                                                    userIds: [self.currentUser!.uid, otherUser.id])
-                            addNewChatController.usersDictionary = self.usersDictionary
-                            addNewChatController.otherUser = otherUser
-                            print("other user: \(otherUser)")
-                            selectedNavController.navigationController?.pushViewController(addNewChatController, animated: true)
+                            if let currentUsernotNil = self.currentUser {
+                                let me = User(firebaseUser: currentUsernotNil)
+                                addNewChatController.currentChat = Chat(lastMessage: "",
+                                                                        userIds: [self.currentUser!.uid, otherUser.id],
+                                                                        userEmails: [self.currentUser!.email!, otherUser.email],
+                                                                        users: [me, otherUser])
+                                addNewChatController.usersDictionary = self.usersDictionary
+                                addNewChatController.otherUser = otherUser
+                                print("other user: \(otherUser)")
+                                selectedNavController.navigationController?.pushViewController(addNewChatController, animated: true)
+                            }
                         }
                     }
                 }

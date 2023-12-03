@@ -54,7 +54,7 @@ extension AddNewChatViewController{
     
     func saveMessageToFirestore(message: Message){
         
-        if let userEmails = currentChat?.userEmails, let userIds = currentChat?.userIds {
+        if let userEmails = currentChat?.userEmails,let userIds = currentChat?.userIds {
             let chatID = Configs.generateChatIDFromEmails(userEmails)
             
             let collectionMessages = database
@@ -67,6 +67,9 @@ extension AddNewChatViewController{
             do{
                 try collectionMessages.addDocument(from: message, completion: {(error) in
                     if error == nil{
+                        
+                        // set the chat fields
+                        self.database.collection("chats").document(chatID).setData(["userIDs": userIds])
                         
                         //update chat references inside users collection...
                         let collectionUsers = self.database
