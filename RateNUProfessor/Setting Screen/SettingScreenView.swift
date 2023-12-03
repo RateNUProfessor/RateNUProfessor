@@ -42,8 +42,11 @@ class SettingScreenView: UIView {
         profileImage.setImage(UIImage(systemName: "person.fill"), for: .normal)
         profileImage.contentHorizontalAlignment = .fill
         profileImage.contentVerticalAlignment = .fill
-        profileImage.imageView?.contentMode = .scaleAspectFit
-        profileImage.imageView?.layer.cornerCurve = .circular
+        profileImage.imageView?.contentMode = .scaleAspectFill
+        profileImage.imageView?.layer.borderColor = AppColors.buttonColor.cgColor
+        profileImage.imageView?.layer.borderWidth = 1.5
+        profileImage.imageView?.layer.cornerRadius = 10
+        profileImage.showsMenuAsPrimaryAction = true
         profileImage.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(profileImage)
     }
@@ -124,7 +127,7 @@ class SettingScreenView: UIView {
             profileImage.heightAnchor.constraint(equalToConstant: 100),
             
             labelChangePic.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            labelChangePic.topAnchor.constraint(equalTo: profileImage.bottomAnchor),
+            labelChangePic.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 8),
             
             labelName.topAnchor.constraint(equalTo: labelChangePic.bottomAnchor, constant: 32),
             labelName.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 32),

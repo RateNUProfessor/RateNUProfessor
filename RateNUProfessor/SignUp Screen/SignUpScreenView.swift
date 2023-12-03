@@ -47,7 +47,10 @@ class SignUpScreenView: UIView {
         buttonTakePhoto.setImage(UIImage(systemName: "person.fill"), for: .normal)
         buttonTakePhoto.contentHorizontalAlignment = .fill
         buttonTakePhoto.contentVerticalAlignment = .fill
-        buttonTakePhoto.imageView?.contentMode = .scaleAspectFit
+        buttonTakePhoto.imageView?.contentMode = .scaleAspectFill
+        buttonTakePhoto.imageView?.layer.borderColor = AppColors.buttonColor.cgColor
+        buttonTakePhoto.imageView?.layer.borderWidth = 1.5
+        buttonTakePhoto.imageView?.layer.cornerRadius = 10
         buttonTakePhoto.showsMenuAsPrimaryAction = true
         buttonTakePhoto.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(buttonTakePhoto)
@@ -130,7 +133,7 @@ class SignUpScreenView: UIView {
             buttonTakePhoto.widthAnchor.constraint(equalToConstant: 100),
             buttonTakePhoto.heightAnchor.constraint(equalToConstant: 100),
             
-            labelPhoto.topAnchor.constraint(equalTo: buttonTakePhoto.bottomAnchor),
+            labelPhoto.topAnchor.constraint(equalTo: buttonTakePhoto.bottomAnchor, constant: 8),
             labelPhoto.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             
             textFieldName.topAnchor.constraint(equalTo: labelPhoto.bottomAnchor, constant: 32),
