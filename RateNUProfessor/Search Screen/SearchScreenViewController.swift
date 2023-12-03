@@ -14,8 +14,6 @@ import FirebaseFirestore
 // 如果点击search by professor name, 进入comment screen, 直接展示有关这个professor的所有comment
 // 如果点击search by course number, 进入search result screen, 展示所有和这个课关联的professors，然后再点击professor，进入comment screen
 
-//TODO: 美化一下这个页面button
-//TODO: 如果有更好的搜索想法可以讨论
 class SearchScreenViewController: UIViewController {
     let searchScreen = SearchScreenView()
     let notificationCenter = NotificationCenter.default
@@ -57,8 +55,7 @@ class SearchScreenViewController: UIViewController {
             navigationController?.pushViewController(commentController, animated: true)
         }
     }
-    
-    //TODO: search by courseNumber所有都没写
+
     @objc func onCourseNumberSelected(notification: Notification){
         if let selectedCourse = notification.object as? Course { // 这里将notification.object转换为Course类型
             let searchResultScreen = ResultScreenViewController()

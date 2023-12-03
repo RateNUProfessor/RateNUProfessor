@@ -45,11 +45,11 @@ class AddCommentScreenView: UIView {
         self.addSubview(labelCourseNumber)
         
         buttonCourseNumber = UIButton(type: .system)
-        buttonCourseNumber.titleLabel?.font = .systemFont(ofSize: 16, weight: .light)
+        buttonCourseNumber.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         buttonCourseNumber.setTitle("Select Course", for: .normal)
         buttonCourseNumber.showsMenuAsPrimaryAction = true
         buttonCourseNumber.translatesAutoresizingMaskIntoConstraints = false
-        buttonCourseNumber.setTitleColor(UIColor.lightGray, for: .normal)
+        buttonCourseNumber.setTitleColor(UIColor.systemGray3, for: .normal)
         buttonCourseNumber.layer.cornerRadius = 4
         buttonCourseNumber.layer.borderWidth = 1
         buttonCourseNumber.layer.borderColor = UIColor.systemGray5.cgColor
