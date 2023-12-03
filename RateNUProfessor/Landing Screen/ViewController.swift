@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     let landingScreen = LandingScreenView()
     var handleAuth: AuthStateDidChangeListenerHandle?
+    let notificationCenter = NotificationCenter.default
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,6 +38,27 @@ class ViewController: UIViewController {
         
         landingScreen.buttonSignIn.addTarget(self, action: #selector(onButtonSignInTapped), for: .touchUpInside)
         landingScreen.buttonSignUp.addTarget(self, action: #selector(onButtonSignUpTapped), for: .touchUpInside)
+        
+        // listen to the event of user signout
+        // push the navigation controller
+        notificationCenter.addObserver(
+                    self,
+                    selector: #selector(onUserSignedOut(notification:)),
+                    name: .userSignedOut, object: nil)
+        
+    }
+    
+    @objc func onUserSignedOut(notification: Notification) {
+        navigationController?.popViewController(animated: false)
+        if let viewControllers = self.navigationController?.viewControllers {
+            for viewController in viewControllers {
+                if viewController is ViewController {
+                    self.navigationController?.popToViewController(viewController, animated: true)
+                }
+            }
+        }
+//        let landingScreen = ViewController()
+//        navigationController?.pushViewController(landingScreen, animated: false)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

@@ -19,6 +19,7 @@ class SettingScreenViewController: UIViewController {
     var loadingIndicator: UIActivityIndicatorView?
     //let changePasswordView = ChangePasswordView()
     var onPasswordChange: ((String) -> Void)?
+    let notificationCenter = NotificationCenter.default
     
     override func loadView() {
         view = settingsScreen
@@ -260,14 +261,16 @@ class SettingScreenViewController: UIViewController {
             do {
                 try Auth.auth().signOut()
                 // Navigate back to the specific ViewController
-                if let viewControllers = self.navigationController?.viewControllers {
-                    for viewController in viewControllers {
-                        if viewController is ViewController { // Replace 'ViewController' with the actual class name
-                            self.navigationController?.popToViewController(viewController, animated: true)
-                            return
-                        }
-                    }
-                }
+//                if let viewControllers = self.navigationController?.viewControllers {
+//                    for viewController in viewControllers {
+//                        if viewController is ViewController { // Replace 'ViewController' with the actual class name
+//                            self.navigationController?.popToViewController(viewController, animated: true)
+//                            return
+//                        }
+//                    }
+//                }
+                // notify the landing page to make changes
+                self.notificationCenter.post(name: .userSignedOut, object: nil)
             } catch {
                 self.presentErrorAlert()
             }
