@@ -10,20 +10,19 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-//TODO: 增加每一个comment应该fields
 // add comment
 class AddCommentScreenViewController: UIViewController {
 
     let addCommentScreen = AddCommentScreenView()
     let database = Firestore.firestore()
 //    var selectedCourse = "CS5001"
-    var selectedYear = "2023"
-    var selectedTerm = "Spring"
+//    var selectedYear = "2023"
+//    var selectedTerm = "Spring"
     
     // Variables to store user-selected values
     var selectedCourse = ""
-//    var selectedYear = ""
-//    var selectedTerm = ""
+    var selectedYear = ""
+    var selectedTerm = ""
     var years = [String]()
     
     // receive the professor object from the All Comment Screen
@@ -68,6 +67,7 @@ class AddCommentScreenViewController: UIViewController {
                         let menuItem = UIAction(title: courseID, handler: { _ in
                             self.selectedCourse = courseID
                             self.addCommentScreen.buttonCourseNumber.setTitle(courseID, for: .normal)
+                            self.addCommentScreen.buttonCourseNumber.setTitleColor(UIColor.darkGray, for: .normal)
                         })
                         menuItems.append(menuItem)
                     }
@@ -85,7 +85,7 @@ class AddCommentScreenViewController: UIViewController {
 
     func getYearData() {
         var currentYear = Calendar.current.component(.year, from: Date())
-        for year in (currentYear - 5)...(currentYear + 5) {
+        for year in (currentYear - 2)...(currentYear + 1) {
             years.append("\(year)")
         }
     }
@@ -172,6 +172,8 @@ class AddCommentScreenViewController: UIViewController {
               !selectedCourse.isEmpty,
               !selectedYear.isEmpty,
               !selectedTerm.isEmpty,
+              score >= 0,
+              score <= 5,
               let firebaseuser = firebaseAuthUser else {
             showAlert(text: "Input field is empty or invalid", from: self)
             return nil
@@ -214,7 +216,6 @@ class AddCommentScreenViewController: UIViewController {
     
     // function to linke the courseNumber with the professor firebase reference
     func updateCourseNumberInFirebase(professor: Professor, completion: @escaping (Result<Void, Error>) -> Void) {
-        //TODO: 在真正link前需要看一下是否已经关联过，不确定如果已经有这个documentID的话firebase会报错还是当作无事发生
         let profRef = database.collection("professors").document(professor.professorUID)
         if let courseNumber = addCommentScreen.buttonCourseNumber.titleLabel?.text {
             do {
@@ -258,10 +259,6 @@ class AddCommentScreenViewController: UIViewController {
             completion(.failure(error))
         }
     }
-
-
-
-
     
     func ifProfessorAlreadyLinked() {
         

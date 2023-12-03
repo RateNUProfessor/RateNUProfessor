@@ -9,7 +9,6 @@ import UIKit
 
 class ResultScreenView: UIView {
     
-//    var labelSearch: UILabel!
     var tableViewProfessors: UITableView!
     
     override init(frame: CGRect) {
@@ -17,7 +16,6 @@ class ResultScreenView: UIView {
         
         self.backgroundColor = .white
         
-//        setupLabelSearch()
         setupTableViewProfessors()
         initConstraints()
         
@@ -33,9 +31,6 @@ class ResultScreenView: UIView {
     func initConstraints() {
         // Constraints for labelProfile (centered both horizontally and vertically)
         NSLayoutConstraint.activate([
-//            labelSearch.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//            labelSearch.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
-            
             tableViewProfessors.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
             tableViewProfessors.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             tableViewProfessors.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),

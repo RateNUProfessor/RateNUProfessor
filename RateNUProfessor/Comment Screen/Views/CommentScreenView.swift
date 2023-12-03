@@ -32,7 +32,6 @@ class CommentScreenView: UIView {
         averageScoreLabel.textColor = .white
         averageScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         averageScoreLabel.textAlignment = .center
-        // 添加到视图
         addSubview(averageScoreLabel)
     }
     
@@ -43,11 +42,18 @@ class CommentScreenView: UIView {
         self.addSubview(tableViewComments)
     }
     
-    // TODO: 怎么让这个button变大一点...
     func setupFloatingButtonAddComment() {
         floatingButtonAddComment = UIButton(type: .system)
         floatingButtonAddComment.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
         floatingButtonAddComment.tintColor = AppColors.buttonColor
+        floatingButtonAddComment.contentHorizontalAlignment = .fill
+        floatingButtonAddComment.contentVerticalAlignment = .fill
+        floatingButtonAddComment.imageView?.contentMode = .scaleAspectFit
+        floatingButtonAddComment.layer.cornerRadius = 16
+        floatingButtonAddComment.imageView?.layer.shadowOffset = .zero
+        floatingButtonAddComment.imageView?.layer.shadowRadius = 0.8
+        floatingButtonAddComment.imageView?.layer.shadowOpacity = 0.7
+        floatingButtonAddComment.imageView?.clipsToBounds = true
         floatingButtonAddComment.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(floatingButtonAddComment)
     }
@@ -67,8 +73,8 @@ class CommentScreenView: UIView {
             tableViewComments.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             
             // Constraints for floatingButtonAddComment
-            floatingButtonAddComment.widthAnchor.constraint(equalToConstant: 60), // Modified for a larger button
-            floatingButtonAddComment.heightAnchor.constraint(equalToConstant: 60), // Modified for a larger button
+            floatingButtonAddComment.widthAnchor.constraint(equalToConstant: 48),
+            floatingButtonAddComment.heightAnchor.constraint(equalToConstant: 48),
             floatingButtonAddComment.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             floatingButtonAddComment.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])

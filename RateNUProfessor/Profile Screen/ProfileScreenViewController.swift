@@ -109,7 +109,7 @@ class ProfileScreenViewController: UIViewController {
                                 print(error)
                             }
                         }
-                        self.comments.sort(by: {$0.rateSemester < $1.rateSemester})
+                        self.comments.sort(by: {$0.rateSemester > $1.rateSemester})
                         self.profileScreen.tableViewComments.reloadData()
                     }
                 })

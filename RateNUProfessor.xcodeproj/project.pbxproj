@@ -30,7 +30,6 @@
 		CE09F92F2B0440750010DBAC /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE09F92E2B0440750010DBAC /* FirebaseFirestoreSwift */; };
 		CE09F9312B0440750010DBAC /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CE09F9302B0440750010DBAC /* FirebaseStorage */; };
 		CE09F9332B04419D0010DBAC /* LandingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9322B04419D0010DBAC /* LandingScreenView.swift */; };
-		CE09F9352B04422D0010DBAC /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9342B04422D0010DBAC /* LoginScreenView.swift */; };
 		CE09F9372B0442460010DBAC /* SignUpScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9362B0442460010DBAC /* SignUpScreenView.swift */; };
 		CE09F9392B04425C0010DBAC /* AddCommentScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9382B04425C0010DBAC /* AddCommentScreenView.swift */; };
 		CE09F93B2B04426D0010DBAC /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F93A2B04426D0010DBAC /* ProfileScreenView.swift */; };
@@ -39,7 +38,6 @@
 		CE09F9432B0442DA0010DBAC /* ChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9422B0442DA0010DBAC /* ChatScreenView.swift */; };
 		CE09F9452B0442EB0010DBAC /* SearchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9442B0442EB0010DBAC /* SearchScreenView.swift */; };
 		CE09F9472B0443010010DBAC /* ResultScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9462B0443010010DBAC /* ResultScreenView.swift */; };
-		CE09F94A2B0443330010DBAC /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9492B0443330010DBAC /* LoginScreenViewController.swift */; };
 		CE09F94D2B0443760010DBAC /* SignUpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F94C2B0443760010DBAC /* SignUpScreenViewController.swift */; };
 		CE09F9502B0443E70010DBAC /* AddCommentScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F94F2B0443E70010DBAC /* AddCommentScreenViewController.swift */; };
 		CE09F9532B0444200010DBAC /* ProfileScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09F9522B0444200010DBAC /* ProfileScreenViewController.swift */; };
@@ -58,12 +56,22 @@
 		CE09FA552B0B2A260010DBAC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09FA542B0B2A260010DBAC /* User.swift */; };
 		CE09FA582B0B3E430010DBAC /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09FA572B0B3E430010DBAC /* Configs.swift */; };
 		CE09FA5A2B0B45D20010DBAC /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09FA592B0B45D20010DBAC /* Campus.swift */; };
+		CE5DF2F52B1BF6C200F10F5E /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DF2F42B1BF6C200F10F5E /* Chat.swift */; };
+		CE5DF2F72B1BF70300F10F5E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DF2F62B1BF70300F10F5E /* Message.swift */; };
+		CE5DF2F92B1BF8A600F10F5E /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DF2F82B1BF8A600F10F5E /* ChatTableViewCell.swift */; };
+		CE5DF2FB2B1BFA8300F10F5E /* ChatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DF2FA2B1BFA8300F10F5E /* ChatsTableViewCell.swift */; };
+		CE5DF2FD2B1BFC7600F10F5E /* AddNewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DF2FC2B1BFC7600F10F5E /* AddNewChatViewController.swift */; };
+		CE5DF2FF2B1BFC8A00F10F5E /* AddNewChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DF2FE2B1BFC8A00F10F5E /* AddNewChatScreenView.swift */; };
+		CE5DF3022B1C055500F10F5E /* ChatProgressIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DF3012B1C055500F10F5E /* ChatProgressIndicatorManager.swift */; };
+		CE5DF3042B1C05C400F10F5E /* ChatScreenFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DF3032B1C05C400F10F5E /* ChatScreenFirebaseManager.swift */; };
+		CE5DF3062B1C199A00F10F5E /* ChatsTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DF3052B1C199A00F10F5E /* ChatsTableViewManager.swift */; };
 		CED2C3F22B17EC0A001BB6E7 /* SignUpPhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F12B17EC0A001BB6E7 /* SignUpPhotoManager.swift */; };
 		CED2C3F42B17F019001BB6E7 /* ImageViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F32B17F019001BB6E7 /* ImageViewUtils.swift */; };
 		CED2C3F82B181EBA001BB6E7 /* CommentsTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F72B181EBA001BB6E7 /* CommentsTableViewManager.swift */; };
 		CED2C3FA2B1826E7001BB6E7 /* UIButtonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3F92B1826E7001BB6E7 /* UIButtonUtils.swift */; };
 		CED2C3FE2B194DAE001BB6E7 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3FD2B194DAE001BB6E7 /* Term.swift */; };
 		CED2C4022B1966E4001BB6E7 /* PickerYearTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C4012B1966E4001BB6E7 /* PickerYearTerm.swift */; };
+		CED63EA82B1C4C09004B19D4 /* AllChatsProgressIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED63EA72B1C4C09004B19D4 /* AllChatsProgressIndicatorManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,7 +96,6 @@
 		CE09F9212B043A210010DBAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE09F9272B043E7D0010DBAC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE09F9322B04419D0010DBAC /* LandingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingScreenView.swift; sourceTree = "<group>"; };
-		CE09F9342B04422D0010DBAC /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		CE09F9362B0442460010DBAC /* SignUpScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenView.swift; sourceTree = "<group>"; };
 		CE09F9382B04425C0010DBAC /* AddCommentScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentScreenView.swift; sourceTree = "<group>"; };
 		CE09F93A2B04426D0010DBAC /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
@@ -97,7 +104,6 @@
 		CE09F9422B0442DA0010DBAC /* ChatScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenView.swift; sourceTree = "<group>"; };
 		CE09F9442B0442EB0010DBAC /* SearchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreenView.swift; sourceTree = "<group>"; };
 		CE09F9462B0443010010DBAC /* ResultScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreenView.swift; sourceTree = "<group>"; };
-		CE09F9492B0443330010DBAC /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		CE09F94C2B0443760010DBAC /* SignUpScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenViewController.swift; sourceTree = "<group>"; };
 		CE09F94F2B0443E70010DBAC /* AddCommentScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentScreenViewController.swift; sourceTree = "<group>"; };
 		CE09F9522B0444200010DBAC /* ProfileScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewController.swift; sourceTree = "<group>"; };
@@ -116,12 +122,22 @@
 		CE09FA542B0B2A260010DBAC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE09FA572B0B3E430010DBAC /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
 		CE09FA592B0B45D20010DBAC /* Campus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
+		CE5DF2F42B1BF6C200F10F5E /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		CE5DF2F62B1BF70300F10F5E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		CE5DF2F82B1BF8A600F10F5E /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		CE5DF2FA2B1BFA8300F10F5E /* ChatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewCell.swift; sourceTree = "<group>"; };
+		CE5DF2FC2B1BFC7600F10F5E /* AddNewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewChatViewController.swift; sourceTree = "<group>"; };
+		CE5DF2FE2B1BFC8A00F10F5E /* AddNewChatScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewChatScreenView.swift; sourceTree = "<group>"; };
+		CE5DF3012B1C055500F10F5E /* ChatProgressIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatProgressIndicatorManager.swift; sourceTree = "<group>"; };
+		CE5DF3032B1C05C400F10F5E /* ChatScreenFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenFirebaseManager.swift; sourceTree = "<group>"; };
+		CE5DF3052B1C199A00F10F5E /* ChatsTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewManager.swift; sourceTree = "<group>"; };
 		CED2C3F12B17EC0A001BB6E7 /* SignUpPhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPhotoManager.swift; sourceTree = "<group>"; };
 		CED2C3F32B17F019001BB6E7 /* ImageViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewUtils.swift; sourceTree = "<group>"; };
 		CED2C3F72B181EBA001BB6E7 /* CommentsTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewManager.swift; sourceTree = "<group>"; };
 		CED2C3F92B1826E7001BB6E7 /* UIButtonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonUtils.swift; sourceTree = "<group>"; };
 		CED2C3FD2B194DAE001BB6E7 /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		CED2C4012B1966E4001BB6E7 /* PickerYearTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerYearTerm.swift; sourceTree = "<group>"; };
+		CED63EA72B1C4C09004B19D4 /* AllChatsProgressIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsProgressIndicatorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +194,8 @@
 				CE09FA592B0B45D20010DBAC /* Campus.swift */,
 				186BAAE32B16DC3C000030A1 /* Course.swift */,
 				CED2C3FD2B194DAE001BB6E7 /* Term.swift */,
+				CE5DF2F42B1BF6C200F10F5E /* Chat.swift */,
+				CE5DF2F62B1BF70300F10F5E /* Message.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -208,7 +226,6 @@
 				CE09F9132B043A1E0010DBAC /* AppDelegate.swift */,
 				CE09F9152B043A1E0010DBAC /* SceneDelegate.swift */,
 				CE09F9482B0443120010DBAC /* Landing Screen */,
-				CE09F94B2B0443450010DBAC /* Login Screen */,
 				CE09F94E2B04437E0010DBAC /* SignUp Screen */,
 				CE09F9562B04446A0010DBAC /* Profile Screen */,
 				CE09F9512B0444000010DBAC /* Add Comment Screen */,
@@ -218,6 +235,7 @@
 				CE09F96A2B0445910010DBAC /* Search Screen */,
 				CE09F96B2B04459B0010DBAC /* Search Result Screen */,
 				CE09FA562B0B2AFF0010DBAC /* Progress Indicator */,
+				CE5DF3002B1BFC9700F10F5E /* Add New Chat Screen */,
 				CE09F9192B043A1E0010DBAC /* Main.storyboard */,
 				CE09F91C2B043A210010DBAC /* Assets.xcassets */,
 				CE09F91E2B043A210010DBAC /* LaunchScreen.storyboard */,
@@ -236,15 +254,6 @@
 				CE09F9322B04419D0010DBAC /* LandingScreenView.swift */,
 			);
 			path = "Landing Screen";
-			sourceTree = "<group>";
-		};
-		CE09F94B2B0443450010DBAC /* Login Screen */ = {
-			isa = PBXGroup;
-			children = (
-				CE09F9342B04422D0010DBAC /* LoginScreenView.swift */,
-				CE09F9492B0443330010DBAC /* LoginScreenViewController.swift */,
-			);
-			path = "Login Screen";
 			sourceTree = "<group>";
 		};
 		CE09F94E2B04437E0010DBAC /* SignUp Screen */ = {
@@ -319,7 +328,10 @@
 			isa = PBXGroup;
 			children = (
 				CE09F9422B0442DA0010DBAC /* ChatScreenView.swift */,
+				CE5DF2FA2B1BFA8300F10F5E /* ChatsTableViewCell.swift */,
 				CE09F9612B0445390010DBAC /* ChatScreenViewController.swift */,
+				CED63EA72B1C4C09004B19D4 /* AllChatsProgressIndicatorManager.swift */,
+				CE5DF3052B1C199A00F10F5E /* ChatsTableViewManager.swift */,
 			);
 			path = "Chat Screen";
 			sourceTree = "<group>";
@@ -358,6 +370,18 @@
 				CE09FA4E2B0B27F20010DBAC /* ProgressSpinnerDelegate.swift */,
 			);
 			path = "Progress Indicator";
+			sourceTree = "<group>";
+		};
+		CE5DF3002B1BFC9700F10F5E /* Add New Chat Screen */ = {
+			isa = PBXGroup;
+			children = (
+				CE5DF2F82B1BF8A600F10F5E /* ChatTableViewCell.swift */,
+				CE5DF2FC2B1BFC7600F10F5E /* AddNewChatViewController.swift */,
+				CE5DF3032B1C05C400F10F5E /* ChatScreenFirebaseManager.swift */,
+				CE5DF3012B1C055500F10F5E /* ChatProgressIndicatorManager.swift */,
+				CE5DF2FE2B1BFC8A00F10F5E /* AddNewChatScreenView.swift */,
+			);
+			path = "Add New Chat Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -442,10 +466,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE09F9592B0444A90010DBAC /* CommentScreenViewController.swift in Sources */,
+				CED63EA82B1C4C09004B19D4 /* AllChatsProgressIndicatorManager.swift in Sources */,
+				CE5DF2FD2B1BFC7600F10F5E /* AddNewChatViewController.swift in Sources */,
 				CE09F9392B04425C0010DBAC /* AddCommentScreenView.swift in Sources */,
 				CE09F93D2B04428F0010DBAC /* CommentScreenView.swift in Sources */,
+				CE5DF2F72B1BF70300F10F5E /* Message.swift in Sources */,
+				CE5DF2F52B1BF6C200F10F5E /* Chat.swift in Sources */,
 				18D6A6E22B099D6100AD34AA /* AppColors.swift in Sources */,
-				CE09F9352B04422D0010DBAC /* LoginScreenView.swift in Sources */,
 				186BAAEC2B17E4A4000030A1 /* commonFunction.swift in Sources */,
 				18D6A6E72B09A2E000AD34AA /* SingleRateUnit.swift in Sources */,
 				CE09F9552B0444570010DBAC /* PostCommentTableViewCell.swift in Sources */,
@@ -469,19 +496,24 @@
 				CE09F9142B043A1E0010DBAC /* AppDelegate.swift in Sources */,
 				18D6A6E52B09A22D00AD34AA /* Professor.swift in Sources */,
 				CE09FA582B0B3E430010DBAC /* Configs.swift in Sources */,
+				CE5DF3062B1C199A00F10F5E /* ChatsTableViewManager.swift in Sources */,
 				CED2C3F22B17EC0A001BB6E7 /* SignUpPhotoManager.swift in Sources */,
 				186BAAE82B16E7B9000030A1 /* NotificationNames.swift in Sources */,
-				CE09F94A2B0443330010DBAC /* LoginScreenViewController.swift in Sources */,
+				CE5DF3022B1C055500F10F5E /* ChatProgressIndicatorManager.swift in Sources */,
 				CE09F9622B0445390010DBAC /* ChatScreenViewController.swift in Sources */,
 				CE09F9502B0443E70010DBAC /* AddCommentScreenViewController.swift in Sources */,
 				CE09F9332B04419D0010DBAC /* LandingScreenView.swift in Sources */,
 				CE09FA552B0B2A260010DBAC /* User.swift in Sources */,
+				CE5DF2F92B1BF8A600F10F5E /* ChatTableViewCell.swift in Sources */,
 				CE09F9662B04455F0010DBAC /* ResultScreenViewController.swift in Sources */,
 				CED2C3F82B181EBA001BB6E7 /* CommentsTableViewManager.swift in Sources */,
 				CE09FA4D2B0B27E10010DBAC /* ProgressSpinnerViewController.swift in Sources */,
+				CE5DF2FF2B1BFC8A00F10F5E /* AddNewChatScreenView.swift in Sources */,
 				CE09F93B2B04426D0010DBAC /* ProfileScreenView.swift in Sources */,
+				CE5DF2FB2B1BFA8300F10F5E /* ChatsTableViewCell.swift in Sources */,
 				CE09F9472B0443010010DBAC /* ResultScreenView.swift in Sources */,
 				CE09FA532B0B28EF0010DBAC /* SignUpProgressIndicatorManager.swift in Sources */,
+				CE5DF3042B1C05C400F10F5E /* ChatScreenFirebaseManager.swift in Sources */,
 				18CFE5FE2B0A8ABB00529968 /* TabBarScreenViewController.swift in Sources */,
 				186BAAE42B16DC3C000030A1 /* Course.swift in Sources */,
 				CE09FA5A2B0B45D20010DBAC /* Campus.swift in Sources */,
