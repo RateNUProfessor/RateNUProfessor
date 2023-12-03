@@ -407,23 +407,33 @@ class SettingScreenViewController: UIViewController {
                 showEmptyError()
             } else {
                 showActivityIndicator()
-                updatePhotoInFirebase(name: uwName, email: email, photoURL: photoURL)
+                updatePhotoInFirebase(name: uwName, email: email, photoURL: photoURL) { result in
+                    switch result {
+                    case .success:
+                        print("Photo updated successfully")
+                        // Notify the profile screen to reload photo
+                        self.notificationCenter.post(name: .photoUpdated, object: photoURL)
+                    case .failure(let error):
+                        print("Failed to update photo: \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
     
     
-    func updatePhotoInFirebase(name: String, email: String, photoURL: URL?){
+    func updatePhotoInFirebase(name: String, email: String, photoURL: URL?, completion: @escaping (Result<Void, Error>) -> Void){
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = name
         changeRequest?.photoURL = photoURL
         
         changeRequest?.commitChanges(completion: {(error) in
-            if error != nil{
-                print("Error occured: \(String(describing: error))")
-            }else{
-
+            if let error = error {
+                print("Error occurred: \(error.localizedDescription)")
+                completion(.failure(error))
+            } else {
                 self.hideActivityIndicator()
+                completion(.success(()))
             }
         })
     }
