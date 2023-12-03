@@ -72,23 +72,34 @@ class SettingScreenViewController: UIViewController {
     }
     
     @objc func onChangePasswordButtonTapped() {
+        // Prompt the user for their current password for reauthentication
+        self.presentReauthenticationAlert { [weak self] currentPassword in
+            self?.reauthenticateUser(currentPassword: currentPassword) {
+                // success validate the current password
+                self?.showChangePasswordAlert()
+                
+            }
+        }
+    }
+    
+    func showChangePasswordAlert() {
 //        let changePasswordVC = ChangePasswordViewController()
         onPasswordChange = { [weak self] newPassword in
             self?.updatePasswordInDatabase(newPassword)
         }
 //        navigationController?.pushViewController(changePasswordVC, animated: true)
-        
-        
+
+
         let changePwdAlert = UIAlertController(
             title: "Change Password?",
             message: "Please enter a new password.",
             preferredStyle: .alert)
-        
+
         changePwdAlert.addTextField{ textField in
             textField.placeholder = "New Password"
             textField.contentMode = .center
         }
-   
+
         changePwdAlert.addTextField{ textField in
             textField.placeholder = "Confirm New Password"
             textField.contentMode = .center
@@ -96,36 +107,38 @@ class SettingScreenViewController: UIViewController {
         }
 
         let changePwdAction = UIAlertAction(title: "Change Password", style: .default, handler: {(_) in
-            
+
             guard let newPassword = changePwdAlert.textFields![0].text,
                   let confirmPassword = changePwdAlert.textFields![1].text,
                   !newPassword.isEmpty else {
                       self.presentErrorAlert(message: "Please enter a new password.")
                 return
             }
-            
+
             guard newPassword == confirmPassword else {
                 self.presentErrorAlert(message: "Passwords do not match.")
                 return
             }
+            
+            self.updatePassword(newPassword: newPassword)
 
             // Prompt the user for their current password for reauthentication
-            self.presentReauthenticationAlert { [weak self] currentPassword in
-                self?.reauthenticateUser(currentPassword: currentPassword) {
-                    self?.updatePassword(newPassword: newPassword)
-                }
-            }
+//            self.presentReauthenticationAlert { [weak self] currentPassword in
+//                self?.reauthenticateUser(currentPassword: currentPassword) {
+//                    self?.updatePassword(newPassword: newPassword)
+//                }
+//            }
         })
-        
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(_) in
             changePwdAlert.view.superview?.addGestureRecognizer(
                 UITapGestureRecognizer(target: self, action: #selector(self.onTapOutsideAlert))
             )
         })
-        
+
         changePwdAlert.addAction(changePwdAction)
         changePwdAlert.addAction(cancelAction)
-        
+
         self.present(changePwdAlert, animated: true, completion: {() in
             changePwdAlert.view.superview?.isUserInteractionEnabled = true
             changePwdAlert.view.superview?.addGestureRecognizer(
@@ -133,6 +146,69 @@ class SettingScreenViewController: UIViewController {
             )
         })
     }
+    
+//    @objc func onChangePasswordButtonTapped() {
+////        let changePasswordVC = ChangePasswordViewController()
+//        onPasswordChange = { [weak self] newPassword in
+//            self?.updatePasswordInDatabase(newPassword)
+//        }
+////        navigationController?.pushViewController(changePasswordVC, animated: true)
+//
+//
+//        let changePwdAlert = UIAlertController(
+//            title: "Change Password?",
+//            message: "Please enter a new password.",
+//            preferredStyle: .alert)
+//
+//        changePwdAlert.addTextField{ textField in
+//            textField.placeholder = "New Password"
+//            textField.contentMode = .center
+//        }
+//
+//        changePwdAlert.addTextField{ textField in
+//            textField.placeholder = "Confirm New Password"
+//            textField.contentMode = .center
+//            textField.isSecureTextEntry = true
+//        }
+//
+//        let changePwdAction = UIAlertAction(title: "Change Password", style: .default, handler: {(_) in
+//
+//            guard let newPassword = changePwdAlert.textFields![0].text,
+//                  let confirmPassword = changePwdAlert.textFields![1].text,
+//                  !newPassword.isEmpty else {
+//                      self.presentErrorAlert(message: "Please enter a new password.")
+//                return
+//            }
+//
+//            guard newPassword == confirmPassword else {
+//                self.presentErrorAlert(message: "Passwords do not match.")
+//                return
+//            }
+//
+//            // Prompt the user for their current password for reauthentication
+//            self.presentReauthenticationAlert { [weak self] currentPassword in
+//                self?.reauthenticateUser(currentPassword: currentPassword) {
+//                    self?.updatePassword(newPassword: newPassword)
+//                }
+//            }
+//        })
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: {(_) in
+//            changePwdAlert.view.superview?.addGestureRecognizer(
+//                UITapGestureRecognizer(target: self, action: #selector(self.onTapOutsideAlert))
+//            )
+//        })
+//
+//        changePwdAlert.addAction(changePwdAction)
+//        changePwdAlert.addAction(cancelAction)
+//
+//        self.present(changePwdAlert, animated: true, completion: {() in
+//            changePwdAlert.view.superview?.isUserInteractionEnabled = true
+//            changePwdAlert.view.superview?.addGestureRecognizer(
+//                UITapGestureRecognizer(target: self, action: #selector(self.onTapOutsideAlert))
+//            )
+//        })
+//    }
     
     private func reauthenticateUser(currentPassword: String, completion: @escaping () -> Void) {
         guard let user = Auth.auth().currentUser, let email = user.email else {
