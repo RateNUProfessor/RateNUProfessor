@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
@@ -16,10 +17,13 @@ class SettingScreenViewController: UIViewController {
     var selectedCampus = "San Jose, CA"
     var currentUser:FirebaseAuth.User?
     let database = Firestore.firestore()
+    var pickedImage:UIImage?
     var loadingIndicator: UIActivityIndicatorView?
     //let changePasswordView = ChangePasswordView()
     var onPasswordChange: ((String) -> Void)?
     let notificationCenter = NotificationCenter.default
+    let storage = Storage.storage()
+    let childProgressView = ProgressSpinnerViewController()
     
     override func loadView() {
         view = settingsScreen
@@ -32,9 +36,11 @@ class SettingScreenViewController: UIViewController {
         view.backgroundColor = .white
         title = "Settings"
         
-        showLoadingIndicator()
+        showActivityIndicator()
         
         currentUser = Auth.auth().currentUser
+        
+        settingsScreen.profileImage.menu = getMenuImagePicker()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Logout",
@@ -206,7 +212,7 @@ class SettingScreenViewController: UIViewController {
         if let id = currentUser?.uid {
             self.database.collection("users").document(id).getDocument { (document, error) in
                 // Stop loading indicator
-                self.hideLoadingIndicator()
+                self.hideActivityIndicator()
 
                 if let error = error {
                     self.presentErrorAlert(message: "Error getting user data: \(error.localizedDescription)")
@@ -225,23 +231,23 @@ class SettingScreenViewController: UIViewController {
                 }
             }
         } else {
-            hideLoadingIndicator()
+            hideActivityIndicator()
             presentErrorAlert(message: "User not logged in.")
         }
     }
 
     
-    private func showLoadingIndicator() {
-        loadingIndicator = UIActivityIndicatorView(style: .large)
-        loadingIndicator?.center = self.view.center
-        self.view.addSubview(loadingIndicator!)
-        loadingIndicator?.startAnimating()
-    }
-
-    private func hideLoadingIndicator() {
-        loadingIndicator?.stopAnimating()
-        loadingIndicator?.removeFromSuperview()
-    }
+//    private func showLoadingIndicator() {
+//        loadingIndicator = UIActivityIndicatorView(style: .large)
+//        loadingIndicator?.center = self.view.center
+//        self.view.addSubview(loadingIndicator!)
+//        loadingIndicator?.startAnimating()
+//    }
+//
+//    private func hideLoadingIndicator() {
+//        loadingIndicator?.stopAnimating()
+//        loadingIndicator?.removeFromSuperview()
+//    }
 
     private func presentErrorAlert(message: String) {
         let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -291,8 +297,10 @@ class SettingScreenViewController: UIViewController {
     @objc func onButtonSaveTapped() {
         let name = settingsScreen.textFieldName.text
         let campus = selectedCampus
-
-        if let id = currentUser?.uid {
+        uploadProfilePhotoToStorage()
+        
+        if let id = currentUser?.uid, let email = currentUser?.email {
+            
             database.collection("users").document(id).updateData([
                 "name": name,
                 "campus": campus
@@ -304,11 +312,70 @@ class SettingScreenViewController: UIViewController {
                     print("Document successfully updated")
                     // Pop back to the previous view controller
                     self?.navigationController?.popViewController(animated: true)
+                    if let profileController = self?.navigationController?.viewControllers.last as? ProfileScreenViewController {
+                        profileController.refreshProfileData()
+                    } else {
+                        print("Error: Unable to cast the last view controller to ProfileScreenViewController")
+                    }
                 }
             }
         }
+        
     }
+    
+    func updateAuthInfo(photoURL: URL?){
+        let name = settingsScreen.textFieldName.text
+        
+        if let uwName = name, let email = currentUser?.email {
+            if uwName.isEmpty {
+                showEmptyError()
+            } else {
+                showActivityIndicator()
+                updatePhotoInFirebase(name: uwName, email: email, photoURL: photoURL)
+            }
+        }
+    }
+    
+    
+    func updatePhotoInFirebase(name: String, email: String, photoURL: URL?){
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = name
+        changeRequest?.photoURL = photoURL
+        
+        changeRequest?.commitChanges(completion: {(error) in
+            if error != nil{
+                print("Error occured: \(String(describing: error))")
+            }else{
 
+                self.hideActivityIndicator()
+            }
+        })
+    }
+    
+    func uploadProfilePhotoToStorage(){
+        var profilePhotoURL:URL?
+        
+        if let image = pickedImage{
+            if let jpegData = image.jpegData(compressionQuality: 80){
+                let storageRef = storage.reference()
+                let imagesRepo = storageRef.child("imagesUsers")
+                let imageRef = imagesRepo.child("\(NSUUID().uuidString).jpg")
+                
+                let uploadTask = imageRef.putData(jpegData, completion: {(metadata, error) in
+                    if error == nil{
+                        imageRef.downloadURL(completion: {(url, error) in
+                            if error == nil{
+                                profilePhotoURL = url
+                                self.updateAuthInfo(photoURL: profilePhotoURL)
+                            }
+                        })
+                    }
+                })
+            }
+        }else{
+            updateAuthInfo(photoURL: profilePhotoURL)
+        }
+    }
     
     func getCampusMenu() -> UIMenu{
         var menuItems = [UIAction]()
@@ -322,5 +389,43 @@ class SettingScreenViewController: UIViewController {
         }
         
         return UIMenu(title: "Select campus", children: menuItems)
+    }
+    
+    func getMenuImagePicker() -> UIMenu{
+        let menuItems = [
+            UIAction(title: "Camera",handler: {(_) in
+                self.pickUsingCamera()
+            }),
+            UIAction(title: "Gallery",handler: {(_) in
+                self.pickPhotoFromGallery()
+            })
+        ]
+        
+        return UIMenu(title: "Select source", children: menuItems)
+    }
+    
+    func pickUsingCamera(){
+        let cameraController = UIImagePickerController()
+        cameraController.sourceType = .camera
+        cameraController.allowsEditing = true
+        cameraController.delegate = self
+        present(cameraController, animated: true)
+    }
+    
+    func pickPhotoFromGallery(){
+        var configuration = PHPickerConfiguration()
+        configuration.filter = PHPickerFilter.any(of: [.images])
+        configuration.selectionLimit = 1
+        
+        let photoPicker = PHPickerViewController(configuration: configuration)
+        
+        photoPicker.delegate = self
+        present(photoPicker, animated: true, completion: nil)
+    }
+    
+    func showEmptyError() {
+        let alert = UIAlertController(title: "ERROR", message: "Text Field can not be empty", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }

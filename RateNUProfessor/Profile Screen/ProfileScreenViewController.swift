@@ -25,7 +25,7 @@ class ProfileScreenViewController: UIViewController {
         refreshProfileData()
     }
     
-    private func refreshProfileData() {
+    func refreshProfileData() {
         currentUser = Auth.auth().currentUser
 
         // Reload the profile image

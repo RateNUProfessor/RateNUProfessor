@@ -72,6 +72,8 @@
 		CED2C3FE2B194DAE001BB6E7 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C3FD2B194DAE001BB6E7 /* Term.swift */; };
 		CED2C4022B1966E4001BB6E7 /* PickerYearTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2C4012B1966E4001BB6E7 /* PickerYearTerm.swift */; };
 		CED63EA82B1C4C09004B19D4 /* AllChatsProgressIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED63EA72B1C4C09004B19D4 /* AllChatsProgressIndicatorManager.swift */; };
+		CED63EAE2B1C603D004B19D4 /* SettingPhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED63EAD2B1C603D004B19D4 /* SettingPhotoManager.swift */; };
+		CED63EB02B1C6E72004B19D4 /* SettingProgressIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED63EAF2B1C6E72004B19D4 /* SettingProgressIndicatorManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +140,8 @@
 		CED2C3FD2B194DAE001BB6E7 /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		CED2C4012B1966E4001BB6E7 /* PickerYearTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerYearTerm.swift; sourceTree = "<group>"; };
 		CED63EA72B1C4C09004B19D4 /* AllChatsProgressIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllChatsProgressIndicatorManager.swift; sourceTree = "<group>"; };
+		CED63EAD2B1C603D004B19D4 /* SettingPhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPhotoManager.swift; sourceTree = "<group>"; };
+		CED63EAF2B1C6E72004B19D4 /* SettingProgressIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProgressIndicatorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -320,6 +324,8 @@
 			children = (
 				CE09F9402B0442CC0010DBAC /* SettingScreenView.swift */,
 				CE09F95E2B04450D0010DBAC /* SettingScreenViewController.swift */,
+				CED63EAF2B1C6E72004B19D4 /* SettingProgressIndicatorManager.swift */,
+				CED63EAD2B1C603D004B19D4 /* SettingPhotoManager.swift */,
 			);
 			path = "Setting Screen";
 			sourceTree = "<group>";
@@ -490,6 +496,7 @@
 				CE09F9372B0442460010DBAC /* SignUpScreenView.swift in Sources */,
 				CE09F9432B0442DA0010DBAC /* ChatScreenView.swift in Sources */,
 				CE09FA4F2B0B27F20010DBAC /* ProgressSpinnerDelegate.swift in Sources */,
+				CED63EAE2B1C603D004B19D4 /* SettingPhotoManager.swift in Sources */,
 				CE09F9412B0442CC0010DBAC /* SettingScreenView.swift in Sources */,
 				CED2C3F42B17F019001BB6E7 /* ImageViewUtils.swift in Sources */,
 				CE09F9532B0444200010DBAC /* ProfileScreenViewController.swift in Sources */,
@@ -501,6 +508,7 @@
 				186BAAE82B16E7B9000030A1 /* NotificationNames.swift in Sources */,
 				CE5DF3022B1C055500F10F5E /* ChatProgressIndicatorManager.swift in Sources */,
 				CE09F9622B0445390010DBAC /* ChatScreenViewController.swift in Sources */,
+				CED63EB02B1C6E72004B19D4 /* SettingProgressIndicatorManager.swift in Sources */,
 				CE09F9502B0443E70010DBAC /* AddCommentScreenViewController.swift in Sources */,
 				CE09F9332B04419D0010DBAC /* LandingScreenView.swift in Sources */,
 				CE09FA552B0B2A260010DBAC /* User.swift in Sources */,
