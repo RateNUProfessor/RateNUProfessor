@@ -10,20 +10,19 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-//TODO: 增加每一个comment应该fields
 // add comment
 class AddCommentScreenViewController: UIViewController {
 
     let addCommentScreen = AddCommentScreenView()
     let database = Firestore.firestore()
 //    var selectedCourse = "CS5001"
-    var selectedYear = "2023"
-    var selectedTerm = "Spring"
+//    var selectedYear = "2023"
+//    var selectedTerm = "Spring"
     
     // Variables to store user-selected values
     var selectedCourse = ""
-//    var selectedYear = ""
-//    var selectedTerm = ""
+    var selectedYear = ""
+    var selectedTerm = ""
     var years = [String]()
     
     // receive the professor object from the All Comment Screen
@@ -86,7 +85,7 @@ class AddCommentScreenViewController: UIViewController {
 
     func getYearData() {
         var currentYear = Calendar.current.component(.year, from: Date())
-        for year in (currentYear - 5)...(currentYear + 5) {
+        for year in (currentYear - 2)...(currentYear + 1) {
             years.append("\(year)")
         }
     }

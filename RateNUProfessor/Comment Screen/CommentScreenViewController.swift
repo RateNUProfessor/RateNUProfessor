@@ -108,7 +108,7 @@ class CommentScreenViewController: UIViewController {
                             )
                             self?.allScoresList.append(rate)
                         }
-                        
+                        self?.allScoresList.sort(by: {$0.rateSemester > $1.rateSemester})
                         group.leave() 
                     }
             }
@@ -199,8 +199,9 @@ extension CommentScreenViewController: UITableViewDelegate, UITableViewDataSourc
                             addNewChatController.currentChat = Chat(lastMessage: "",
                                                                     userEmails: [self.currentUser!.email!, otherUser.email],
                                                                     userIds: [self.currentUser!.uid, otherUser.id])
-                            //addNewChatController.usersDictionary = self.usersDictionary
+                            addNewChatController.usersDictionary = self.usersDictionary
                             addNewChatController.otherUser = otherUser
+                            print("other user: \(otherUser)")
                             selectedNavController.navigationController?.pushViewController(addNewChatController, animated: true)
                         }
                     }

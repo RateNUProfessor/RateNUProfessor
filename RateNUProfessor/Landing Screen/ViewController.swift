@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         handleAuth = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
             guard let self = self else { return }
 
@@ -53,6 +53,8 @@ class ViewController: UIViewController {
         if let viewControllers = self.navigationController?.viewControllers {
             for viewController in viewControllers {
                 if viewController is ViewController {
+                    landingScreen.textFieldEmail.text = ""
+                    landingScreen.textFieldPassword.text = ""
                     self.navigationController?.popToViewController(viewController, animated: true)
                 }
             }
@@ -70,12 +72,34 @@ class ViewController: UIViewController {
     
     
     @objc func onButtonSignInTapped() {
-        let loginController = LoginScreenViewController()
-        self.navigationController?.pushViewController(loginController, animated: true)
+//        let loginController = LoginScreenViewController()
+//        self.navigationController?.pushViewController(loginController, animated: true)
+        
+        if let email = landingScreen.textFieldEmail.text, let password = landingScreen.textFieldPassword.text {
+            signInToFirebase(email: email, password: password)
+        }
     }
     
     @objc func onButtonSignUpTapped() {
         let signUpController = SignUpScreenViewController()
         self.navigationController?.pushViewController(signUpController, animated: true)
+    }
+    
+    func signInToFirebase(email: String, password: String){
+        Auth.auth().signIn(withEmail: email, password: password, completion: {(result, error) in
+            if error == nil{
+//                let tabBarController = TabBarScreenViewController()
+//                self.navigationController?.pushViewController(tabBarController, animated: true)
+            }else{
+                self.showErrorMessage("User not found or Wrong password. Please try again.")
+                
+            }
+        })
+    }
+    
+    func showErrorMessage(_ message: String) {
+        let alert = UIAlertController(title: "ERROR", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alert, animated: true)
     }
 }

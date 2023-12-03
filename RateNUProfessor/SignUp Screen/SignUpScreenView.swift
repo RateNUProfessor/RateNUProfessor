@@ -108,7 +108,7 @@ class SignUpScreenView: UIView {
     
     func setupbuttonCampusSelected(){
         buttonCampusSelected = UIButton(type: .system)
-        buttonCampusSelected.titleLabel?.font = .systemFont(ofSize: 16, weight: .light)
+        buttonCampusSelected.titleLabel?.font = .systemFont(ofSize: 16, weight: .regular)
         buttonCampusSelected.setTitle("Campus", for: .normal)
         buttonCampusSelected.showsMenuAsPrimaryAction = true
         buttonCampusSelected.translatesAutoresizingMaskIntoConstraints = false

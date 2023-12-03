@@ -32,7 +32,6 @@ class CommentScreenView: UIView {
         averageScoreLabel.textColor = .white
         averageScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         averageScoreLabel.textAlignment = .center
-        // 添加到视图
         addSubview(averageScoreLabel)
     }
     

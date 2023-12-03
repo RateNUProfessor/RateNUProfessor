@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 class AddNewChatViewController: UIViewController {
     
     let currentUser = FirebaseAuth.Auth.auth().currentUser
-    //var usersDictionary = [String: User]()
+    var usersDictionary = [String: User]()
     var otherUser = User(id: "", name: "", email: "", password: "", campus: "")
     var currentChat: Chat?
     let addChatScreen = AddNewChatScreenView()
@@ -46,7 +46,6 @@ class AddNewChatViewController: UIViewController {
         title = otherUser.name
         
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.hidesBackButton = true
     }
     
     @objc func sendMessage(){
@@ -108,7 +107,7 @@ extension AddNewChatViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.configure(with: message.msgText,
 //                       senderName: usersDictionary[message.senderEmail]!.name,
-                       senderName: currentUser!.displayName!,
+                       senderName: messageType == .outgoing ? currentUser!.displayName! : otherUser.name,
                        timestamp: message.timestamp,
                        type: messageType)
         

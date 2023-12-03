@@ -117,7 +117,7 @@ class ChatTableViewCell: UITableViewCell {
 
         switch type {
         case .incoming:
-            wrapperCellView.backgroundColor = .green
+            wrapperCellView.backgroundColor = .systemGray6
             
             labelMessage.textColor = .darkGray
             labelDate.textColor = .darkGray
@@ -130,11 +130,11 @@ class ChatTableViewCell: UITableViewCell {
             initConstraints(messageType: .incoming)
             
         case .outgoing:
-            wrapperCellView.backgroundColor = .white
+            wrapperCellView.backgroundColor = AppColors.buttonColor
             
-            labelMessage.textColor = .systemBlue
-            labelDate.textColor = .systemBlue
-            labelName.textColor = .systemBlue
+            labelMessage.textColor = .darkGray
+            labelDate.textColor = .darkGray
+            labelName.textColor = .darkGray
             
             labelDate.text = "Sent \(relativeDate)"
             labelName.textAlignment = .right

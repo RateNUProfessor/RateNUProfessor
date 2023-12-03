@@ -38,7 +38,7 @@ extension ChatScreenViewController: UITableViewDelegate, UITableViewDataSource{
         let newChatController = AddNewChatViewController()
         newChatController.currentChat = chatsList[indexPath.row]
         newChatController.otherUser = self.otherUser
-        //newChatController.usersDictionary = self.usersDictionary
+        newChatController.usersDictionary = self.usersDictionary
         navigationController?.pushViewController(newChatController, animated: true)
     }
 }
