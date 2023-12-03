@@ -29,7 +29,6 @@ extension ProfileScreenViewController: UITableViewDelegate, UITableViewDataSourc
             
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {_ in
                 
-                //TODO: delete comments from firebase
                 //self.deleteANote(token: self.authToken!, id: self.comments[indexPath.row]._id)
                 if let id = self.currentUser?.uid {
                     
@@ -59,8 +58,6 @@ extension ProfileScreenViewController: UITableViewDelegate, UITableViewDataSourc
                         }
                       }
                 }
-                
-                
             }))
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .default))

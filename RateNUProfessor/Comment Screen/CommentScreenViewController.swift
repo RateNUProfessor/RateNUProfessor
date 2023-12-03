@@ -15,6 +15,9 @@ class CommentScreenViewController: UIViewController {
     // waiting to get the professor selected from the search screen
     var professorObj = Professor(name: "")
     var allScoresList = [SingleRateUnit]()
+    var usersDictionary = [String: User]()
+    let notificationCenter = NotificationCenter.default
+    var currentUser = FirebaseAuth.Auth.auth().currentUser
         
     override func loadView() {
         view = commentScreen
@@ -159,8 +162,6 @@ class CommentScreenViewController: UIViewController {
     }
 }
 
-
-
 extension CommentScreenViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allScoresList.count
@@ -178,8 +179,45 @@ extension CommentScreenViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alertController = UIAlertController(
+            title: "Want to chat?",
+            message: "Do you want to chat with this person to learn more about this comment?",
+            preferredStyle: .alert
+        )
 
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let chatAction = UIAlertAction(title: "Confirm", style: .destructive) { _ in
+            let otherUser = self.allScoresList[indexPath.row].rateStudent
+            //self.dismiss(animated: true)
+            if (self.currentUser?.uid != otherUser.id) {
+                if let tabBarController = self.tabBarController {
+                    let desiredTabIndex = 1
+                    if desiredTabIndex >= 0 && desiredTabIndex < tabBarController.viewControllers?.count ?? 0 {
+                        tabBarController.selectedIndex = desiredTabIndex
+                        if let selectedNavController = tabBarController.selectedViewController as? UINavigationController {
+                            let addNewChatController = AddNewChatViewController()
+                            addNewChatController.currentChat = Chat(lastMessage: "",
+                                                                    userEmails: [self.currentUser!.email!, otherUser.email],
+                                                                    userIds: [self.currentUser!.uid, otherUser.id])
+                            //addNewChatController.usersDictionary = self.usersDictionary
+                            addNewChatController.otherUser = otherUser
+                            selectedNavController.navigationController?.pushViewController(addNewChatController, animated: true)
+                        }
+                    }
+                }
+            } else {
+                let errorAlert = UIAlertController(title: "Error", message: "This comment is posted by you.", preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(errorAlert, animated: true)
+            }
+        }
 
+        alertController.addAction(cancelAction)
+        alertController.addAction(chatAction)
+
+        present(alertController, animated: true, completion: nil)
+        
+        
     }
 
 }
