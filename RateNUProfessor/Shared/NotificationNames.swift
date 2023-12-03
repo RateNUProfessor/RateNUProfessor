@@ -12,4 +12,6 @@ extension Notification.Name{
     static let courseNumberSelected = Notification.Name("courseNumberSelected")
     static let otherUserSelectedForChat = Notification.Name("otherUserSelectedForChat")
     static let userSignedOut = Notification.Name("userSignedOut")
+    static let photoUpdated = Notification.Name("photoUpdated")
+    
 }

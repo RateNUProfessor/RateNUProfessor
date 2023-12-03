@@ -15,6 +15,7 @@ class ProfileScreenViewController: UIViewController {
     var comments = [SingleRateUnit]()
     var currentUser:FirebaseAuth.User?
     let database = Firestore.firestore()
+    let notificationCenter = NotificationCenter.default
     
     override func loadView() {
         view = profileScreen
@@ -72,6 +73,11 @@ class ProfileScreenViewController: UIViewController {
             action: #selector(onSettingsBarButtonTapped))
         
         profileScreen.labelName.text = currentUser?.displayName
+        
+        notificationCenter.addObserver(
+                    self,
+                    selector: #selector(onphotoUpdated(notification:)),
+                    name: .photoUpdated, object: nil)
                 
         
         if let url = currentUser?.photoURL{
@@ -126,5 +132,13 @@ class ProfileScreenViewController: UIViewController {
         navigationController?.pushViewController(settingsController, animated: true)
     }
     
+    // reload the profile photo
+    @objc func onphotoUpdated(notification: Notification){
+        print("Profile Screen -- Notifiction center triggered")
+        currentUser = Auth.auth().currentUser
+        if let url = currentUser?.photoURL{
+            self.profileScreen.profileImage.loadRemoteImage(from: url)
+        }
+    }
     
 }
