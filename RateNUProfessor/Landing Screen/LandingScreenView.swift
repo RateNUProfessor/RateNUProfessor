@@ -16,8 +16,6 @@ class LandingScreenView: UIView {
     var labelPassword: UILabel!
     var textFieldPassword: UITextField!
     
-    // let buttonColor = UIColor(red: 1, green: 110.0/255.0, blue: 108.0/255.0, alpha: 1.0)
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white

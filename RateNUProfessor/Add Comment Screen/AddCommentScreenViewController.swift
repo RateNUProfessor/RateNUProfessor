@@ -152,22 +152,8 @@ class AddCommentScreenViewController: UIViewController {
                 dispatchGroup.leave()
             }
 
-//            dispatchGroup.enter()
-//            updateUserInFirebase(user: User(firebaseUser: firebaseuser), newComment: newComment, commentID: commentID) { result in
-//                switch result {
-//                case .success:
-//                    print("User updated successfully")
-//                case .failure(let error):
-//                    print("Error update user: \(error.localizedDescription)")
-//                }
-//                dispatchGroup.leave()
-//            }
-
             dispatchGroup.notify(queue: .main) {
                 // All Firebase updates are done here
-                // Notify other parts of the app that a new comment has been added
-//                NotificationCenter.default.post(name: NSNotification.Name("NewCommentAdded"), object: nil, userInfo: ["newComment": newComment])
-                
                 // Pop the current view controller
                 self.navigationController?.popViewController(animated: true)
             }
@@ -216,7 +202,7 @@ class AddCommentScreenViewController: UIViewController {
                             "commentId": documentID
                         ])
                         completion(.success(documentID))
-                        // print(documentID)
+
                     }
                 }
             }
@@ -264,8 +250,6 @@ class AddCommentScreenViewController: UIViewController {
                     ])
                     completion(.success(()))
 
-                    // Correctly placed notification
-//                    NotificationCenter.default.post(name: NSNotification.Name("NewCommentAdded"), object: nil, userInfo: ["newComment": newComment])
                 }
             }
         } catch {

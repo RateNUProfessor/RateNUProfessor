@@ -5,9 +5,6 @@
 //  Created by 陈可轩 on 2023/11/18.
 //
 
-
-// 暂时想到的attributes，供后续参考
-
 import Foundation
 
 struct Professor: Codable {

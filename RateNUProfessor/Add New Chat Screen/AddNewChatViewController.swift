@@ -47,8 +47,6 @@ class AddNewChatViewController: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = false
         
-//        print("Other User in Add Chat Screen")
-//        print(self.otherUser)
     }
     
     @objc func sendMessage(){
@@ -72,16 +70,6 @@ class AddNewChatViewController: UIViewController {
             }
         }
     }
-    
-//    func getOtherUsers() -> String{
-//        var otherUsers = ""
-//        for email in currentChat!.userEmails{
-//            if email != currentUser?.email{
-//                otherUsers += usersDictionary[email]!.name
-//            }
-//        }
-//        return otherUsers
-//    }
     
     func scrollToBottom() {
         let lastSection = addChatScreen.tableViewMessages.numberOfSections - 1
@@ -109,7 +97,6 @@ extension AddNewChatViewController: UITableViewDelegate, UITableViewDataSource{
         }()
         
         cell.configure(with: message.msgText,
-//                       senderName: usersDictionary[message.senderEmail]!.name,
                        senderName: messageType == .outgoing ? currentUser!.displayName! : otherUser.name,
                        timestamp: message.timestamp,
                        type: messageType)

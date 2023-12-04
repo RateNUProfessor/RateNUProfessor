@@ -39,7 +39,6 @@ class ChatScreenViewController: UIViewController {
     }
     
     func observeCurrentUsers(){
-        //MARK: Observe Firestore database to get the currently registered users...
         self.database.collection("users")
             .addSnapshotListener(includeMetadataChanges: false, listener: {
                 querySnapshot, error in
@@ -61,7 +60,6 @@ class ChatScreenViewController: UIViewController {
     
     
     func observeCurrentChats(){
-        //MARK: Observe Firestore database to display the chat list...
         self.database.collection("users")
             .document((self.currentUser?.uid)!)
             .collection("chats")
@@ -76,7 +74,6 @@ class ChatScreenViewController: UIViewController {
                             print(error)
                         }
                     }
-                    //MARK: sort the chats based on time, latest appears first...
                     self.chatsList.sort(by: {
                         $0.latestTimeStamp! > $1.latestTimeStamp!
                     })

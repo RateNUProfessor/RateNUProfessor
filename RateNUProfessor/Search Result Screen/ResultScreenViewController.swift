@@ -8,8 +8,6 @@
 import UIKit
 import Firebase
 
-// 展示所有和这个课关联的professor
-// 点击每一个tableViewCell进入相应professor的comment screen
 class ResultScreenViewController: UIViewController {
 
     let resultScreen = ResultScreenView()
@@ -34,15 +32,8 @@ class ResultScreenViewController: UIViewController {
         if let courseID = selectedCourseID {
             fetchProfessorsForCourse(courseID: courseID)
         }
-        
-//        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrow.backward"), style: .plain, target: self, action: #selector(backButtonTapped))
-//        navigationItem.leftBarButtonItem = backButton
     }
-    
-//    @objc func backButtonTapped() {
-//        navigationController?.popViewController(animated: true)
-//    }
-    
+
     private func fetchProfessorsForCourse(courseID: String) {
         print("Fetching professors for course ID: \(courseID)")
         var updatedProfessors = [Professor]()
