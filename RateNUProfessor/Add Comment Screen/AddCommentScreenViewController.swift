@@ -15,14 +15,12 @@ class AddCommentScreenViewController: UIViewController {
 
     let addCommentScreen = AddCommentScreenView()
     let database = Firestore.firestore()
-//    var selectedCourse = "CS5001"
-//    var selectedYear = "2023"
-//    var selectedTerm = "Spring"
     
     // Variables to store user-selected values
     var selectedCourse = ""
     var selectedYear = ""
     var selectedTerm = ""
+    var selectedCampus = ""
     var years = [String]()
     
     // receive the professor object from the All Comment Screen
@@ -48,7 +46,22 @@ class AddCommentScreenViewController: UIViewController {
         firebaseAuthUser = Auth.auth().currentUser
         addCommentScreen.buttonAdd.addTarget(self, action: #selector(buttonAddTapped), for: .touchUpInside)
         addCommentScreen.buttonCourseNumber.menu = getMenuCourses()
-
+        addCommentScreen.buttonCampus.menu = getMenuCampus()
+    }
+    
+    func getMenuCampus() -> UIMenu{
+        var menuItems = [UIAction]()
+        
+        for campus in Campus.campus{
+            let menuItem = UIAction(title: campus,handler: {(_) in
+                                self.selectedCampus = campus
+                                self.addCommentScreen.buttonCampus.setTitle(self.selectedCampus, for: .normal)
+                self.addCommentScreen.buttonCampus.setTitleColor(UIColor.darkGray, for: .normal)
+                            })
+            menuItems.append(menuItem)
+        }
+        
+        return UIMenu(title: "Select campus", children: menuItems)
     }
     
     func getMenuCourses() -> UIMenu {
@@ -172,6 +185,7 @@ class AddCommentScreenViewController: UIViewController {
               !selectedCourse.isEmpty,
               !selectedYear.isEmpty,
               !selectedTerm.isEmpty,
+              !selectedCampus.isEmpty,
               score >= 0,
               score <= 5,
               let firebaseuser = firebaseAuthUser else {
@@ -181,7 +195,7 @@ class AddCommentScreenViewController: UIViewController {
         
         let user = User(firebaseUser: firebaseuser)
         let semester = "\(selectedYear) \(selectedTerm)"
-        let newComment = SingleRateUnit(commentId: "", rateStudent: user, rateProfessor: professor, rateClass: selectedCourse, rateScore: score, rateComment: comment, rateSemester: semester, rateCampus: "Boston")
+        let newComment = SingleRateUnit(commentId: "", rateStudent: user, rateProfessor: professor, rateClass: selectedCourse, rateScore: score, rateComment: comment, rateSemester: semester, rateCampus: selectedCampus)
         return newComment
     }
     
