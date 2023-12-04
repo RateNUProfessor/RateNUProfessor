@@ -17,19 +17,16 @@ class SearchBottomSheetView: UIView {
         
         self.backgroundColor = .white
         
-        //MARK: Search Bar...
         searchBar = UISearchBar()
         searchBar.placeholder = "Search..."
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(searchBar)
         
-        //MARK: Table view...
         tableViewSearchResults = UITableView()
         tableViewSearchResults.register(SearchTableCell.self, forCellReuseIdentifier: Configs.searchTableViewID)
         tableViewSearchResults.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(tableViewSearchResults)
         
-        //MARK: constraints...
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             searchBar.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),

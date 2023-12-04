@@ -26,16 +26,7 @@ extension ChatScreenViewController: UITableViewDelegate, UITableViewDataSource{
             let chat = chatsList[indexPath.row]
             //let userEmails = chat.userEmails
             let userIds = chat.userIds
-            
-            // identify currentUser and other user
-//            let otherUserId = {
-//                for id in userIds {
-//                    if id != self.currentUser?.uid {
-//                        return id
-//                    }
-//                }
-//            }
-            
+    
             // set other user
             for user in chat.users {
                 if user.id == currentUser?.uid {
@@ -66,8 +57,6 @@ extension ChatScreenViewController: UITableViewDelegate, UITableViewDataSource{
             cellOtherUser = user
         }
         newChatController.otherUser = cellOtherUser
-//        print("Other User in Chat Screen Table cell")
-//        print(self.otherUser)
         newChatController.usersDictionary = self.usersDictionary
         navigationController?.pushViewController(newChatController, animated: true)
         

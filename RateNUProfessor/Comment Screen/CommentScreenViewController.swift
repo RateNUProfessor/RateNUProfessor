@@ -41,8 +41,6 @@ class CommentScreenViewController: UIViewController {
         
         commentScreen.floatingButtonAddComment.addTarget(self, action: #selector(onAddCommentButtonTapped), for: .touchUpInside)
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(handleNewComment(_:)), name: NSNotification.Name("NewCommentAdded"), object: nil)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,13 +61,13 @@ class CommentScreenViewController: UIViewController {
                 return
             }
             
-            // 清空现有评论列表
+            // clear all the comments
             self?.allScoresList.removeAll()
             
-            // 用于跟踪异步操作
+            // track asynchronous operations
             let group = DispatchGroup()
 
-            // 遍历每个用户
+            // loop through all the users
             for userDocument in userQuerySnapshot!.documents {
                 group.enter()
                 
@@ -82,17 +80,17 @@ class CommentScreenViewController: UIViewController {
                     campus: userData["campus"] as? String ?? ""
                 )
 
-                // 获取与特定教授相关的评论
+                // get the comments for the selected professors
                 db.collection("users").document(userDocument.documentID).collection("comments")
                     .whereField("rateProfessor.professorUID", isEqualTo: self?.professorObj.professorUID ?? "")
                     .getDocuments { (commentQuerySnapshot, err) in
                         if let err = err {
                             print("Error getting comments: \(err)")
-                            group.leave() // 离开组
+                            group.leave() // leave group
                             return
                         }
 
-                        // 遍历该用户的每条评论
+                        // loop through all the comments from the user
                         for commentDocument in commentQuerySnapshot!.documents {
                             let commentData = commentDocument.data()
                             if let rateScore = commentData["rateScore"] as? Double {
@@ -118,7 +116,7 @@ class CommentScreenViewController: UIViewController {
             }
                         
             group.notify(queue: .main) {
-                // 当所有评论都被处理后，计算平均分
+                // calcualte the average score
                 if numberOfScores > 0 {
                     let averageScore = totalScore / Double(numberOfScores)
                     self?.commentScreen.averageScoreLabel.text = "Average Score: \(String(format: "%.2f", averageScore))"
@@ -131,7 +129,6 @@ class CommentScreenViewController: UIViewController {
                           print("Document successfully updated")
                         }
                     }
-                    //self?.professorObj.avgScore = averageScore
                 } else {
                     self?.commentScreen.averageScoreLabel.text = "No Scores Available"
                 }
@@ -193,12 +190,11 @@ extension CommentScreenViewController: UITableViewDelegate, UITableViewDataSourc
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let chatAction = UIAlertAction(title: "Confirm", style: .destructive) { _ in
             let otherUser = self.allScoresList[indexPath.row].rateStudent
-            //self.dismiss(animated: true)
+   
             if (self.currentUser?.uid != otherUser.id) {
-                if let tabBarController = self.tabBarController {
-                    let desiredTabIndex = 1
+                  let desiredTabIndex = 1
                     if desiredTabIndex >= 0 && desiredTabIndex < tabBarController.viewControllers?.count ?? 0 {
-                        tabBarController.selectedIndex = desiredTabIndex
+                        tabBarController.selectedIndex = desiredTabInde
                         if let selectedNavController = tabBarController.selectedViewController as? UINavigationController {
                             let addNewChatController = AddNewChatViewController()
                             if let currentUsernotNil = self.currentUser {

@@ -29,8 +29,7 @@ struct User: Codable{
     
     init(firebaseUser: FirebaseAuth.User) {
         self.id = firebaseUser.uid
-        
-        // TODO: 如果name是空的话要怎么处理
+
         if let displayName = firebaseUser.displayName {
             self.name = displayName
         } else {
@@ -42,11 +41,9 @@ struct User: Codable{
         } else {
             self.email = "Default Email" // Provide a default email or handle nil case
         }
-        
-        // TODO: Handle password assignment according to your requirements
+    
         self.password = ""
         self.allComments = [SingleRateUnit]()
-        // TODO: save campus info in firebase auth and get it here
         self.campus = ""
     }
 

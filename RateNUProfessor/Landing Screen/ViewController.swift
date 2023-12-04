@@ -59,8 +59,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-//        let landingScreen = ViewController()
-//        navigationController?.pushViewController(landingScreen, animated: false)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,9 +70,6 @@ class ViewController: UIViewController {
     
     
     @objc func onButtonSignInTapped() {
-//        let loginController = LoginScreenViewController()
-//        self.navigationController?.pushViewController(loginController, animated: true)
-        
         if let email = landingScreen.textFieldEmail.text, let password = landingScreen.textFieldPassword.text {
             signInToFirebase(email: email, password: password)
         }
@@ -88,8 +83,7 @@ class ViewController: UIViewController {
     func signInToFirebase(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password, completion: {(result, error) in
             if error == nil{
-//                let tabBarController = TabBarScreenViewController()
-//                self.navigationController?.pushViewController(tabBarController, animated: true)
+
             }else{
                 self.showErrorMessage("User not found or Wrong password. Please try again.")
                 
