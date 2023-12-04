@@ -49,7 +49,7 @@ class CommentTableViewCell: UITableViewCell {
         labelComment = UILabel()
         labelComment.font = UIFont.systemFont(ofSize: 16)
         labelComment.textColor = .darkGray
-        labelComment.numberOfLines = 2 // Adjust the number of lines as needed
+        labelComment.numberOfLines = 0 // Adjust the number of lines as needed
         labelComment.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelComment)
     }

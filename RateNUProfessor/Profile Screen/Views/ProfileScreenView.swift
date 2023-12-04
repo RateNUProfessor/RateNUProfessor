@@ -74,6 +74,8 @@ class ProfileScreenView: UIView {
         tableViewComments = UITableView()
         tableViewComments.register(PostCommentTableViewCell.self, forCellReuseIdentifier: Configs.tableViewProfileCommentID)
         tableViewComments.translatesAutoresizingMaskIntoConstraints = false
+        tableViewComments.rowHeight = UITableView.automaticDimension // Enable self-sizing cells
+        tableViewComments.estimatedRowHeight = 100 // Set an estimated row height
         self.addSubview(tableViewComments)
     }
     
