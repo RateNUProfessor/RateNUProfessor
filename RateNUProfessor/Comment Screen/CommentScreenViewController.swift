@@ -190,11 +190,11 @@ extension CommentScreenViewController: UITableViewDelegate, UITableViewDataSourc
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let chatAction = UIAlertAction(title: "Confirm", style: .destructive) { _ in
             let otherUser = self.allScoresList[indexPath.row].rateStudent
-   
             if (self.currentUser?.uid != otherUser.id) {
-                  let desiredTabIndex = 1
+                if let tabBarController = self.tabBarController {
+                    let desiredTabIndex = 1
                     if desiredTabIndex >= 0 && desiredTabIndex < tabBarController.viewControllers?.count ?? 0 {
-                        tabBarController.selectedIndex = desiredTabInde
+                        tabBarController.selectedIndex = desiredTabIndex
                         if let selectedNavController = tabBarController.selectedViewController as? UINavigationController {
                             let addNewChatController = AddNewChatViewController()
                             if let currentUsernotNil = self.currentUser {
