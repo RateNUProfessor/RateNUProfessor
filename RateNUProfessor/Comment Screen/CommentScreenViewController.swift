@@ -226,7 +226,7 @@ extension CommentScreenViewController: UITableViewDelegate, UITableViewDataSourc
         alertController.addAction(chatAction)
 
         present(alertController, animated: true, completion: nil)
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
 

@@ -70,6 +70,8 @@ extension ChatScreenViewController: UITableViewDelegate, UITableViewDataSource{
 //        print(self.otherUser)
         newChatController.usersDictionary = self.usersDictionary
         navigationController?.pushViewController(newChatController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
