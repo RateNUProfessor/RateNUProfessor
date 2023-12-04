@@ -11,6 +11,9 @@ class AddCommentScreenView: UIView {
     
     var labelCourseNumber: UILabel!
     var buttonCourseNumber: UIButton!
+    
+    var labelCampus: UILabel!
+    var buttonCampus: UIButton!
 
     var labelScore: UILabel!
     var textScore: UITextField!
@@ -55,8 +58,25 @@ class AddCommentScreenView: UIView {
         buttonCourseNumber.layer.borderColor = UIColor.systemGray5.cgColor
         buttonCourseNumber.clipsToBounds = true
         buttonCourseNumber.contentHorizontalAlignment = .center
-        
         self.addSubview(buttonCourseNumber)
+        
+        labelCampus = UILabel()
+        labelCampus.text = "Campus Taken"
+        labelCampus.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(labelCampus)
+        
+        buttonCampus = UIButton(type: .system)
+        buttonCampus.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        buttonCampus.setTitle("Select Location", for: .normal)
+        buttonCampus.showsMenuAsPrimaryAction = true
+        buttonCampus.translatesAutoresizingMaskIntoConstraints = false
+        buttonCampus.setTitleColor(UIColor.systemGray3, for: .normal)
+        buttonCampus.layer.cornerRadius = 4
+        buttonCampus.layer.borderWidth = 1
+        buttonCampus.layer.borderColor = UIColor.systemGray5.cgColor
+        buttonCampus.clipsToBounds = true
+        buttonCampus.contentHorizontalAlignment = .center
+        self.addSubview(buttonCampus)
 
         labelScore = UILabel()
         labelScore.text = "Score"
@@ -152,7 +172,16 @@ class AddCommentScreenView: UIView {
             buttonCourseNumber.heightAnchor.constraint(equalToConstant: 40),
             buttonCourseNumber.widthAnchor.constraint(equalTo: textComment.widthAnchor),
             
-            labelSemester.topAnchor.constraint(equalTo: buttonCourseNumber.bottomAnchor, constant: 20),
+            labelCampus.topAnchor.constraint(equalTo: buttonCourseNumber.bottomAnchor, constant: 20),
+            labelCampus.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+
+            buttonCampus.topAnchor.constraint(equalTo: labelCampus.bottomAnchor, constant: 8),
+            buttonCampus.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            buttonCampus.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            buttonCampus.heightAnchor.constraint(equalToConstant: 40),
+            buttonCampus.widthAnchor.constraint(equalTo: textComment.widthAnchor),
+            
+            labelSemester.topAnchor.constraint(equalTo: buttonCampus.bottomAnchor, constant: 20),
             labelSemester.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
 
             textFieldYear.topAnchor.constraint(equalTo: labelSemester.bottomAnchor, constant: 8),
