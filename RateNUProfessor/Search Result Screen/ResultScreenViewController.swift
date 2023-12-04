@@ -139,7 +139,9 @@ extension ResultScreenViewController: UITableViewDelegate, UITableViewDataSource
             let commentScreenVC = CommentScreenViewController()
             commentScreenVC.professorObj = selectedProfessor
             navigationController?.pushViewController(commentScreenVC, animated: true)
+            
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
