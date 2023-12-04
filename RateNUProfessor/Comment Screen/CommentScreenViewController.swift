@@ -31,6 +31,10 @@ class CommentScreenViewController: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        commentScreen.tableViewComments.rowHeight = UITableView.automaticDimension
+        commentScreen.tableViewComments.estimatedRowHeight = 100
+        
+        
         commentScreen.tableViewComments.delegate = self
         commentScreen.tableViewComments.dataSource = self
         commentScreen.tableViewComments.separatorStyle = .none
@@ -163,6 +167,7 @@ class CommentScreenViewController: UIViewController {
 }
 
 extension CommentScreenViewController: UITableViewDelegate, UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allScoresList.count
     }

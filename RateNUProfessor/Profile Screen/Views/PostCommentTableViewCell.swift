@@ -55,6 +55,7 @@ class PostCommentTableViewCell: UITableViewCell {
         labelInfo.textAlignment = .right
         labelInfo.textColor = .darkGray
         labelInfo.translatesAutoresizingMaskIntoConstraints = false
+        labelInfo.numberOfLines = 0
         wrapperCellView.addSubview(labelInfo)
     }
     
@@ -62,6 +63,7 @@ class PostCommentTableViewCell: UITableViewCell {
         labelComment = UILabel()
         labelComment.font = UIFont.systemFont(ofSize: 16)
         labelComment.translatesAutoresizingMaskIntoConstraints = false
+        labelComment.numberOfLines = 0
         wrapperCellView.addSubview(labelComment)
     }
 
@@ -75,7 +77,7 @@ class PostCommentTableViewCell: UITableViewCell {
             
             labelName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 10),
             labelName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
-            labelName.heightAnchor.constraint(equalToConstant: 20),
+            //labelName.heightAnchor.constraint(equalToConstant: 20),
             labelName.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
             
             labelInfo.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 8),
@@ -84,9 +86,10 @@ class PostCommentTableViewCell: UITableViewCell {
             
             labelComment.topAnchor.constraint(equalTo: labelInfo.bottomAnchor, constant: 8),
             labelComment.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
-            labelComment.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor),
+            labelComment.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor, constant: 8),
+            labelComment.bottomAnchor.constraint(equalTo: wrapperCellView.bottomAnchor, constant: -8)
             
-            wrapperCellView.heightAnchor.constraint(equalToConstant: 100)
+            // wrapperCellView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 
