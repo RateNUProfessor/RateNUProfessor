@@ -46,6 +46,7 @@ class PostCommentTableViewCell: UITableViewCell {
         labelName = UILabel()
         labelName.font = UIFont.boldSystemFont(ofSize: 20)
         labelName.translatesAutoresizingMaskIntoConstraints = false
+        labelName.lineBreakMode = .byWordWrapping
         wrapperCellView.addSubview(labelName)
     }
     
@@ -56,6 +57,7 @@ class PostCommentTableViewCell: UITableViewCell {
         labelInfo.textColor = .darkGray
         labelInfo.translatesAutoresizingMaskIntoConstraints = false
         labelInfo.numberOfLines = 0
+        labelInfo.lineBreakMode = .byWordWrapping
         wrapperCellView.addSubview(labelInfo)
     }
     
@@ -63,6 +65,7 @@ class PostCommentTableViewCell: UITableViewCell {
         labelComment = UILabel()
         labelComment.font = UIFont.systemFont(ofSize: 16)
         labelComment.translatesAutoresizingMaskIntoConstraints = false
+        labelComment.lineBreakMode = .byWordWrapping
         labelComment.numberOfLines = 0
         wrapperCellView.addSubview(labelComment)
     }
@@ -86,6 +89,7 @@ class PostCommentTableViewCell: UITableViewCell {
             
             labelComment.topAnchor.constraint(equalTo: labelInfo.bottomAnchor, constant: 8),
             labelComment.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 16),
+            labelComment.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -16),
             labelComment.widthAnchor.constraint(lessThanOrEqualTo: wrapperCellView.widthAnchor, constant: 8),
             labelComment.bottomAnchor.constraint(equalTo: wrapperCellView.bottomAnchor, constant: -8)
             

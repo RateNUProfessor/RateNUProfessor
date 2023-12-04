@@ -79,6 +79,7 @@ class ChatsTableViewCell: UITableViewCell {
             labelName.trailingAnchor.constraint(lessThanOrEqualTo: timeStamp.leadingAnchor, constant: 4),
             
             lastMessage.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 12),
+            lastMessage.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -12),
             lastMessage.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 8),
             
             wrapperCellView.heightAnchor.constraint(equalToConstant: 72)
