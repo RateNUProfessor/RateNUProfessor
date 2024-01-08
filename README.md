@@ -2,4 +2,4 @@
 
 App Demo: https://youtu.be/lvCOrnDuiAs
 
-This app created a dynamic platform to rate and review faculty of Northeastern University from students’ perspective. 
+RateNUProfessor is a dynamic platform allowing all Northeastern students review and rate their professors.
